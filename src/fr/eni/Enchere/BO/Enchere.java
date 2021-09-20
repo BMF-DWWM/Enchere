@@ -3,16 +3,12 @@ package fr.eni.Enchere.BO;
 import java.sql.Date;
 
 public class Enchere {
-	int noUtilisateur;
-	Date dateEnchere;
-	int noArticle;
-	int montantEnchere;
-	/**
-	 * @param noUtilisateur
-	 * @param dateEnchere
-	 * @param noArticle
-	 * @param montantEnchere
-	 */
+	private int noUtilisateur;
+	private Date dateEnchere;
+	private int noArticle;
+	private int montantEnchere;
+
+	
 	public Enchere(int noUtilisateur, Date dateEnchere, int noArticle, int montantEnchere) {
 		super();
 		this.noUtilisateur = noUtilisateur;
