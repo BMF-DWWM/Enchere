@@ -3,10 +3,7 @@ package fr.eni.Enchere.BO;
 public class Categorie {
 	int noCategorie;
 	String libelle;
-	/**
-	 * @param noCategorie
-	 * @param libelle
-	 */
+
 	public Categorie(int noCategorie, String libelle) {
 		super();
 		this.noCategorie = noCategorie;

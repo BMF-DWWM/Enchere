@@ -5,12 +5,8 @@ public class Retrait {
 	String rue;
 	int codePostal;
 	String ville;
-	/**
-	 * @param noArticle
-	 * @param rue
-	 * @param codePostal
-	 * @param ville
-	 */
+	
+	
 	public Retrait(int noArticle, String rue, int codePostal, String ville) {
 		super();
 		this.noArticle = noArticle;

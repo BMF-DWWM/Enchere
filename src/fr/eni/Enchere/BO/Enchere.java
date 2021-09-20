@@ -7,12 +7,8 @@ public class Enchere {
 	Date dateEnchere;
 	int noArticle;
 	int montantEnchere;
-	/**
-	 * @param noUtilisateur
-	 * @param dateEnchere
-	 * @param noArticle
-	 * @param montantEnchere
-	 */
+
+	
 	public Enchere(int noUtilisateur, Date dateEnchere, int noArticle, int montantEnchere) {
 		super();
 		this.noUtilisateur = noUtilisateur;
