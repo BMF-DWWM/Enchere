@@ -1,22 +1,22 @@
 package fr.eni.Enchere.BO;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class ArticlesVendu {
 	
 	private int noArticle;
 	private String nomArticle;
 	private String description;
-	private LocalDate dateDebutEncheres;
-	private LocalDate dateFinEncheres;
+	private Date dateDebutEncheres;
+	private Date dateFinEncheres;
     private int prixInitial;
     private int prixVente;
     private int noUtilisateur;
     private int noCategorie;
     
     
-	public ArticlesVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int prixInitial, int prixVente, int noUtilisateur, int noCategorie) {
+	public ArticlesVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
+			Date dateFinEncheres, int prixInitial, int prixVente, int noUtilisateur, int noCategorie) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -29,7 +29,7 @@ public class ArticlesVendu {
 		this.noCategorie = noCategorie;
 	}
 	
-	public ArticlesVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
+	public ArticlesVendu(String nomArticle, String description, Date dateDebutEncheres, Date dateFinEncheres,
 			int prixInitial, int prixVente, int noUtilisateur, int noCategorie) {
 		super();
 		this.nomArticle = nomArticle;
@@ -67,19 +67,19 @@ public class ArticlesVendu {
 		this.description = description;
 	}
 	
-	public LocalDate getDateDebutEncheres() {
+	public Date getDateDebutEncheres() {
 		return dateDebutEncheres;
 	}
 	
-	public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
+	public void setDateDebutEncheres(Date dateDebutEncheres) {
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
 	
-	public LocalDate getDateFinEncheres() {
+	public Date getDateFinEncheres() {
 		return dateFinEncheres;
 	}
 	
-	public void setDateFinEncheres(LocalDate dateFinEncheres) {
+	public void setDateFinEncheres(Date dateFinEncheres) {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 	

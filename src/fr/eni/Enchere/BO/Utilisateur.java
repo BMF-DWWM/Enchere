@@ -1,18 +1,18 @@
 package fr.eni.Enchere.BO;
 
 public class Utilisateur {
-	int noUtilisateur;
-	String pseudo;
-	String nom;
-	String prenom;
-	String email;
-	String telephone;
-	String rue;
-	String codePostal;
-	String ville;
-	String motDePasse;
-	int credit;
-	boolean administrateur;
+	private int noUtilisateur;
+	private String pseudo;
+	private String nom;
+	private String prenom;
+	private String email;
+	private String telephone;
+	private String rue;
+	private String codePostal;
+	private String ville;
+	private String motDePasse;
+	private int credit;
+	private boolean administrateur;
 	
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
