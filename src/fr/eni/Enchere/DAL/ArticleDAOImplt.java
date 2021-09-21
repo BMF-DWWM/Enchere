@@ -121,9 +121,9 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 		PreparedStatement pstmt = null;
 		try (Connection cnx = ConnectionProvider.getConnextion() ){
 			pstmt = cnx.prepareStatement(sqlInsert, PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setInt(1, article.getNoArticle());
+			pstmt.setString(1, article.getNomArticle());
 			pstmt.setString(2, article.getDescription());
-			pstmt.setDate(3, (Date)article.getDateDebutEncheres());
+			pstmt.setDate(3, (Date) article.getDateDebutEncheres());
 			pstmt.setDate(4, (Date)article.getDateFinEncheres());
 			pstmt.setInt(5, article.getPrixInitial());
 			pstmt.setInt(6, article.getPrixVente());
