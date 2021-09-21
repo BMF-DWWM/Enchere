@@ -5,13 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style><%@include file="/Style.css"%></style>
 <title>Creation Profil</title>
 </head>
 <body>
-<h1>ENI-Enchère </h1>
-
+		<%@include file="/EnteteEnchere.html" %>
+	
 <div class="creationProfil">
-	<form action="<%=request.getContextPath()%>/ServletCreationProfil" method="post"></form>
+	<form action="<%=request.getContextPath()%>/ServletCreationProfil" method="post">
 	<h2 class="titrepProfil">Mon profil</h2>
 		<div class="containerFormulaire">
 			<div class="container1">

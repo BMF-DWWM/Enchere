@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+header {
+	display:flex;
+	align-content: flex-start;
+	flex-direction:initial;
+	background-color: grey;
+	font-family: cursive;
+	flex-wrap: wrap;
+	
+}
+
+body {
+	display:flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+h2 {
+	display:flex;
+	justify-content: center;
+	font-family: cursive;
+	
+	
+}
+
+p {
+	font-family: cursive;
+}
+
+label {
+	font-family: cursive;
+}
+
+lectureProfil {
+	display:flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex-direction: column;
+}

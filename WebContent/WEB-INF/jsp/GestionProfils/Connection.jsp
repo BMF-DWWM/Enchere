@@ -7,6 +7,7 @@
 <title>Connection</title>
 </head>
 <body>
+	<%@include file="/EnteteEnchere.html" %>
 	<h1>Connection</h1>
 <form method="post" action="Connection">
 
