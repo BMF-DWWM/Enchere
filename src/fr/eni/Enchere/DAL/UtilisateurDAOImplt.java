@@ -16,7 +16,7 @@ public class UtilisateurDAOImplt implements DAO<Utilisateur> {
 	}
 	
 	private String sqlSelectAll = "Select idUser,identifiant,password from Utilisateur";
-	private String sqlVerif = "Select idUser,identifiant,password from Utilisateur where identifiant=? and password=?";
+	private String sqlVerif = "Select no_utilisateur,pseudo,mot_de_passe from Utilisateurs where pseudo=? and mot_de_passe=?";
 	private String sqlVerifPseudo = "Select identifiant from Utilisateur where identifiant=?";
 	private static final String sqlInsert = "insert into Utilisateur(identifiant,password) values(?,?)";
 
@@ -71,7 +71,7 @@ public class UtilisateurDAOImplt implements DAO<Utilisateur> {
 
 		
 	
-	public Utilisateur VerifConnection(String Pseudo,String Password) {
+	public DAO<Utilisateur> VerifConnection(String Pseudo,String Password) {
 		try {
 			
 			Connection connection = ConnectionProvider.getConnextion();
@@ -81,7 +81,7 @@ public class UtilisateurDAOImplt implements DAO<Utilisateur> {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				return new Utilisateur(rs.getString("identifiant"));
+				return new Utilisateur(rs.getString("pseudo"));
 			}
 			else {
 				System.out.println("pas ok");
@@ -94,7 +94,8 @@ public class UtilisateurDAOImplt implements DAO<Utilisateur> {
 		return null;
 
 	}
-	
+
+
 	public Utilisateur VerifPseudo(String Pseudo) {
 		
 		try {

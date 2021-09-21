@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.Enchere.BO.ArticlesVendu;
+import fr.eni.Enchere.BO.Utilisateur;
 
 
 public class ArticleDAOImplt implements DAO<ArticlesVendu> {
@@ -168,5 +169,11 @@ public class ArticleDAOImplt implements DAO<ArticlesVendu> {
 			}
 		}
 		
+	}
+
+	@Override
+	public DAO<Utilisateur> VerifConnection(String ps, String p) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
