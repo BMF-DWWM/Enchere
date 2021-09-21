@@ -1,7 +1,6 @@
-package fr.eni.Servlet.magasin;
+package fr.eni.Enchere.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.eni.magasin.bo.Utilisateur;
-import fr.eni.magasin.dal.MagasinDAOjdbcimpl;
+import fr.eni.Enchere.DAL.DAOFactory;
+import fr.eni.Enchere.DAL.DAOUtilisateur;
+
+
 
 
 @WebServlet("/CreerCompte")
@@ -30,13 +31,13 @@ public class CreerCompte extends HttpServlet {
 		String CreerPseudo = request.getParameter("pseudo");		
 		String CreerPassword = request.getParameter("password");
 		
-		MagasinDAOjdbcimpl test = new MagasinDAOjdbcimpl();
+		DAOUtilisateur utilDAO = DAOFactory.getUtilisateurDAO().VerifConnection(CreerPseudo, CreerPassword);
 		
-		Utilisateur Resultat = test.VerifPseudo(CreerPseudo);
 		
-		if (Resultat == null){
+		
+		if (utilDAO == null){
 
-			test.CreationCompte(CreerPseudo, CreerPassword);
+			//utilDAO.CreationCompte(CreerPseudo, CreerPassword);
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Connecter.jsp");
 			rd.forward(request, response);
 		}
