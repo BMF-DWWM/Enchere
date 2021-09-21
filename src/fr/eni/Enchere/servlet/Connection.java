@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.eni.Enchere.BO.Utilisateur;
-import fr.eni.Enchere.DAL.DAO;
 import fr.eni.Enchere.DAL.DAOFactory;
+import fr.eni.Enchere.DAL.DAOUtilisateur;
 
 
 /**
@@ -35,13 +34,13 @@ public class Connection extends HttpServlet {
 		
 		RequestDispatcher rd;
 		
-		String pseudo = request.getParameter("pseudo");		
+		String pseudo = request.getParameter("pseudo"); //ou mail		
 		String password = request.getParameter("password");
 		
 		System.out.println("Pseudo : "+ pseudo);
 		System.out.println("Password : "+ password);	
 		
-		DAO<Utilisateur> utilDAO = DAOFactory.getUtilisateurDAO().VerifConnection(pseudo, password);
+		DAOUtilisateur utilDAO = DAOFactory.getUtilisateurDAO().VerifConnection(pseudo, password);
 
 		if(utilDAO != null) {
 			rd = request.getRequestDispatcher("WEB-INF/jsp/Connecter.jsp");

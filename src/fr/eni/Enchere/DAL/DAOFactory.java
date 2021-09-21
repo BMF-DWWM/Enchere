@@ -4,7 +4,7 @@ import fr.eni.Enchere.BO.ArticlesVendu;
 import fr.eni.Enchere.BO.Utilisateur;
 
 public class DAOFactory {
-	public static DAO<Utilisateur> getUtilisateurDAO() {
+	public static DAOUtilisateur getUtilisateurDAO() {
 		return new UtilisateurDAOImplt();
 	}
 	

@@ -11,7 +11,7 @@ import fr.eni.Enchere.BO.Utilisateur;
 import fr.eni.Enchere.DAL.ConnectionProvider;
 
 
-public class UtilisateurDAOImplt implements DAO<Utilisateur> {
+public class UtilisateurDAOImplt implements DAOUtilisateur {
 	public  UtilisateurDAOImplt() {
 	}
 	
@@ -20,35 +20,7 @@ public class UtilisateurDAOImplt implements DAO<Utilisateur> {
 	private String sqlVerifPseudo = "Select identifiant from Utilisateur where identifiant=?";
 	private static final String sqlInsert = "insert into Utilisateur(identifiant,password) values(?,?)";
 
-	@Override
-	public Utilisateur selectbyId(int id) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public List<Utilisateur> selectAll() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void update(Utilisateur utilsateur) throws DALException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void insert(Utilisateur utilsateur) throws DALException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(int id) throws DALException {
-		// TODO Auto-generated method stub
-		
-	}
 	
 //public void SelectAll() {
 //		
@@ -71,7 +43,7 @@ public class UtilisateurDAOImplt implements DAO<Utilisateur> {
 
 		
 	
-	public DAO<Utilisateur> VerifConnection(String Pseudo,String Password) {
+	public DAOUtilisateur VerifConnection(String Pseudo,String Password) {
 		try {
 			
 			Connection connection = ConnectionProvider.getConnextion();
@@ -81,7 +53,7 @@ public class UtilisateurDAOImplt implements DAO<Utilisateur> {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				return new Utilisateur(rs.getString("pseudo"));
+				return (DAOUtilisateur) new Utilisateur(rs.getString("pseudo"));
 			}
 			else {
 				System.out.println("pas ok");
@@ -142,6 +114,41 @@ public class UtilisateurDAOImplt implements DAO<Utilisateur> {
 			System.out.println("Erreur insertion nouveau compte ");
 			e.printStackTrace();
 		}
+	}
+
+
+	@Override
+	public DAOUtilisateur selectbyId(int id) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Utilisateur> selectAll() throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void update(Utilisateur t) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void insert(Utilisateur t) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void delete(int id) throws DALException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

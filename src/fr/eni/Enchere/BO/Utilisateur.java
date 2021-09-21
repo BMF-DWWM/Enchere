@@ -1,11 +1,10 @@
 package fr.eni.Enchere.BO;
 
-import java.util.List;
 
-import fr.eni.Enchere.DAL.DALException;
-import fr.eni.Enchere.DAL.DAO;
+import fr.eni.Enchere.DAL.DAOUtilisateur;
 
-public class Utilisateur implements DAO<Utilisateur> {
+
+public class Utilisateur  {
 	private int noUtilisateur;
 	private String pseudo;
 	private String nom;
@@ -165,43 +164,5 @@ public class Utilisateur implements DAO<Utilisateur> {
 				+ ", administrateur=" + administrateur + "]";
 	}
 
-	@Override
-	public Utilisateur selectbyId(int id) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Utilisateur> selectAll() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void update(Utilisateur t) throws DALException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void insert(Utilisateur t) throws DALException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(int id) throws DALException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public DAO<Utilisateur> VerifConnection(String ps, String p) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	
 	
 }
