@@ -16,12 +16,11 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 	}
 	
 	private String sqlSelectAll = "Select idUser,identifiant,password from Utilisateur";
-	private String sqlVerif = "Select no_utilisateur,pseudo,mot_de_passe from Utilisateurs where pseudo=? and mot_de_passe=?";
-	private String sqlVerifPseudo = "Select identifiant from Utilisateur where identifiant=?";
-	private static final String sqlInsert = "insert into Utilisateur(identifiant,password) values(?,?)";
+	private String sqlVerif = "Select no_utilisateur,pseudo,email,mot_de_passe from Utilisateurs where (pseudo=? or email=?) and mot_de_passe=?";
+	private String sqlVerifCreationCompte = "Select pseudo,email from Utilisateurs where pseudo=? and email=?";
+	private static final String sqlCreationCompte = "insert into Utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe) values(?,?,?,?,?,?,?,?,?)";
 
 
-	
 //public void SelectAll() {
 //		
 //		try  {
@@ -43,17 +42,23 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 
 		
 	
-	public DAOUtilisateur VerifConnection(String Pseudo,String Password) {
+	public Utilisateur VerifConnection(String Pseudo,String Password) {
 		try {
 			
 			Connection connection = ConnectionProvider.getConnextion();
 			PreparedStatement pstmt = connection.prepareStatement(sqlVerif);
 			pstmt.setString(1,Pseudo);
-			pstmt.setString(2,Password);
+			pstmt.setString(2,Pseudo);
+			pstmt.setString(3,Password);
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				return (DAOUtilisateur) new Utilisateur(rs.getString("pseudo"));
+				if(Pseudo.contains("@")) {
+					return new Utilisateur(rs.getString("email"));
+				}
+				else {
+					return new Utilisateur(rs.getString("pseudo"));
+				}
 			}
 			else {
 				System.out.println("pas ok");
@@ -65,25 +70,24 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 		}
 		return null;
 
-	}
+	}	
 
-
-	public Utilisateur VerifPseudo(String Pseudo) {
+	public Utilisateur VerifPseudo(String Pseudo, String Email) {
 		
 		try {
 			 Connection connection = ConnectionProvider.getConnextion();
-			 Utilisateur utilisateur = new Utilisateur(Pseudo);
 
-			PreparedStatement pstmt = connection.prepareStatement(sqlVerifPseudo);
+			PreparedStatement pstmt = connection.prepareStatement(sqlVerifCreationCompte);
 			pstmt.setString(1,Pseudo);
+			pstmt.setString(2,Email);
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				System.out.println("Pseudo deja utiliser");
-				return utilisateur;
+				System.out.println("Pseudo/email deja utiliser");
+				return new Utilisateur();
 			}
 			else {
-				System.out.println("Pseudo disponible");
+				System.out.println("Pseudo & email disponible");
 			}
 			} catch (SQLException e) {
 				System.out.println("Erreur de verification");
@@ -93,27 +97,36 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 		} 
 
 
-	public void CreationCompte (String Pseudo,String Password) {
+	public Utilisateur CreationCompte (String Pseudo,String Nom,String Prenom,String Email,String Telephone,String Rue,String CodePostal,String Ville,String Password) {
 		
 	try {
 		Connection connection = ConnectionProvider.getConnextion();
-		PreparedStatement pstmt = connection.prepareStatement(sqlInsert,Statement.RETURN_GENERATED_KEYS);
+		PreparedStatement pstmt = connection.prepareStatement(sqlCreationCompte,Statement.RETURN_GENERATED_KEYS);
 		Utilisateur utilisateur = new Utilisateur(); 
 		
 		pstmt.setString(1, Pseudo);
-		pstmt.setString(2, Password);
+		pstmt.setString(2, Nom);
+		pstmt.setString(3, Prenom);
+		pstmt.setString(4, Email);
+		pstmt.setString(5, Telephone);
+		pstmt.setString(6, Rue);
+		pstmt.setString(7, CodePostal);
+		pstmt.setString(8, Ville);
+		pstmt.setString(9, Password);
 		
 		int nbRows = pstmt.executeUpdate();
 		if(nbRows == 1) {
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if(rs.next()) {
 				utilisateur.setNoUtilisateur(rs.getInt(1));
+				System.out.println("Profil Créer");
 			}
 		}
 		} catch (SQLException e) {
 			System.out.println("Erreur insertion nouveau compte ");
 			e.printStackTrace();
 		}
+	return null;
 	}
 
 

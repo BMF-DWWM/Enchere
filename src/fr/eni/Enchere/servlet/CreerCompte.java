@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.Enchere.BO.Utilisateur;
 import fr.eni.Enchere.DAL.DAOFactory;
 import fr.eni.Enchere.DAL.DAOUtilisateur;
 
@@ -21,32 +22,38 @@ public class CreerCompte extends HttpServlet {
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/CreerCompte.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/CreationProfil.jsp");
 		rd.forward(request, response);
 		
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String CreerPseudo = request.getParameter("pseudo");		
-		String CreerPassword = request.getParameter("password");
 		
-		DAOUtilisateur utilDAO = DAOFactory.getUtilisateurDAO().VerifConnection(CreerPseudo, CreerPassword);
+		RequestDispatcher rd;
 		
+		String newPseudo = request.getParameter("pseudo");		
+		String newNom = request.getParameter("nom");
+		String newPrenom = request.getParameter("prenom");
+		String newEmail = request.getParameter("email");
+		String newTelephone = request.getParameter("telephone");
+		String newRue = request.getParameter("rue");
+		String newCodePostal = request.getParameter("codePostal");
+		String newVille = request.getParameter("ville");
+		String newPassword = request.getParameter("password");
+		String newPasswordConfirm = request.getParameter("passwordConfirm");
 		
-		
-		if (utilDAO == null){
+		Utilisateur utilVerif = DAOFactory.getUtilisateurDAO().VerifPseudo(newPseudo, newEmail);
 
-			//utilDAO.CreationCompte(CreerPseudo, CreerPassword);
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Connecter.jsp");
+		if(utilVerif == null && newPassword.equals(newPasswordConfirm)) {
+			DAOFactory.getUtilisateurDAO().CreationCompte(newPseudo, newNom, newPrenom, newEmail, newTelephone, newRue, newCodePostal, newVille, newPassword);
+			rd = request.getRequestDispatcher("WEB-INF/jsp/Connecter.jsp");
 			rd.forward(request, response);
 		}
-		
-		else {
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/CreerCompte.jsp");
-			rd.forward(request, response);
+			else {
+				rd = request.getRequestDispatcher("WEB-INF/jsp/CreationProfil.jsp");
+				rd.forward(request, response);
+			}
 		}
-		
 	}
-
-}

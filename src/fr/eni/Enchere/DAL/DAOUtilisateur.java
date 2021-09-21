@@ -16,7 +16,9 @@ public interface DAOUtilisateur{
 	
 	public void delete (int id) throws DALException; 
 	
-	public DAOUtilisateur VerifConnection(String ps,String p);
+	public Utilisateur VerifConnection(String pseudo,String password);
 	
-
+	public Utilisateur VerifPseudo(String Pseudo,String Email);
+	
+	public Utilisateur CreationCompte (String Pseudo,String Nom,String Prenom,String Email,String Telephone,String Rue,String CodePostal,String Ville,String Password);
 }
