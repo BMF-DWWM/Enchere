@@ -5,7 +5,7 @@ import java.util.List;
 import fr.eni.Enchere.BO.Enchere;
 import fr.eni.Enchere.BO.Utilisateur;
 
-public class EnchereDAOImplt implements DAO<Enchere>{
+public class EnchereDAOImplt implements DAOArt<Enchere>{
 	
 	public EnchereDAOImplt() {
 		
@@ -41,9 +41,5 @@ public class EnchereDAOImplt implements DAO<Enchere>{
 		
 	}
 
-	@Override
-	public DAO<Utilisateur> VerifConnection(String ps, String p) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }

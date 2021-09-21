@@ -14,7 +14,7 @@ import fr.eni.Enchere.BO.ArticlesVendu;
 import fr.eni.Enchere.BO.Utilisateur;
 
 
-public class ArticleDAOImplt implements DAO<ArticlesVendu> {
+public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 	
 	private static final String sqlSelectArticleById = "select * from Articles_Vendus where no_article =?";
 	private static final String sqlSelectAllRun= "select * From Articles_Vendus";
@@ -171,9 +171,5 @@ public class ArticleDAOImplt implements DAO<ArticlesVendu> {
 		
 	}
 
-	@Override
-	public DAO<Utilisateur> VerifConnection(String ps, String p) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }
