@@ -9,7 +9,7 @@
 <body>
 <h1>Connecter</h1>
 
-<% out.println("Bienvenue " + request.getParameter("pseudo")); %>
+<% out.println("Bienvenue " + session.getAttribute("pseudo")); %>
 
 	<a href="<%=request.getContextPath()%>/Connection"><input type="button" Value="Déconnexion"></a>
 

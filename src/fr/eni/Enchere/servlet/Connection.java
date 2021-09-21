@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.Enchere.BO.Utilisateur;
 import fr.eni.Enchere.DAL.DAOFactory;
@@ -23,8 +24,12 @@ public class Connection extends HttpServlet {
 	 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		HttpSession session = request.getSession();
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Connection.jsp");
+		
+		session.invalidate();
+		
 		rd.forward(request, response);
 		
 		
@@ -34,9 +39,13 @@ public class Connection extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RequestDispatcher rd;
+		HttpSession session = request.getSession();
 		
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
+		
+		session.setAttribute("pseudo", pseudo);
+		session.setAttribute("password", password);
 		
 		System.out.println("Pseudo : "+ pseudo);
 		System.out.println("Password : "+ password);	
