@@ -38,8 +38,8 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 		
 			
 			if(rs.next()) {
-				enchere = new Enchere(rs.getInt("noUtilisateur"),rs.getDate("date_enchere"),
-						rs.getInt("noArticle"), rs.getInt("montant_enchere"));
+				enchere = new Enchere(rs.getInt("no_utilisateur"),rs.getDate("date_enchere"),
+						rs.getInt("no_article"), rs.getInt("montant_enchere"));
 			} 
 			
 		} catch (SQLException e) {
@@ -68,8 +68,8 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 			
 			while (rs.next()) {
 				
-				enchere = new Enchere(rs.getInt("noUtilisateur"),rs.getDate("date_enchere"),
-						rs.getInt("noArticle"), rs.getInt("montant_enchere"));	
+				enchere = new Enchere(rs.getInt("no_utilisateur"),rs.getDate("date_enchere"),
+						rs.getInt("no_article"), rs.getInt("montant_enchere"));	
 				listEnchere.add(enchere);
 		}
 						

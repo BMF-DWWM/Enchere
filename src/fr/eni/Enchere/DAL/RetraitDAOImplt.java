@@ -36,7 +36,7 @@ public Retrait selectbyId(int id) throws DALException {
 	
 		
 		if(rs.next()) {
-			retrait = new Retrait(rs.getInt("noArticle"), rs.getString("rue"),
+			retrait = new Retrait(rs.getInt("no_article"), rs.getString("rue"),
 					rs.getString("codePostal"), rs.getString("ville"));
 		} 
 		
@@ -66,7 +66,7 @@ public List<Retrait> selectAll() throws DALException {
 		
 		while (rs.next()) {
 			
-			retrait = new Retrait(rs.getInt("noArticle"), rs.getString("rue"),
+			retrait = new Retrait(rs.getInt("no_article"), rs.getString("rue"),
 					rs.getString("codePostal"), rs.getString("ville"));
 			listRetrait.add(retrait);
 	}
