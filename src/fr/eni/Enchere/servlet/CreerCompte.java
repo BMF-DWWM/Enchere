@@ -22,7 +22,7 @@ public class CreerCompte extends HttpServlet {
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/CreationProfil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/GestionProfils/CreationProfil.jsp");
 		rd.forward(request, response);
 		
 	}
@@ -48,11 +48,11 @@ public class CreerCompte extends HttpServlet {
 
 		if(utilVerif == null && newPassword.equals(newPasswordConfirm)) {
 			DAOFactory.getUtilisateurDAO().CreationCompte(newPseudo, newNom, newPrenom, newEmail, newTelephone, newRue, newCodePostal, newVille, newPassword);
-			rd = request.getRequestDispatcher("WEB-INF/jsp/Connecter.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/jsp/GestionProfils/Connecter.jsp");
 			rd.forward(request, response);
 		}
 			else {
-				rd = request.getRequestDispatcher("WEB-INF/jsp/CreationProfil.jsp");
+				rd = request.getRequestDispatcher("WEB-INF/jsp/GestionProfils/CreationProfil.jsp");
 				rd.forward(request, response);
 			}
 		}

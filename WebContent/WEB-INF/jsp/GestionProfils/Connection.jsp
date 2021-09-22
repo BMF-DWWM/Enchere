@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Connection</title>
+<title>Connexion</title>
 </head>
 <body>
-	<%@include file="/EnteteEnchere.html" %>
-	<h1>Connection</h1>
+	<%@include file="../../../EnteteEnchere.html" %>
+	<h1>Connexion</h1>
 <form method="post" action="Connection">
 
 	<label>Pseudo</label>

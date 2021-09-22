@@ -26,7 +26,7 @@ public class Connection extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Connection.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/GestionProfils/Connection.jsp");
 		
 		session.invalidate();
 		
@@ -53,7 +53,7 @@ public class Connection extends HttpServlet {
 		Utilisateur utilDAO = DAOFactory.getUtilisateurDAO().VerifConnection(pseudo, password);
 
 		if(utilDAO != null) {
-			rd = request.getRequestDispatcher("WEB-INF/jsp/Connecter.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/jsp/GestionProfils/Connecter.jsp");
 			rd.forward(request, response);
 		}
 		else {
