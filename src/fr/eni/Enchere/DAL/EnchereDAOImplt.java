@@ -21,7 +21,7 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 	private static final String sqlInsert = "insert into Encheres (no_utilisateur, date_enchere,"
 			+ "no_article,montant_enchere)"
 			+ " values (?,?,?,?)";
-	private static final String sqlDelete = "delete from Articles_Vendus where no_article = ?" ;
+	private static final String sqlDelete = "delete from Encheres where no_utilisateur = ?" ;
 	
 	public EnchereDAOImplt() {
 		
