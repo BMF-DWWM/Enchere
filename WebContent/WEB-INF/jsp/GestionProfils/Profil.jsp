@@ -9,7 +9,7 @@
 <title>Profil</title>
 </head>
 <body>
-		<%@include file="/EnteteEnchere.html" %>
+	<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
 	
 	<div class="lectureProfil">
 	<form action="<%=request.getContextPath()%>" method="get">

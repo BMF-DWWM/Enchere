@@ -7,7 +7,7 @@
 <title>Affichage recherche</title>
 </head>
 <body>
-	<%@include file="/EnteteEnchere.html" %>
+<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
 	
 	<div class="Recherche" >
 		<h2>Liste des enchères</h2>

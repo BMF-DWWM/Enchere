@@ -7,7 +7,7 @@
 <title>Connexion</title>
 </head>
 <body>
-	<%@include file="../../../EnteteEnchere.html" %>
+<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
 	<h1>Connexion</h1>
 <form method="post" action="Connection">
 

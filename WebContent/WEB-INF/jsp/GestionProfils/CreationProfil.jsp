@@ -9,7 +9,7 @@
 <title>Creation Profil</title>
 </head>
 <body>
-		<%@include file="/EnteteEnchere.html" %>
+		<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
 	
 <div class="creationProfil">
 	<form action="<%=request.getContextPath()%>/ServletCreationProfil" method="post">

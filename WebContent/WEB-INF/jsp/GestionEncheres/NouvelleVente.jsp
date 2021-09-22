@@ -7,7 +7,7 @@
 <title>Nouvelle vente</title>
 </head>
 <body>
-	<%@include file="/EnteteEnchere.html" %>
+	<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
 	<h2>Nouvelle vente</h2>
 	
 	<div class="creationProfil">

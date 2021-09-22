@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@include file="/EnteteEnchere.html" %>
+	<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
 
 </body>
 </html>

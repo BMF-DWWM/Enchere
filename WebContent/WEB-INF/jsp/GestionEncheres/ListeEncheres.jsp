@@ -9,7 +9,7 @@
 <title>Liste des Enchères ENI</title>
 </head>
 <body>
-	<%@include file="/EnteteEnchere.html" %>
+<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
 	<!-- <header>
 	<div class="EnTete">
 		<h1>ENI-Enchères</h1>
