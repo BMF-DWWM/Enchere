@@ -11,7 +11,7 @@
 	<h2>Nouvelle vente</h2>
 	
 	<div class="creationProfil">
-	<form action="<%=request.getContextPath()%>/ServletCreationProfil" method="post">
+	<form action="<%=request.getContextPath()%>/ServletMisEnVenteArticle" method="post">
 	<h2 class="titrepProfil">Mon profil</h2>
 		<div class="containerFormulaire">
 			<div class="container1">
@@ -19,10 +19,10 @@
 			<label>Description :</label> <input type="text" id="description" name="description"  >
 			<label>Catégorie :</label> <select name="categories" id="select-categorie">
 										<option value="toutes">Toutes</option>
-										<option value="informatique">Informatique</option>
-										<option value="ameublement">Ameublement</option>
-										<option value="vetement">Vêtement</option>
-										<option value="sportLoisir">Sport/Loisirs</option>
+										<option value="1">Informatique</option>
+										<option value="2">Ameublement</option>
+										<option value="3">Vêtement</option>
+										<option value="4">Sport/Loisirs</option>
 										</select>
 			<label>Photo de l'article </label> <input type="file" id="photoArticle" name="photoArticle">
 			<label>Mise à prix :</label> <input type="number" id="mise" name="mise">
