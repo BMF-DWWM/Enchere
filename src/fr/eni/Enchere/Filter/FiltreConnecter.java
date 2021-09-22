@@ -14,7 +14,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpSession;
 
 
-@WebFilter(urlPatterns = "/modifieProfil",
+@WebFilter(urlPatterns ="",
 		   dispatcherTypes = {
 					DispatcherType.REQUEST,
 					DispatcherType.INCLUDE,

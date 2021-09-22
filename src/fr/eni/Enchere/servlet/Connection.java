@@ -54,6 +54,8 @@ public class Connection extends HttpServlet {
 		System.out.println("id Session : "+ idSession);
 		
 		Utilisateur utilDAO = DAOFactory.getUtilisateurDAO().VerifConnection(pseudo, password);
+		
+		session.setAttribute("utilisateur", utilDAO);
 
 		if(utilDAO != null) {
 			rd = request.getRequestDispatcher("WEB-INF/jsp/GestionProfils/Connecter.jsp");

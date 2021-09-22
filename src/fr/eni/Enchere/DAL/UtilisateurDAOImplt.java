@@ -16,7 +16,7 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 	}
 	
 	private String sqlSelectAll = "Select idUser,identifiant,password from Utilisateur";
-	private String sqlVerif = "Select no_utilisateur,pseudo,email,mot_de_passe from Utilisateurs where (pseudo=? or email=?) and mot_de_passe=?";
+	private String sqlVerif = "Select * from Utilisateurs where (pseudo=? or email=?) and mot_de_passe=?";
 	private String sqlVerifCreationCompte = "Select pseudo,email from Utilisateurs where pseudo=? and email=?";
 	private static final String sqlCreationCompte = "insert into Utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe) values(?,?,?,?,?,?,?,?,?)";
 
@@ -50,16 +50,13 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 			pstmt.setString(1,Pseudo);
 			pstmt.setString(2,Pseudo);
 			pstmt.setString(3,Password);
+			
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				if(Pseudo.contains("@")) {
-					return new Utilisateur(rs.getString("email"));
+					return new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+					
 				}
-				else {
-					return new Utilisateur(rs.getString("pseudo"));
-				}
-			}
 			else {
 				System.out.println("pas ok");
 			}
