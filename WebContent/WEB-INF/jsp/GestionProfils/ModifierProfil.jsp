@@ -8,6 +8,7 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
+	<a href="<%=request.getContextPath()%>/Connection"><input type="button" Value="Déconnexion"></a>
 
 </body>
 </html>

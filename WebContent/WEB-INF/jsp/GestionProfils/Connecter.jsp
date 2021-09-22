@@ -12,6 +12,7 @@
 
 <% out.println("Bienvenue " + session.getAttribute("pseudo")); %>
 
+	<a href="<%=request.getContextPath()%>/modifieProfil"><input type="button" Value="Modifier Profil"></a>
 	<a href="<%=request.getContextPath()%>/Connection"><input type="button" Value="Déconnexion"></a>
 
 </body>

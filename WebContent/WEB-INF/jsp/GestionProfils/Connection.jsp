@@ -22,6 +22,10 @@
 	<div>
 		<a href="<%=request.getContextPath()%>/CreerCompte"><input type="button" name="creerCompte" Value="Créer un compte"></a>
 	</div>
+	
+	<div>
+		<a href="<%=request.getContextPath()%>/modifieProfil"><input type="button" name="modifProfil" Value="Modifier Profil"></a>
+	</div>
 </form>
 
 </body>
