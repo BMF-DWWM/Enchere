@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.List;
 
 import fr.eni.Enchere.BO.Utilisateur;
-import fr.eni.Enchere.DAL.ConnectionProvider;
+
 
 
 public class UtilisateurDAOImplt implements DAOUtilisateur {

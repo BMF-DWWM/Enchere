@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.Enchere.BO.Utilisateur;
 import fr.eni.Enchere.DAL.DAOFactory;
-import fr.eni.Enchere.DAL.DAOUtilisateur;
+
 
 
 /**
@@ -43,15 +43,12 @@ public class Connection extends HttpServlet {
 		
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
-		String idSession = session.getId();
 		
 		session.setAttribute("pseudo", pseudo);
 		session.setAttribute("password", password);
-		session.setAttribute("idSession", idSession);
 		
 		System.out.println("Pseudo : "+ pseudo);
 		System.out.println("Password : "+ password);	
-		System.out.println("id Session : "+ idSession);
 		
 		Utilisateur utilDAO = DAOFactory.getUtilisateurDAO().VerifConnection(pseudo, password);
 		

@@ -11,10 +11,13 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.Enchere.BO.Utilisateur;
 
-@WebFilter(urlPatterns ="",
+
+@WebFilter(urlPatterns ={"/modifieProfil","/ServletMisEnVenteArticle"},
 		   dispatcherTypes = {
 					DispatcherType.REQUEST,
 					DispatcherType.INCLUDE,
@@ -28,21 +31,25 @@ public class FiltreConnecter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		RequestDispatcher rd;
-		HttpSession session = (HttpSession) request.getAttribute("idSession");
-		System.out.println("je passe dans le filtre");
+
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpSession session = req.getSession();
 		
-		if(session != null) {
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+		System.out.println("je passe dans le filtre");
+
+		if(utilisateur != null) {
+			System.out.println(utilisateur.getNoUtilisateur());
+			System.out.println("filtre réussi");
 			chain.doFilter(request, response);
 		}
 		else {
 			rd = request.getRequestDispatcher("/Connection");
+			System.out.println("Non connecter");
 			rd.forward(request, response);
 		}
-		
-		
 	}
 
-	
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub

@@ -1,9 +1,6 @@
 package fr.eni.Enchere.BO;
 
 
-import fr.eni.Enchere.DAL.DAOUtilisateur;
-
-
 public class Utilisateur  {
 	private int noUtilisateur;
 	private String pseudo;
