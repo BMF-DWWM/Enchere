@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+
 import fr.eni.Enchere.BO.Utilisateur;
 
 
@@ -15,6 +16,8 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 	public  UtilisateurDAOImplt() {
 	}
 	
+	private String sqlmdpOublierVerif = "Select pseudo from Utilisateurs where pseudo=?";
+	private String sqlmdpOublier = "update Utilisateurs set mot_de_passe=? where pseudo=? ";
 	private String sqlSelectAll = "Select idUser,identifiant,password from Utilisateur";
 	private String sqlVerif = "Select * from Utilisateurs where (pseudo=? or email=?) and mot_de_passe=?";
 	private String sqlVerifCreationCompte = "Select pseudo,email from Utilisateurs where pseudo=? and email=?";
@@ -81,7 +84,7 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 			
 			if (rs.next()) {
 				System.out.println("Pseudo/email deja utiliser");
-				return new Utilisateur();
+				return new Utilisateur(rs.getString("Pseudo"));
 			}
 			else {
 				System.out.println("Pseudo & email disponible");
@@ -128,6 +131,43 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 
 
 	@Override
+	public Utilisateur updateMdp(String Pseudo,String Password) throws DALException {
+		
+		try {
+			Connection connection = ConnectionProvider.getConnextion();
+			PreparedStatement pstmt;
+			pstmt = connection.prepareStatement(sqlmdpOublierVerif);
+			
+			pstmt.setString(1, Pseudo);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+
+				pstmt = connection.prepareStatement(sqlmdpOublier);
+				pstmt.setString(1,Password);
+				pstmt.setString(2, Pseudo);
+				pstmt.executeUpdate();
+				System.out.println("mot de passe changer avec succes");
+				return new Utilisateur(Pseudo);
+			}
+			else {
+				System.out.println("aucun compte créer avec ce pseudo");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	@Override
+	public void update(Utilisateur t) throws DALException {
+		
+		
+	}
+	
+	
+	@Override
 	public DAOUtilisateur selectbyId(int id) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
@@ -140,12 +180,6 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 		return null;
 	}
 
-
-	@Override
-	public void update(Utilisateur t) throws DALException {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 	@Override

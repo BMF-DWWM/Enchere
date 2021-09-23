@@ -26,6 +26,9 @@
 	<div>
 		<a href="<%=request.getContextPath()%>/modifieProfil"><input type="button" name="modifProfil" Value="Modifier Profil"></a>
 	</div>
+	<div>
+		<a href="<%=request.getContextPath()%>/MdpOublier"><input type="button" name="MdpOublier" Value="MdpOublier"></a>
+	</div>
 </form>
 
 </body>
