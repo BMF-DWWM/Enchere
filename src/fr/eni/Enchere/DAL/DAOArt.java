@@ -18,7 +18,7 @@ public interface DAOArt<T> {
 		
 		public void delete (int id) throws DALException; 
 		
-		public List<T> selectAllByMotCle(String mot, String categorie) throws DALException;
+		public List<T> selectAllByMotCle(String mot, String categorie, String option) throws DALException;
 		
 		
 		

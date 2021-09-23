@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +24,16 @@
 		<option value="2">Ameublement</option>
 		<option value="3">Vêtement</option>
 		<option value="4">Sport/Loisirs</option>
+		</select>
+			<select name="achatVente" id="achat vente">
+		<option value="">-----Achats-----</option>
+		<option value="1">enchères ouverte</option>
+		<option value="2">mes enchères en cours</option>
+		<option value="3">mes enchères remportées</option>
+		<option value="">-----Mes ventes-----</option>
+		<option value="4">Mes ventes en cours</option>
+		<option value="5">ventes non débutées</option>
+		<option value="6">ventes terminées</option>
 		</select>
 		
 		<button id="btnRecherche" type="submit" >Rechercher</button>

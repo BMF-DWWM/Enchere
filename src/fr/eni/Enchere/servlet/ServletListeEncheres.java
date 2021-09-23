@@ -42,6 +42,7 @@ public class ServletListeEncheres extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
 		String categorie;
+		String option ;
 			String mot = request.getParameter("s");
 			if (request.getParameter("categories").equals("")) {
 				categorie = "";
@@ -49,8 +50,13 @@ public class ServletListeEncheres extends HttpServlet {
 			else {
 				categorie = " and no_categorie =" +request.getParameter("categories");
 			}
+			switch (request.getParameter("achatVente")) {
+			case "1": option = "and GETDATE()  between date_debut_encheres and date_fin_encheres";break;
+			default: option ="";
+				break;
+			}
 			try {
-				request.setAttribute("listeArticle", articleDAO.selectAllByMotCle(mot, categorie));
+				request.setAttribute("listeArticle", articleDAO.selectAllByMotCle(mot, categorie, option));
 				
 			} catch (DALException e) {
 				// TODO Auto-generated catch block

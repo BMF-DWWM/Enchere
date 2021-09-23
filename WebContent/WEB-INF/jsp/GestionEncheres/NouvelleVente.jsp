@@ -37,7 +37,7 @@
 		</div>
 		</div>
 			<div class="containerBouton">
-			<input type="submit" value="Enregistrer">
+			<input type="submit" value="Enregistrer" >
 			<input type="button" onclick="https://google.fr" value="Annuler">
 			<input type="button" onclick="https://google.fr" value="Annuler la vente">
 			</div>

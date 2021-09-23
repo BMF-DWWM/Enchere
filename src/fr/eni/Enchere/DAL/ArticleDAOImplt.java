@@ -91,11 +91,11 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 			// TODO: handle finally clause
 		}return listArticle;
 	}
-	public List<ArticlesVendu> selectAllByMotCle(String mot, String categorie) throws DALException {
+	public List<ArticlesVendu> selectAllByMotCle(String mot, String categorie, String option) throws DALException {
 		ArticlesVendu article = null;
 		List<ArticlesVendu> listArticle = new ArrayList<ArticlesVendu>();
 		try (Connection cnx = ConnectionProvider.getConnextion()){
-			PreparedStatement pstmt = cnx.prepareStatement(sqlSelectAllRunByMotCle+" '%"+ mot+ "%' " + categorie);
+			PreparedStatement pstmt = cnx.prepareStatement(sqlSelectAllRunByMotCle+" '%"+ mot+ "%' " + categorie + option);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
