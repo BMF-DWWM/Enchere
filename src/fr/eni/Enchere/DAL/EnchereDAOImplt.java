@@ -92,7 +92,7 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 			
 		pstmt.executeUpdate();
 		} catch (Exception e) {
-			throw new DALException("Update article failed"+ enchere, e);
+			throw new DALException("Update enchere failed"+ enchere, e);
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -118,10 +118,10 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 
 			
 			pstmt.executeUpdate();
-			ResultSet rs = pstmt.getGeneratedKeys();
+			
 		
 		} catch (Exception e) {
-			throw new DALException("Insert article failed"+ enchere, e);
+			throw new DALException("Insert enchere failed"+ enchere, e);
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -143,7 +143,7 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 			pstmt.setInt(1, noArticle);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			throw new DALException("Delete article failed"+ noArticle, e);
+			throw new DALException("Delete enchere failed"+ noArticle, e);
 		}finally {
 			if (pstmt != null) {
 				try {
