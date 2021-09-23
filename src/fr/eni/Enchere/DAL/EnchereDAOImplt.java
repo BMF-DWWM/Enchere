@@ -155,5 +155,11 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 		}
 	}
 
+	@Override
+	public List<Enchere> selectAllByMotCle(String mot, String categorie) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

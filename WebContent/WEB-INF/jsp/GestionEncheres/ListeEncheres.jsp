@@ -23,16 +23,16 @@
 	 -->
 	<div class="Recherche" >
 		<h2>Liste des enchères</h2>
-		<form>
+		<form action="<%=request.getContextPath()%>/ServletListeEncheres" method="post">
 		<p>Filtres :<p>
 		<input type="search" id="recherche-article" name="s" maxlength="50"  placeholder="Le nom de l'article contient" >
 		<p>Catégorie :<p> 
 		<select name="categories" id="select-categorie">
-		<option value="toutes">Toutes</option>
-		<option value="informatique">Informatique</option>
-		<option value="ameublement">Ameublement</option>
-		<option value="vetement">Vêtement</option>
-		<option value="sportLoisir">Sport/Loisirs</option>
+		<option value="">Toutes</option>
+		<option value="1">Informatique</option>
+		<option value="2">Ameublement</option>
+		<option value="3">Vêtement</option>
+		<option value="4">Sport/Loisirs</option>
 		</select>
 		
 		<button id="btnRecherche" type="submit" >Rechercher</button>

@@ -20,6 +20,10 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 	private static final String sqlSelectAllRun= "select * from ARTICLES_VENDUS av\r\n" + 
 			"	inner join UTILISATEURS u\r\n" + 
 			"	ON u.no_utilisateur=av.no_utilisateur";
+	private static final String sqlSelectAllRunByMotCle = "select * from ARTICLES_VENDUS av\r\n"
+			+ "inner join UTILISATEURS u\r\n"
+			+ "ON u.no_utilisateur=av.no_utilisateur\r\n"
+			+ "where nom_article like";
 	private static final String sqlUpdate= "update Articles_Vendus  set nom_article = ?, description = ?, "
 			+ "date_debut_encheres = ?, date_fin_encheres= ?, prix_initial = ?, prix_vente = ?, "
 			+ "no_utilisateur = ?, no_categorie = ? where no_article = ?";
@@ -27,6 +31,7 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 			+ "date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie)"
 			+ " values (?,?,?,?,?,?,?,?)";
 	private static final String sqlDelete = "delete from Articles_Vendus where no_article = ?" ;
+	
 	
 	public  ArticleDAOImplt() {
 	}
@@ -86,6 +91,28 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 			// TODO: handle finally clause
 		}return listArticle;
 	}
+	public List<ArticlesVendu> selectAllByMotCle(String mot, String categorie) throws DALException {
+		ArticlesVendu article = null;
+		List<ArticlesVendu> listArticle = new ArrayList<ArticlesVendu>();
+		try (Connection cnx = ConnectionProvider.getConnextion()){
+			PreparedStatement pstmt = cnx.prepareStatement(sqlSelectAllRunByMotCle+" '%"+ mot+ "%' " + categorie);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				article = new ArticlesVendu(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres"),
+						rs.getDate("date_fin_encheres"), rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"),
+						rs.getInt("no_categorie"), rs.getString("pseudo"));		
+				listArticle.add(article);
+		}
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// TODO: handle finally clause
+		}return listArticle;
+	}
+	
 
 	@Override
 	public void update(ArticlesVendu article ) throws DALException {

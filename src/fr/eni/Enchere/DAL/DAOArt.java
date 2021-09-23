@@ -2,6 +2,7 @@ package fr.eni.Enchere.DAL;
 
 import java.util.List;
 
+import fr.eni.Enchere.BO.ArticlesVendu;
 import fr.eni.Enchere.BO.Utilisateur;
 
 public interface DAOArt<T> {
@@ -16,6 +17,8 @@ public interface DAOArt<T> {
 		public void insert (T t) throws DALException;
 		
 		public void delete (int id) throws DALException; 
+		
+		public List<T> selectAllByMotCle(String mot, String categorie) throws DALException;
 		
 		
 		

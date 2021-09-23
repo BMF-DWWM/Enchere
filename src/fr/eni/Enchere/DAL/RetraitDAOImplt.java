@@ -150,4 +150,10 @@ public void delete(int noArticle) throws DALException {
 	}
 	
 }
+
+@Override
+public List<Retrait> selectAllByMotCle(String mot, String categorie) throws DALException {
+	// TODO Auto-generated method stub
+	return null;
+}
 }
