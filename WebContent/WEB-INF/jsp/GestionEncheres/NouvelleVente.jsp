@@ -29,9 +29,9 @@
 			<label>Debut de l'enchère :</label> <input type="date" id="debutEnchere" name="debutEnchere">
 			<label>Fin de l'enchère :</label> <input type="date" id="finEnchere" name="finEnchere">
 		<div class="retrait">
-			<label>Rue :</label> <input type="text" id="rue" name="rue">
-			<label>Code postal :</label> <input type="text" id="codePostal" name="codePostal">
-			<label>Ville :</label> <input type="text" id="ville" name="ville">
+			<label>Rue :</label> <input type="text" id="rue" name="rue" value="${utilisateur.rue}">
+			<label>Code postal :</label> <input type="text" id="codePostal" name="codePostal" value="${utilisateur.codePostal}">
+			<label>Ville :</label> <input type="text" id="ville" name="ville" value="${utilisateur.ville}">
 			
 		</div>
 		</div>

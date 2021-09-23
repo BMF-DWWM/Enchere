@@ -90,7 +90,7 @@ public void update(Retrait retrait) throws DALException {
 		
 	pstmt.executeUpdate();
 	} catch (Exception e) {
-		throw new DALException("Update article failed"+ retrait, e);
+		throw new DALException("Update retrait failed"+ retrait, e);
 	}finally {
 		if (pstmt != null) {
 			try {
@@ -104,14 +104,50 @@ public void update(Retrait retrait) throws DALException {
 }
 
 @Override
-public void insert(Retrait t) throws DALException {
-	// TODO Auto-generated method stub
+public void insert(Retrait retrait) throws DALException {
+	PreparedStatement pstmt = null;
+	try (Connection cnx = ConnectionProvider.getConnextion() ){
+		pstmt = cnx.prepareStatement(sqlInsert);
+		pstmt.setInt(1, retrait.getNoArticle());
+		pstmt.setString(2, retrait.getRue());
+		pstmt.setString(3, retrait.getCodePostal());
+		pstmt.setString(4, retrait.getVille());
+
+		
+		pstmt.executeUpdate();
+
 	
+	} catch (Exception e) {
+		throw new DALException("Insert retrait failed"+ retrait, e);
+	}finally {
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				throw new DALException("close failed - ", e);
+			}
+		}
+	}	
 }
 
 @Override
-public void delete(int id) throws DALException {
-	// TODO Auto-generated method stub
+public void delete(int noArticle) throws DALException {
+	PreparedStatement pstmt = null;
+	try (Connection cnx = ConnectionProvider.getConnextion() ){
+		pstmt = cnx.prepareStatement(sqlDelete);
+		pstmt.setInt(1, noArticle);
+		pstmt.executeUpdate();
+	} catch (Exception e) {
+		throw new DALException("Delete enchere failed"+ noArticle, e);
+	}finally {
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 }
 }

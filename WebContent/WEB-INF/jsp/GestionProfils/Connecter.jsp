@@ -14,6 +14,7 @@
 
 	<a href="<%=request.getContextPath()%>/modifieProfil"><input type="button" Value="Modifier Profil"></a>
 	<a href="<%=request.getContextPath()%>/Connection"><input type="button" Value="Déconnexion"></a>
+	<a href="<%=request.getContextPath()%>/ServletMisEnVenteArticle"><input type="button" Value="Faire une vente"></a>
 
 </body>
 </html>
