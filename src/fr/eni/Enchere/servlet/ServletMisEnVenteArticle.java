@@ -70,7 +70,7 @@ public class ServletMisEnVenteArticle extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	     RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionEncheres/NouvelleVente.jsp");
+	     RequestDispatcher rd = request.getRequestDispatcher("/ServletListeEncheres");
 	     rd.forward(request, response);
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +40,16 @@
 	</div>
 	
 	<div class="affichageArticle">
-	
+	<c:forEach items="${listeArticle}" var="article">
+  		<div class='containerArticle'></div>
+  			<div class='containerImage'></div>
+  			<div class='containerTexte'>
+  			<a href="<%=request.getContextPath()%>/ServletListeEncheres">${article.nomArticle }</a>
+  			<label> Prix : ${article.prixInitial }</label>
+  			<label>Fin de l'enchère : ${article.dateFinEncheres }</label>
+  			<label>Vendeur : <a href="<%=request.getContextPath()%>/ServletListeEncheres">${article.pseudoUtilisateur }</a></label>
+  			</div>
+ 	</c:forEach>
 	<!-- Afficher derniers articles ajoutés -->
 	
 	<!-- Afficher dernières ventes réalisées -->

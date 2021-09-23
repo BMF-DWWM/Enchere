@@ -13,8 +13,25 @@ public class ArticlesVendu {
     private int prixVente;
     private int noUtilisateur;
     private int noCategorie;
+    private String pseudoUtilisateur;
     
     
+
+	public ArticlesVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
+			Date dateFinEncheres, int prixInitial, int prixVente, int noUtilisateur, int noCategorie,
+			String pseudoUtilisateur) {
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.prixInitial = prixInitial;
+		this.prixVente = prixVente;
+		this.noUtilisateur = noUtilisateur;
+		this.noCategorie = noCategorie;
+		this.pseudoUtilisateur = pseudoUtilisateur;
+	}
+
 	public ArticlesVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
 			Date dateFinEncheres, int prixInitial, int prixVente, int noUtilisateur, int noCategorie) {
 		super();
@@ -114,18 +131,31 @@ public class ArticlesVendu {
 	public void setNoCategorie(int noCategorie) {
 		this.noCategorie = noCategorie;
 	}
-
+	
+	
 
 	@Override
 	public String toString() {
 		return "ArticlesVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", prixInitial="
 				+ prixInitial + ", prixVente=" + prixVente + ", noUtilisateur=" + noUtilisateur + ", noCategorie="
-				+ noCategorie + "]";
+				+ noCategorie + ", pseudoUtilisateur=" + pseudoUtilisateur + "]";
+	}
+
+	public String getPseudoUtilisateur() {
+		return pseudoUtilisateur;
+	}
+
+	public void setPseudoUtilisateur(String pseudoUtilisateur) {
+		this.pseudoUtilisateur = pseudoUtilisateur;
+	}
+
+
+
 	}
 
 	
 	
 	
     
-}
+
