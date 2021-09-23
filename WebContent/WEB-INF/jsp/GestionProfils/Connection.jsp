@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Connexion</title>
+<style><%@include file="/Style.css"%></style>
 </head>
 <body>
 <%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
