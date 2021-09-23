@@ -11,16 +11,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
-	<!-- <header>
-	<div class="EnTete">
-		<h1>ENI-Enchères</h1>
-		
-		<a href="/Enchere/WebContent/WEB-INF/jsp/Connection.jsp"  >S'inscrire - Se connecter</a>
 	
-	</div>
-	
-	</header>
-	 -->
 	<div class="Recherche" >
 		<h2>Liste des enchères</h2>
 		<form action="<%=request.getContextPath()%>/ServletListeEncheres" method="post">
@@ -46,6 +37,7 @@
   			<div class='containerTexte'>
   			<a href="<%=request.getContextPath()%>/ServletListeEncheres">${article.nomArticle }</a>
   			<label> Prix : ${article.prixInitial }</label>
+  			<label>Description : ${article.description }</label>
   			<label>Fin de l'enchère : ${article.dateFinEncheres }</label>
   			<label>Vendeur : <a href="<%=request.getContextPath()%>/ServletListeEncheres">${article.pseudoUtilisateur }</a></label>
   			</div>

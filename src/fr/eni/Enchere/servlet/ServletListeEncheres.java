@@ -26,11 +26,12 @@ public class ServletListeEncheres extends HttpServlet {
 		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
 		try {
 			request.setAttribute("listeArticle",articleDAO.selectAll());
+			System.out.println("1");
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionEncheres/ListeEncheres.jsp");
 		rd.forward(request, response);
 	}
@@ -48,21 +49,16 @@ public class ServletListeEncheres extends HttpServlet {
 			else {
 				categorie = " and no_categorie =" +request.getParameter("categories");
 			}
-//			try {
-//				articleDAO.selectAllByMotCle(mot, categorie);
-//			} catch (Exception e) {
-//				// TODO: handle exception
-//			}
 			try {
 				request.setAttribute("listeArticle", articleDAO.selectAllByMotCle(mot, categorie));
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionEncheres/ListeEncheres.jsp");
-				rd.forward(request, response);
+				
 			} catch (DALException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-		
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionEncheres/ListeEncheres.jsp");
+			rd.forward(request, response);
 	}
 
 }
