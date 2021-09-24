@@ -1,6 +1,8 @@
 package fr.eni.Enchere.servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.Enchere.BO.ArticlesVendu;
+import fr.eni.Enchere.BO.Enchere;
 import fr.eni.Enchere.BO.Retrait;
 import fr.eni.Enchere.DAL.DALException;
 import fr.eni.Enchere.DAL.DAOArt;
@@ -27,10 +30,14 @@ public class ServletDetailArticle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
 		DAOArt<Retrait> retraitDAO = DAOFactory.getretraitDAO();
+		HttpSession session = request.getSession();
+		ArticlesVendu article = null;
 		try {
 						request.setAttribute("article", articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
 						request.setAttribute("retrait", retraitDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
-			
+						article = articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
+						session.setAttribute("articleNoUtilisateur", article.getNoUtilisateur());
+						session.setAttribute("articleNoArticle", article.getNoArticle());
 						
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
@@ -44,19 +51,27 @@ public class ServletDetailArticle extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
-		ArticlesVendu article = null;
-		System.out.println((request.getParameter("noArticle")));
+		HttpSession session = request.getSession();
+		int articleNoUtilisateur = (int) session.getAttribute("articleNoUtilisateur");
+		int articleNoArticle = (int) session.getAttribute("articleNoArticle");
+		DAOArt<Enchere> enchereDAO = DAOFactory.getEnchereDAO();
+		Enchere rechercheEnchere = null;
+		
 		try {
-			article = articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			rechercheEnchere = enchereDAO.selectbyIdUserAndIdArticle(articleNoUtilisateur, articleNoArticle);
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(article);
+		if (rechercheEnchere == null) {
+			
+		}
+		int montant = Integer.parseInt(request.getParameter("montantEnchere"));
+		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd ");
+		Date dateMilliSec = new Date( System.currentTimeMillis());
+		System.out.println(dateMilliSec);
+		String date = formatter.format(dateMilliSec);
+		System.out.println(date);
 	}
 
 }

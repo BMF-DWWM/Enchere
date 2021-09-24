@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.Enchere.BO.ArticlesVendu;
+import fr.eni.Enchere.BO.Enchere;
 import fr.eni.Enchere.BO.Utilisateur;
 
 
@@ -201,6 +202,12 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 			}
 		}
 		
+	}
+
+	@Override
+	public Enchere selectbyIdUserAndIdArticle(int idUtilisateur, int IdArticle) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

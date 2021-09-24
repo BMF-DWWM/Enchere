@@ -158,4 +158,10 @@ public List<Retrait> selectAllByMotCle(String mot, String categorie, String opti
 	// TODO Auto-generated method stub
 	return null;
 }
+
+@Override
+public Enchere selectbyIdUserAndIdArticle(int idUtilisateur, int IdArticle) throws DALException {
+	// TODO Auto-generated method stub
+	return null;
+}
 }
