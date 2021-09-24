@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Enchère Remportée</title>
-<style><%@include file="/Style.css"%></style>
+<title>Insert title here</title>
 </head>
 <body>
 <%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>

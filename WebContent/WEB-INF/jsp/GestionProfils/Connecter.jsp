@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Connecter</title>
-<style><%@include file="/Style.css"%></style>
 </head>
 <body>
 <%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>

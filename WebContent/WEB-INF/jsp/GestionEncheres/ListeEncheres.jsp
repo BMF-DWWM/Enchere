@@ -11,6 +11,18 @@
 </head>
 <body>
 <%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
+
+<c:if test="${utilisateur.noUtilisateur == null}">
+	<div>
+		<a href="<%=request.getContextPath()%>/Connection"><input type="button" name="Connection" Value="Se connecter - S'inscrire"></a>
+	</div>
+</c:if>
+
+<c:if test="${utilisateur.noUtilisateur != null}"> 
+	<a href="<%=request.getContextPath()%>/modifieProfil"><input type="button" Value="Modifier Profil"></a>
+	<a href="<%=request.getContextPath()%>/Connection"><input type="button" Value="Déconnexion"></a>
+</c:if>
+
 	
 	<div class="Recherche" >
 		<h2>Liste des enchères</h2>

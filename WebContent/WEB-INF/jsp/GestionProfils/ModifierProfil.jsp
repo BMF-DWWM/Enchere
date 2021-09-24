@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Modifier le profil</title>
-<style><%@include file="/Style.css"%></style>
 </head>
 <body>
 <%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
@@ -56,7 +55,6 @@
 				<input type="text" name="confirmmotdepasse" value="" >
 			</div>
 		</div>
-	</div>	
 		<div>
 		<input type="submit" value="Envoyer" >
 		</div>

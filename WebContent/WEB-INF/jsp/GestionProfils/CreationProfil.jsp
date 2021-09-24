@@ -67,9 +67,9 @@
 				</div>
 			</div>
 			
-			<div >
-			<input class="containerBouton" type="submit" value="Créer">
-			<input class="containerBouton" type="button" onclick="https://google.fr" value="Annuler">
+			<div class="containerBouton">
+			<input type="submit" value="Créer">
+			<input type="button" onclick="https://google.fr" value="Annuler">
 			</div>
 			
 		
