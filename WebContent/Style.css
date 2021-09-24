@@ -20,6 +20,16 @@ body {
 	background-size: cover;
 }
 
+.container1 {
+	background: rgba(204, 204, 153, 0.7) ;
+	border-radius: 10px;
+	border-color: black;
+	border: 2px solid black;
+	padding: 5px;
+	
+	
+}
+
 .containerConnexion {
 
 	display: flex;
@@ -28,31 +38,25 @@ body {
 	justify-content: center;
 	font-family: Tahoma, Geneva, sans-serif;
 	align-items: center;
-	background: rgba(204, 204, 153, 0.7) ;
-	border-radius: 10px;
-	border-color: black;
-	border: 20px;
 
 
 }
+
+
 .containerFormulaire {
 
 	display: flex;
 	justify-content: center;
 	font-family: Tahoma, Geneva, sans-serif;
-	background: rgba(204, 204, 153, 0.7) ;
-	border-radius: 10px;
-	border-color: black;
-	border: 2px solid black;
 	width:100%;
-
+	text-align: right;
 
 }
 
 .label-input-container {
 	display: flex;
 	padding: 10px;
-	width:100%;
+	width:80%;
 	
 }
 .my-label {
@@ -121,12 +125,12 @@ form {
 	background: linear-gradient(to right, gold, darkorange);
 	color: white;
 	--width: 100px;
-	--height: calc(var(--width) / 3);
+	--height: calc(var(--width) / 3.5);
 	width: var(--width);
 	height: var(--height);
 	text-align: center;
 	line-height: var(--height);
-	font-size: calc(var(--height) / 2.5);
+	font-size: calc(var(--height) / 4);
 	letter-spacing: 0.2em;
 	border: 1px solid darkgoldenrod;
 	border-radius: 2em;
@@ -136,6 +140,8 @@ form {
 	transition: 0.5s;
 	position: relative;
 	overflow: hidden;
+	padding-bottom: 5px;
+	margin: 8px;
 }
 
 .containerBouton:hover {

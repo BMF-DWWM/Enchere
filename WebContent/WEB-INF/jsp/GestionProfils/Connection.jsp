@@ -9,23 +9,33 @@
 </head>
 <body>
 <%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
-	<h1>Connexion</h1>
 <form method="post" action="Connection">
-
-	<label>Pseudo</label>
-	<input type="text" name="pseudo">
-	
-	<label>Mot de passe</label>
-	<input type="text" name="password">
-	
-	<input type="submit" value="Connexion">
-
-	<div>
-		<a href="<%=request.getContextPath()%>/CreerCompte"><input type="button" name="creerCompte" Value="Créer un compte"></a>
-	</div>
-	<div>
-		<a href="<%=request.getContextPath()%>/MdpOublier"><input type="button" name="MdpOublier" Value="MdpOublier"></a>
-	</div>
+	<h2>Connexion</h2>
+	<div class="container1">
+		<div class="containerConnexion">
+		
+			<label>Pseudo</label>
+			<input type="text" name="pseudo">
+			
+			<label>Mot de passe</label>
+			<input type="text" name="password">
+			<div class="boutonsConnexion" >
+			<input class="containerBouton" type="submit" value="Connexion">
+			
+			
+				<div>
+					<a href="<%=request.getContextPath()%>/CreerCompte"><input class="containerBouton" type="button" name="creerCompte" Value="Créer un compte"></a>
+				</div>
+				
+				<div>
+					<a href="<%=request.getContextPath()%>/modifieProfil"><input class="containerBouton" type="button" name="modifProfil" Value="Modifier Profil"></a>
+				</div>
+				<div>
+					<a href="<%=request.getContextPath()%>/MdpOublier"><input class="containerBouton" type="button" name="MdpOublier" Value="Mot de passe oublié"></a>
+				</div>
+			</div>
+		</div>
+	</div>	
 </form>
 
 </body>
