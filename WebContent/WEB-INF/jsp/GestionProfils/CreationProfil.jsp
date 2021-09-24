@@ -12,7 +12,7 @@
 		<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
 	
 <div class="creationProfil">
-	<form action="<%=request.getContextPath()%>/ServletCreationProfil" method="post">
+	<form action="<%=request.getContextPath()%>/CreerCompte" method="post">
 	<h2 class="titrepProfil">Mon profil</h2>
 			<div class="container1">
 				<div class="containerFormulaire">
@@ -69,7 +69,7 @@
 			
 			<div >
 			<input class="containerBouton" type="submit" value="Créer">
-			<input class="containerBouton" type="button" onclick="https://google.fr" value="Annuler">
+			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBouton" type="button" name="Retour" Value="Annuler"></a>
 			</div>
 			
 		

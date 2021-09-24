@@ -26,10 +26,6 @@
 				<div>
 					<a href="<%=request.getContextPath()%>/CreerCompte"><input class="containerBouton" type="button" name="creerCompte" Value="Créer un compte"></a>
 				</div>
-				
-				<div>
-					<a href="<%=request.getContextPath()%>/modifieProfil"><input class="containerBouton" type="button" name="modifProfil" Value="Modifier Profil"></a>
-				</div>
 				<div>
 					<a href="<%=request.getContextPath()%>/MdpOublier"><input class="containerBouton" type="button" name="MdpOublier" Value="Mot de passe oublié"></a>
 				</div>

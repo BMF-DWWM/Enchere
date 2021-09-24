@@ -48,7 +48,7 @@ public class CreerCompte extends HttpServlet {
 
 		if(utilVerif == null && newPassword.equals(newPasswordConfirm)) {
 			DAOFactory.getUtilisateurDAO().CreationCompte(newPseudo, newNom, newPrenom, newEmail, newTelephone, newRue, newCodePostal, newVille, newPassword);
-			rd = request.getRequestDispatcher("WEB-INF/jsp/GestionProfils/Connecter.jsp");
+			rd = request.getRequestDispatcher("/Connection");
 			rd.forward(request, response);
 		}
 			else {

@@ -33,6 +33,7 @@
 </div>
 
 <a href="<%=request.getContextPath()%>/Connection"><input type="button" Value="Déconnexion"></a>
+<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input type="button" Value="Retour"></a>
 
 
 
