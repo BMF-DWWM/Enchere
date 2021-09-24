@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Nouvelle vente</title>
+<style><%@include file="/Style.css"%></style>
 </head>
 <body>
 	<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
@@ -43,7 +44,6 @@
 			</div>
 		</div>
 	</form>
-	<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input type="button" Value="Voir la liste des ventes"></a>
 </div>
 	
 	
