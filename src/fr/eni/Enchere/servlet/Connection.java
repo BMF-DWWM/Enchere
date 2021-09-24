@@ -55,8 +55,9 @@ public class Connection extends HttpServlet {
 		session.setAttribute("utilisateur", utilDAO);
 
 		if(utilDAO != null) {
-			rd = request.getRequestDispatcher("WEB-INF/jsp/GestionEncheres/ListeEncheres.jsp");
-			rd.forward(request, response);
+			response.sendRedirect("/Enchere/ServletListeEncheres");
+			//rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionEncheres/ListeEncheres.jsp");
+			//rd.forward(request, response);
 		}
 		else {
 			rd = request.getRequestDispatcher("WEB-INF/jsp/Erreur.jsp");
