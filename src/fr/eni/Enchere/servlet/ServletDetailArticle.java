@@ -33,14 +33,20 @@ public class ServletDetailArticle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
 		DAOArt<Retrait> retraitDAO = DAOFactory.getretraitDAO();
+		DAOArt<Enchere> enchereDAO = DAOFactory.getEnchereDAO();
 		HttpSession session = request.getSession();
 		ArticlesVendu article = null;
+		Enchere rechercheEnchere = null;
 		try {
 						request.setAttribute("article", articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
 						request.setAttribute("retrait", retraitDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
 						article = articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
 						session.setAttribute("articleNoUtilisateur", article.getNoUtilisateur());
 						session.setAttribute("articleNoArticle", article.getNoArticle());
+						int articleNoUtilisateur = (int) session.getAttribute("articleNoUtilisateur");
+						int articleNoArticle = (int) session.getAttribute("articleNoArticle");
+						rechercheEnchere = enchereDAO.selectbyIdUserAndIdArticle((articleNoUtilisateur), articleNoArticle);
+						request.setAttribute("enchere", rechercheEnchere);
 						
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
