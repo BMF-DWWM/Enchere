@@ -1,7 +1,6 @@
 package fr.eni.Enchere.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,29 +8,35 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.Enchere.BO.ArticlesVendu;
+import fr.eni.Enchere.BO.Retrait;
 import fr.eni.Enchere.DAL.DALException;
 import fr.eni.Enchere.DAL.DAOArt;
 import fr.eni.Enchere.DAL.DAOFactory;
 
 /**
- * Servlet implementation class ServletListeEncheres
+ * Servlet implementation class ServletDetailArticle
  */
-@WebServlet("/ServletListeEncheres")
-public class ServletListeEncheres extends HttpServlet {
+@WebServlet("/ServletDetailArticle")
+public class ServletDetailArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
+		DAOArt<Retrait> retraitDAO = DAOFactory.getretraitDAO();
 		try {
-			request.setAttribute("listeArticle",articleDAO.selectAll());
+						request.setAttribute("article", articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
+						request.setAttribute("retrait", retraitDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
+			
+						
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionEncheres/ListeEncheres.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/GestionEncheres/DetailsVente.jsp");
 		rd.forward(request, response);
 	}
 
@@ -40,31 +45,18 @@ public class ServletListeEncheres extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
-		String categorie;
-		String option ;
-			String mot = request.getParameter("s");
-			if (request.getParameter("categories").equals("")) {
-				categorie = "";
-			}
-			else {
-				categorie = " and no_categorie =" +request.getParameter("categories");
-			}
-			switch (request.getParameter("achatVente")) {
-			case "1": option = "and GETDATE()  between date_debut_encheres and date_fin_encheres";break;
-			default: option ="";
-				break;
-			}
-			try {
-				request.setAttribute("listeArticle", articleDAO.selectAllByMotCle(mot, categorie, option));
-			
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionEncheres/ListeEncheres.jsp");
-			rd.forward(request, response);
+		ArticlesVendu article = null;
+		System.out.println((request.getParameter("noArticle")));
+		try {
+			article = articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(article);
 	}
 
 }

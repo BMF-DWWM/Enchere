@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Detail Vente</title>
 </head>
 <body>
 <%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>	
@@ -14,15 +14,34 @@
 <div class="containerVente">
 	<div class="containerImage"></div>
 	<div class="containerInfo">
-		<label></label>
-		<label>Description :</label>
-		<label>Catégorie :</label>
-		<label>Meilleur offre :</label>
-		<label> Mise à prix :</label>
-		<label>Fin de l'enchère</label>
-		<label>Retrait :</label>
-		<label> Vendeur :</label>
-		<label>Ma proposition </label>
+		<label>${article.nomArticle }</label>
+		<label>Description : ${article.description }</label>
+		<c:choose>
+			<c:when test="${article.noCategorie ==1}">
+				<label>Catégorie : Informatique</label>
+			</c:when>
+			<c:when test="${article.noCategorie ==2}">
+				<label>Catégorie : Ameublement</label>
+			</c:when>
+			<c:when test="${article.noCategorie ==3}">
+				<label>Catégorie : Vétement</label>
+			</c:when>
+			<c:when test="${article.noCategorie ==4}">
+				<label>Catégorie : Sport / Loisir</label>
+			</c:when>
+		</c:choose>
+	
+		<label>Meilleur offre : ${article.nomArticle }</label>
+		<label> Mise à prix : ${article.prixInitial }</label>
+		<label>Fin de l'enchère : ${article.dateFinEncheres }</label>
+		<label>Retrait : ${retrait.rue } ${retrait.codePostal } ${retrait.ville}</label>
+		<label> Vendeur : ${article.pseudoUtilisateur }</label>
+		<label>Ma proposition : </label>
+		<form action="<%=request.getContextPath()%>/ServletDetailArticle" method="post">
+			<input type="number" name="">
+			<input type="submit" value="Enchérir">
+		</form>
+		
 	</div>
 
 </div>

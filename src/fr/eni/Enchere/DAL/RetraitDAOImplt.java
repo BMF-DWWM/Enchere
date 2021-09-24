@@ -37,7 +37,7 @@ public Retrait selectbyId(int id) throws DALException {
 		
 		if(rs.next()) {
 			retrait = new Retrait(rs.getInt("no_article"), rs.getString("rue"),
-					rs.getString("codePostal"), rs.getString("ville"));
+					rs.getString("code_Postal"), rs.getString("ville"));
 		} 
 		
 	} catch (SQLException e) {

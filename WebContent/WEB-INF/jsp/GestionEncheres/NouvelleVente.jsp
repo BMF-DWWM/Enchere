@@ -43,6 +43,7 @@
 			</div>
 		</div>
 	</form>
+	<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input type="button" Value="Voir la liste des ventes"></a>
 </div>
 	
 	

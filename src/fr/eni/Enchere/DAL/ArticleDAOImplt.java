@@ -16,7 +16,10 @@ import fr.eni.Enchere.BO.Utilisateur;
 
 public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 	
-	private static final String sqlSelectArticleById = "select * from Articles_Vendus where no_article =?";
+	private static final String sqlSelectArticleById = "select * from ARTICLES_VENDUS av\r\n" + 
+			"	inner join UTILISATEURS u\r\n" + 
+			"	on u.no_utilisateur = av.no_utilisateur\r\n" + 
+			"	where no_article = ?";
 	private static final String sqlSelectAllRun= "select * from ARTICLES_VENDUS av\r\n" + 
 			"	inner join UTILISATEURS u\r\n" + 
 			"	ON u.no_utilisateur=av.no_utilisateur";
@@ -47,9 +50,9 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 		
 			
 			if(rs.next()) {
-				article = new ArticlesVendu(rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres"),
+				article = new ArticlesVendu(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres"),
 						rs.getDate("date_fin_encheres"), rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"),
-						rs.getInt("no_categorie"));
+						rs.getInt("no_categorie"), rs.getString("pseudo"));
 				
 			} 
 			
