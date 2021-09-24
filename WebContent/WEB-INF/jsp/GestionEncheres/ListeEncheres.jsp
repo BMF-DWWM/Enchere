@@ -57,7 +57,7 @@
   		<div class='containerArticle'></div>
   			<div class='containerImage'></div>
   			<div class='containerTexte'>
-  			<a href="<%=request.getContextPath()%>/ServletListeEncheres">${article.nomArticle }</a>
+  			<a href="<%=request.getContextPath()%>/ServletDetailArticle?noArticle=${article.noArticle}">${article.nomArticle }</a>
   			<label> Prix : ${article.prixInitial }</label>
   			<label>Description : ${article.description }</label>
   			<label>Fin de l'enchère : ${article.dateFinEncheres }</label>

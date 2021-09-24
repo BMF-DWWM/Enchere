@@ -1,8 +1,11 @@
 package fr.eni.Enchere.servlet;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -54,8 +57,11 @@ public class ServletDetailArticle extends HttpServlet {
 		HttpSession session = request.getSession();
 		int articleNoUtilisateur = (int) session.getAttribute("articleNoUtilisateur");
 		int articleNoArticle = (int) session.getAttribute("articleNoArticle");
+		int montant = Integer.parseInt(request.getParameter("montantEnchere"));
+		Date dateMilliSec = new Date( System.currentTimeMillis());
 		DAOArt<Enchere> enchereDAO = DAOFactory.getEnchereDAO();
 		Enchere rechercheEnchere = null;
+		Enchere enchere = new Enchere(articleNoUtilisateur, dateMilliSec, articleNoArticle, montant);
 		
 		try {
 			rechercheEnchere = enchereDAO.selectbyIdUserAndIdArticle(articleNoUtilisateur, articleNoArticle);
@@ -64,14 +70,18 @@ public class ServletDetailArticle extends HttpServlet {
 			e.printStackTrace();
 		}
 		if (rechercheEnchere == null) {
+			try {
+				enchereDAO.insert(enchere);
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else {
 			
 		}
-		int montant = Integer.parseInt(request.getParameter("montantEnchere"));
-		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd ");
-		Date dateMilliSec = new Date( System.currentTimeMillis());
-		System.out.println(dateMilliSec);
-		String date = formatter.format(dateMilliSec);
-		System.out.println(date);
+		
+	
+		
 	}
 
 }

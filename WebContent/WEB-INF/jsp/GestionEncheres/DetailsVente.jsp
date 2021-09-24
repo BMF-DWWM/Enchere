@@ -39,7 +39,7 @@
 		<label> Vendeur : ${article.pseudoUtilisateur }</label>
 		<label>Ma proposition : </label>
 		<form action="<%=request.getContextPath()%>/ServletDetailArticle" method="post">
-			<input type="number" name="">
+			<input type="number" name="montantEnchere">
 			<input type="submit" value="Enchérir">
 		</form>
 		
