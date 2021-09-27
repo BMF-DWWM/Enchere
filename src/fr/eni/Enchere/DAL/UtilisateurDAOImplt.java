@@ -21,8 +21,8 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 	private String sqlSelectAll = "Select idUser,identifiant,password from Utilisateur";
 	private String sqlVerif = "Select * from Utilisateurs where (pseudo=? or email=?) and mot_de_passe=?";
 	private String sqlVerifCreationCompte = "Select pseudo,email from Utilisateurs where pseudo=? and email=?";
-	private static final String sqlCreationCompte = "insert into Utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe) values(?,?,?,?,?,?,?,?,?)";
-
+	private String sqlCreationCompte = "insert into Utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe) values(?,?,?,?,?,?,?,?,?)";
+	private String sqlUpdate = "update UTILISATEURS SET pseudo = ?,nom = ?,prenom = ?,email= ?,telephone = ?,rue = ?,code_postal = ?,ville = ?,mot_de_passe = ? where no_utilisateur = ?";
 
 //public void SelectAll() {
 //		
@@ -161,11 +161,38 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 	
 	
 	@Override
-	public void update(Utilisateur t) throws DALException {
-		
+	public void update(Utilisateur utilisateur) throws DALException {
+		PreparedStatement pstmt = null;
+		try (Connection cnx = ConnectionProvider.getConnextion() ){
+			pstmt = cnx.prepareStatement(sqlUpdate);
+			pstmt.setString(1, utilisateur.getPseudo() ) ;
+			pstmt.setString(2, utilisateur.getNom());
+			pstmt.setString(3, utilisateur.getPrenom());
+			pstmt.setString(4, utilisateur.getEmail());
+			pstmt.setString(5, utilisateur.getTelephone());
+			pstmt.setString(6, utilisateur.getRue());
+			pstmt.setString(7, utilisateur.getCodePostal());
+			pstmt.setString(8, utilisateur.getVille());
+			pstmt.setString(9, utilisateur.getMotDePasse());
+			pstmt.setInt(10, utilisateur.getNoUtilisateur());
+			
+			
+		pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new DALException("Update profil failed"+ utilisateur, e);
+		}finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					throw new DALException("close failed - ", e);
+				}
+			}
+		}
+
 		
 	}
-	
+
 	
 	@Override
 	public DAOUtilisateur selectbyId(int id) throws DALException {
