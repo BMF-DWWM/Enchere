@@ -210,5 +210,11 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 		return null;
 	}
 
+	@Override
+	public Enchere sqlSelectMax(int idArticle) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

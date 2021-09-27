@@ -164,4 +164,10 @@ public Enchere selectbyIdUserAndIdArticle(int idUtilisateur, int IdArticle) thro
 	// TODO Auto-generated method stub
 	return null;
 }
+
+@Override
+public Enchere sqlSelectMax(int idArticle) throws DALException {
+	// TODO Auto-generated method stub
+	return null;
+}
 }

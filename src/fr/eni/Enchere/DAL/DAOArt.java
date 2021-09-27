@@ -23,6 +23,8 @@ public interface DAOArt<T> {
 		
 		public Enchere selectbyIdUserAndIdArticle(int idUtilisateur, int IdArticle) throws DALException;
 		
+		public Enchere sqlSelectMax (int idArticle) throws DALException;
+		
 		
 		
 

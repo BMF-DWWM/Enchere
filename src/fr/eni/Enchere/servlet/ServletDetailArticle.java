@@ -45,9 +45,9 @@ public class ServletDetailArticle extends HttpServlet {
 						session.setAttribute("articleNoArticle", article.getNoArticle());
 						int articleNoUtilisateur = (int) session.getAttribute("articleNoUtilisateur");
 						int articleNoArticle = (int) session.getAttribute("articleNoArticle");
-						rechercheEnchere = enchereDAO.selectbyIdUserAndIdArticle((articleNoUtilisateur), articleNoArticle);
-						request.setAttribute("enchere", rechercheEnchere);
-						
+						rechercheEnchere = enchereDAO.sqlSelectMax((int) session.getAttribute("articleNoArticle"));
+						request.setAttribute("rechercheEnchere", rechercheEnchere);
+						System.out.println(rechercheEnchere);
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,12 +61,21 @@ public class ServletDetailArticle extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		DAOArt<Enchere> enchereDAO = DAOFactory.getEnchereDAO();
+		Enchere rechercheEnchere = null;
+		try {
+			rechercheEnchere = enchereDAO.sqlSelectMax((int) session.getAttribute("articleNoArticle"));
+		} catch (DALException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if (rechercheEnchere == null) {
+			
+		}
 		int articleNoUtilisateur = (int) session.getAttribute("articleNoUtilisateur");
 		int articleNoArticle = (int) session.getAttribute("articleNoArticle");
 		int montant = Integer.parseInt(request.getParameter("montantEnchere"));
 		Date dateMilliSec = new Date( System.currentTimeMillis());
-		DAOArt<Enchere> enchereDAO = DAOFactory.getEnchereDAO();
-		Enchere rechercheEnchere = null;
 		Enchere enchere = new Enchere(articleNoUtilisateur, dateMilliSec, articleNoArticle, montant);
 		
 		try {

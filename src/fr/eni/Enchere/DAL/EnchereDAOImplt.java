@@ -23,6 +23,9 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 			+ "no_article,montant_enchere)"
 			+ " values (?,?,?,?)";
 	private static final String sqlDelete = "delete from Encheres where no_utilisateur = ?" ;
+	private static final String sqlSelectMax ="select  MAX(montant_enchere) as montant_enchere,no_article,date_enchere from ENCHERES \r\n" + 
+			"where no_article = ? \r\n" + 
+			"group by no_article,date_enchere";
 	
 	public EnchereDAOImplt() {
 		
@@ -192,6 +195,35 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 	public List<Enchere> selectAllByMotCle(String mot, String categorie, String option) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public Enchere sqlSelectMax(int idArticle) throws DALException {
+		Enchere enchere= null;
+		PreparedStatement pstmt = null;
+		try (Connection cnx = ConnectionProvider.getConnextion()){
+			pstmt= cnx.prepareStatement(sqlSelectMax);
+			pstmt.setInt(1, idArticle);
+			ResultSet rs = pstmt.executeQuery();
+		
+			
+			if(rs.next()) {
+				enchere = new Enchere(rs.getDate("date_enchere"),
+						rs.getInt("no_article"), rs.getInt("montant_enchere"));
+			} 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DALException ("SelectMax failed - id = " + idArticle, e);
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return enchere;
 	}
 
 
