@@ -17,8 +17,8 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 	private static final String sqlSelectEnchereeById = "select * from Encheres where no_article =?";
 	private static final String sqlEnchereVerifExiste = "select * from ENCHERES where no_utilisateur = ? and no_article = ?";
 	private static final String sqlSelectAllRun= "select * From Encheres";
-	private static final String sqlUpdate= "update Encheres  set no_utilisateur = ?, date_enchere = ?, "
-			+ "no_article = ?, montant_enchere= ? where no_article = ?";
+	private static final String sqlUpdate= "update Encheres  set  date_enchere = ?, "
+			+ " montant_enchere= ? where no_article = ? and no_utilisateur = ?";
 	private static final String sqlInsert = "insert into Encheres (no_utilisateur, date_enchere,"
 			+ "no_article,montant_enchere)"
 			+ " values (?,?,?,?)";
@@ -119,10 +119,10 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 		PreparedStatement pstmt = null;
 		try (Connection cnx = ConnectionProvider.getConnextion() ){
 			pstmt = cnx.prepareStatement(sqlUpdate);
-			pstmt.setInt(1, enchere.getNoUtilisateur());
-			pstmt.setDate(2, enchere.getDateEnchere());
+			pstmt.setDate(1, enchere.getDateEnchere());
+			pstmt.setInt(2, enchere.getMontantEnchere());
 			pstmt.setInt(3, enchere.getNoArticle());
-			pstmt.setInt(4, enchere.getMontantEnchere());
+			pstmt.setInt(4, enchere.getNoUtilisateur());
 			
 		pstmt.executeUpdate();
 		} catch (Exception e) {

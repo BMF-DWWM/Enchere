@@ -37,15 +37,20 @@ public class ServletDetailArticle extends HttpServlet {
 		HttpSession session = request.getSession();
 		ArticlesVendu article = null;
 		Enchere rechercheEnchere = null;
-		try {
-						request.setAttribute("article", articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
-						request.setAttribute("retrait", retraitDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
-						article = articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
-						session.setAttribute("articleNoUtilisateur", article.getNoUtilisateur());
-						session.setAttribute("articleNoArticle", article.getNoArticle());
-						int articleNoUtilisateur = (int) session.getAttribute("articleNoUtilisateur");
-						int articleNoArticle = (int) session.getAttribute("articleNoArticle");
-						rechercheEnchere = enchereDAO.sqlSelectMax((int) session.getAttribute("articleNoArticle"));
+		try {	if ( request.getParameter("noArticle")==(null)) {
+				article = (ArticlesVendu) session.getAttribute("articlesession");
+				request.setAttribute("article", articleDAO.selectbyId(article.getNoArticle()));
+				request.setAttribute("retrait", retraitDAO.selectbyId(article.getNoArticle()));
+					
+			}else { 
+				request.setAttribute("article", articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
+				request.setAttribute("retrait", retraitDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
+				article = articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
+			}
+						
+						
+						session.setAttribute("articlesession", article);
+						rechercheEnchere = enchereDAO.sqlSelectMax(article.getNoArticle());
 						request.setAttribute("rechercheEnchere", rechercheEnchere);
 						System.out.println(rechercheEnchere);
 		} catch (DALException e) {
@@ -63,26 +68,18 @@ public class ServletDetailArticle extends HttpServlet {
 		HttpSession session = request.getSession();
 		DAOArt<Enchere> enchereDAO = DAOFactory.getEnchereDAO();
 		Enchere rechercheEnchere = null;
-		try {
-			rechercheEnchere = enchereDAO.sqlSelectMax((int) session.getAttribute("articleNoArticle"));
-		} catch (DALException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		if (rechercheEnchere == null) {
-			
-		}
-		int articleNoUtilisateur = (int) session.getAttribute("articleNoUtilisateur");
-		int articleNoArticle = (int) session.getAttribute("articleNoArticle");
+		Enchere rechercheEnchere2 = null;
+		ArticlesVendu article = (ArticlesVendu) session.getAttribute("articlesession");
+		int articleNoUtilisateur = article.getNoUtilisateur();
+		int articleNoArticle = article.getNoArticle();
 		int montant = Integer.parseInt(request.getParameter("montantEnchere"));
 		Date dateMilliSec = new Date( System.currentTimeMillis());
 		Enchere enchere = new Enchere(articleNoUtilisateur, dateMilliSec, articleNoArticle, montant);
-		
 		try {
-			rechercheEnchere = enchereDAO.selectbyIdUserAndIdArticle(articleNoUtilisateur, articleNoArticle);
-		} catch (DALException e) {
+			rechercheEnchere = enchereDAO.sqlSelectMax(articleNoArticle);
+		} catch (DALException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 		if (rechercheEnchere == null) {
 			try {
@@ -92,8 +89,33 @@ public class ServletDetailArticle extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else {
-			
+			try {
+				rechercheEnchere2 = enchereDAO.selectbyIdUserAndIdArticle(articleNoUtilisateur, articleNoArticle);
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (rechercheEnchere2 == null) {
+				try {
+					enchereDAO.insert(enchere);
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else {
+				try {
+					enchereDAO.update(enchere);
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
+		response.sendRedirect("/Enchere/ServletDetailArticle");
+//		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/GestionEncheres/DetailsVente.jsp");
+//		rd.forward(request, response);
+		
+		
 		
 	
 		
