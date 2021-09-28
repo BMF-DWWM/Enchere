@@ -1,14 +1,12 @@
 @charset "UTF-8";
 
-header {
+.EnTete{
 	display:flex;
-	justify-content:flex-start;
-	flex-wrap:wrap;
-	align-content:space-between;
-	background: linear-gradient(#52d379, #fea32d, #ffffff);
-	font-family: Tahoma, Geneva, sans-serif;
-	
-	
+	justify-content: space-between;
+	background: #820000;
+	border-style: groove;
+	border-color: #dbaa02;
+	border-width:6px;
 }
 
 body {
@@ -16,20 +14,29 @@ body {
 	display:flex;
 	flex-direction : column ; 
 	flex-wrap : wrap;
-	background: url(https://previews.123rf.com/images/macrovector/macrovector1608/macrovector160800254/61577046-peinture-traditionnelle-vente-aux-ench%C3%A8res-ench%C3%A8res-participants-avec-tablette-pour-ordinateur-porta.jpg);
 	background-size: cover;
+	background-image: url("img/bg_encheres.png");
 }
 
 .container1 {
-	background: rgba(204, 204, 153, 0.7) ;
+	display: flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+	background: rgba(204, 204, 153, 0.8) ;
 	border-radius: 10px;
-	border-color: black;
-	border: 2px solid black;
+	border-style: groove;
+	border-color: #dbaa02;
+	border-width:3px;
 	padding: 5px;
 	
 	
 }
 
+.retrait {
+	display: flex;
+	
+}
 .containerConnexion {
 
 	display: flex;
@@ -38,8 +45,6 @@ body {
 	justify-content: center;
 	font-family: Tahoma, Geneva, sans-serif;
 	align-items: center;
-
-
 }
 
 
@@ -67,20 +72,28 @@ body {
 
 h1 {
 	display:flex;
+	margin:3px;
 	justify-content: center;
-	font-family: Tahoma, Geneva, sans-serif;
-	border-radius: 10px;
-	border-color: #000000;
-	background:linear-gradient(#52d379, #fea32d, #ffffff);
+	font-family: Brush Script MT, Brush Script Std, cursive;
+	background: #820000;
+	text-shadow:0 4px 0 #000000;
+	color: #fec501;
 }
 
 h2 {
 	display:flex;
 	justify-content: center;
-	font-family:Tahoma, Geneva, sans-serif;
-	border-radius: 10px;
-	border-color: #000000;
-	background:linear-gradient(#52d379, #fea32d, #ffffff);
+	align-content: center;
+	font-family: Brush Script MT, Brush Script Std, cursive;
+	font-size:xx-large;
+	border-radius: 5px;
+	background: #820000;
+	border-style: groove;
+	border-width:5px;
+	border-color: #dbaa02;
+	text-shadow:0 4px 0 #000000;
+	color: #fec501;
+	width:20%;
 	
 }
 
@@ -120,6 +133,9 @@ form {
 	align-content: space-around;
 }
 
+
+  
+
 .containerBouton {
 	font-family:Tahoma, Geneva, sans-serif;
 	background: linear-gradient(to right, gold, darkorange);
@@ -130,7 +146,7 @@ form {
 	height: var(--height);
 	text-align: center;
 	line-height: var(--height);
-	font-size: calc(var(--height) / 4);
+	font-size: calc(var(--height) / 2.5);
 	letter-spacing: 0.2em;
 	border: 1px solid darkgoldenrod;
 	border-radius: 2em;
@@ -163,18 +179,71 @@ form {
 .containerBouton:hover::before {
 	left: 100%;
 }
+
+.containerBoutonWide {
+	font-family:Tahoma, Geneva, sans-serif;
+	background: linear-gradient(to right, gold, darkorange);
+	color: white;
+	--width: 115px;
+	--height: calc(var(--width) / 4.5);
+	width: var(--width);
+	height: var(--height);
+	text-align: center;
+	line-height: var(--height);
+	font-size: calc(var(--height) / 3);
+	letter-spacing: 0.2em;
+	border: 1px solid darkgoldenrod;
+	border-radius: 2em;
+	transform: perspective(500px) rotateY(-15deg);
+	text-shadow: 6px 3px 2px rgba(0, 0, 0, 0.2);
+	box-shadow: 2px 0 0 5px rgba(0, 0, 0, 0.2);
+	transition: 0.5s;
+	position: relative;
+	overflow: hidden;
+	padding-bottom: 5px;
+	margin: 8px;
 }
 
-.firefly {
-  position: fixed
-  left: 50%
-  top: 50%
-  width: 0.4vw
-  height: 0.4vw
-  margin: -0.2vw 0 0 9.8vw
-  animation: ease 200s alternate infinite
-  pointer-events: none
-  
-  
+.containerBoutonWide:hover {
+	transform: perspective(500px) rotateY(15deg);
+	text-shadow: -6px 3px 2px rgba(0, 0, 0, 0.2);
+	box-shadow: -2px 0 0 5px rgba(0, 0, 0, 0.2);
+}
 
+.containerBoutonWide::before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to right, transparent, white, transparent);
+	left: -100%;
+	transition: 0.5s;
+}
+
+.containerBoutonWide:hover::before {
+	left: 100%;
+}
+
+
+p {
+	display:flex;
+	margin: 5px;
+	justify-content: center;
+	font-family: Brush Script MT, Brush Script Std, cursive;
+	text-shadow:0 2px 0 #000000;
+	color: #fec501;
+	font-size: 150%; 
+}
+
+label {
+	display:flex;
+	margin: 5px;
+	justify-content: center;
+	font-family:Monotype Corsiva, cursive;
+	text-shadow:0 3px 0 #fec605;
+	color: #000000;
+	font-size: 150%; 
+	font-weight: bold;
+	
+}
   

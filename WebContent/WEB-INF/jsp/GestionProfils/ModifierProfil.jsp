@@ -6,14 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style><%@include file="/Style.css"%></style>
-<title>Creation Profil</title>
+<title>Modifier profil</title>
 </head>
 <body>
-		<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
+		<%@include file="/WEB-INF/jsp/HeadersFooters/Entete.jsp" %>
 	
 <div class="creationProfil">
 	<form action="<%=request.getContextPath()%>/modifieProfil" method="post">
-	<h2 class="titrepProfil">Mon profil</h2>
+	<h2>Mon profil</h2>
 			<div class="container1">
 				<div class="containerFormulaire">
 					<div class="label-input-container">
@@ -69,23 +69,17 @@
 			</div>
 			
 			<div >
-			<input class="containerBouton" type="submit" value="Modifier">
-			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBouton" type="button" name="Retour" Value="Annuler"></a>
+			<input class="containerBouton" type="submit" value="Supprimer profil">
+			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBoutonWide" type="button" name="supprimerProfil" Value="Supprimer profil"></a>
 			</div>
 			<div >
 			<input class="containerBouton" type="submit" value="Modifier">
-			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBouton" type="button" name="Retour" Value="Annuler"></a>
+			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBouton" type="button" name="Retour" Value="Retour"></a>
 			</div>
 			
 		
 	</form>
 </div>
-	
-
-<a href="<%=request.getContextPath()%>/Connection"><input type="button" Value="Déconnexion"></a>
-<a href="<%=request.getContextPath()%>/modifieProfil"><input type="button" Value="Retour"></a>
-
-
 
 </body>
 </html>

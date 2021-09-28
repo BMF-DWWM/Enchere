@@ -7,7 +7,7 @@
 <title>Connecter</title>
 </head>
 <body>
-<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
+<%@include file="/WEB-INF/jsp/HeadersFooters/Entete.jsp" %>
 <h1>Connecter</h1>
 
 <% out.println("Bienvenue " + session.getAttribute("pseudo")); %>

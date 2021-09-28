@@ -8,7 +8,7 @@
 <style><%@include file="/Style.css"%></style>
 </head>
 <body>
-	<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>
+	<%@include file="/WEB-INF/jsp/HeadersFooters/Entete.jsp" %>
 
 </body>
 </html>

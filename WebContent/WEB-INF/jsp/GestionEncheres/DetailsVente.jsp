@@ -9,7 +9,7 @@
 <style><%@include file="/Style.css"%></style>
 </head>
 <body>
-<%@include file="/WEB-INF/jsp/HeadersFooters/EnteteEnchere.html" %>	
+<%@include file="/WEB-INF/jsp/HeadersFooters/Entete.jsp" %>	
 
 <h1>Détail vente</h1>
 <div class="containerVente">
