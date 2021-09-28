@@ -21,17 +21,17 @@
 			
 			<label>Mot de passe</label>
 			<input type="text" name="password">
-			
+			<div>
 			<label>Se souvenir de moi</label>
 			<input class="" type="checkbox" value="Se souvenir de moi" name="sesouvenirdemoi" >
-			
+			</div>
 			<div class="boutonsConnexion" >
 			<input class="containerBouton" type="submit" value="Connexion">
 
 			
 			
 				<div>
-					<a href="<%=request.getContextPath()%>/CreerCompte"><input class="containerBouton" type="button" name="creerCompte" Value="Créer un compte"></a>
+					<a href="<%=request.getContextPath()%>/CreerCompte"><input class="containerBoutonWide" type="button" name="creerCompte" Value="Créer un compte"></a>
 				</div>
 				<div>
 					<a href="<%=request.getContextPath()%>/MdpOublier"><input class="containerBouton" type="button" name="MdpOublier" Value="Mot de passe oublié"></a>
