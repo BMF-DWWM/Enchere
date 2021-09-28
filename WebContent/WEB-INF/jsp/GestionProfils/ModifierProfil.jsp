@@ -72,6 +72,10 @@
 			<input class="containerBouton" type="submit" value="Modifier">
 			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBouton" type="button" name="Retour" Value="Annuler"></a>
 			</div>
+			<div >
+			<input class="containerBouton" type="submit" value="Modifier">
+			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBouton" type="button" name="Retour" Value="Annuler"></a>
+			</div>
 			
 		
 	</form>

@@ -70,7 +70,9 @@ public class ServletMisEnVenteArticle extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			RequestDispatcher rd = request.getRequestDispatcher("/ServletMisEnVenteArticle");
-			rd.forward(request, response);
+	     
+	     	response.sendRedirect("/Enchere/ServletMisEnVenteArticle");
+			//RequestDispatcher rd = request.getRequestDispatcher("/ServletMisEnVenteArticle");
+			//rd.forward(request, response);
 	}
 }
