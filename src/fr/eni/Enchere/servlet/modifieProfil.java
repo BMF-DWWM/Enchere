@@ -52,6 +52,7 @@ public class modifieProfil extends HttpServlet {
 		
 		Utilisateur modifUtil = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, password, credit, administrateur);
 		
+		session.setAttribute("utilisateur", modifUtil);
 		try {
 			DAOFactory.getUtilisateurDAO().update(modifUtil);
 		} catch (DALException e) {
