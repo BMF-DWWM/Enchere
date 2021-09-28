@@ -69,7 +69,6 @@
 			</div>
 			
 			<div >
-			<input class="containerBouton" type="submit" value="Supprimer profil">
 			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBoutonWide" type="button" name="supprimerProfil" Value="Supprimer profil"></a>
 			</div>
 			<div >

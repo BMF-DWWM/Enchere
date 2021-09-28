@@ -38,9 +38,8 @@
 		
 			<div>
 			<input class="containerBouton" type="submit" value="Enregistrer" >
-			<input class="containerBouton" type="button" onclick="https://google.fr" value="Annuler">
-			<input class="containerBoutonWide" type="button" onclick="https://google.fr" value="Annuler la vente">
-			</div>
+			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBoutonWide" type="button" name="Annuler" Value="Annuler"></a>
+			</div>	
 		
 		</div>	
 		</div>
