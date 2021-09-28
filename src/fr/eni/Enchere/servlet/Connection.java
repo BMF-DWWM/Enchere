@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,14 @@ public class Connection extends HttpServlet {
 		HttpSession session = request.getSession();
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/GestionProfils/Connection.jsp");
 		
+		Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("pseudo")) {
+                    request.setAttribute("pseudo", cookie.getValue());
+                }
+            }
+        }
 		session.invalidate();
 		
 		rd.forward(request, response);
@@ -43,17 +52,26 @@ public class Connection extends HttpServlet {
 		
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
+		String sesouvenirdemoi = request.getParameter("sesouvenirdemoi");
 		
-		session.setAttribute("pseudo", pseudo);
-		session.setAttribute("password", password);
-		
+		if (sesouvenirdemoi != null) {
+			// Creation du cookie
+			Cookie cookie = new Cookie("pseudo", pseudo);
+
+			// definition de la limite de validite
+			cookie.setMaxAge(60*60*24*30);
+
+			// envoi du cookie dans la reponse HTTP
+			response.addCookie(cookie);
+		} 
+
 		System.out.println("Pseudo : "+ pseudo);
 		System.out.println("Password : "+ password);	
 		
 		Utilisateur utilDAO = DAOFactory.getUtilisateurDAO().VerifConnection(pseudo, password);
 		
 		session.setAttribute("utilisateur", utilDAO);
-
+		
 		if(utilDAO != null) {
 			response.sendRedirect("/Enchere/ServletListeEncheres");
 			//rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionEncheres/ListeEncheres.jsp");

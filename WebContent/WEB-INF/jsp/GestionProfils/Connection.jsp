@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,13 +15,19 @@
 	<div class="container1">
 		<div class="containerConnexion">
 		
+		
 			<label>Pseudo</label>
-			<input type="text" name="pseudo">
+			<input type="text" name="pseudo" value="${pseudo}">
 			
 			<label>Mot de passe</label>
 			<input type="text" name="password">
+			
+			<label>Se souvenir de moi</label>
+			<input class="" type="checkbox" value="Se souvenir de moi" name="sesouvenirdemoi" >
+			
 			<div class="boutonsConnexion" >
 			<input class="containerBouton" type="submit" value="Connexion">
+
 			
 			
 				<div>
