@@ -97,6 +97,7 @@ public class ServletDetailArticle extends HttpServlet {
 				try {
 					System.out.println("1");
 					enchereDAO.insert(enchere);
+					enchereDAO.UpdateCreditInsertEnchere(utilisateur.getCredit(), montant, noUtilisateur);
 				} catch (DALException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
