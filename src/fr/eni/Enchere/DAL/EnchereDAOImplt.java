@@ -13,7 +13,7 @@ import fr.eni.Enchere.BO.Enchere;
 import fr.eni.Enchere.BO.Utilisateur;
 
 public class EnchereDAOImplt implements DAOArt<Enchere>{
-	
+	private static final String sqlSelectEnchereeByIdUser = "select * from Encheres where no_utilisateur =?";
 	private static final String sqlSelectEnchereeById = "select * from Encheres where no_article =?";
 	private static final String sqlEnchereVerifExiste = "select * from ENCHERES where no_utilisateur = ? and no_article = ?";
 	private static final String sqlSelectAllRun= "select * From Encheres";
@@ -91,6 +91,8 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 		}
 		return enchere;
 	}
+	
+	
 
 	@Override
 	public List<Enchere> selectAll() throws DALException {
@@ -252,6 +254,35 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 	public void updateNoAcquereur(int noAcquereur, int noArticle) throws DALException {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public Enchere selectbyIdUser(int iduser) throws DALException {
+		Enchere enchere= null;
+		PreparedStatement pstmt = null;
+		try (Connection cnx = ConnectionProvider.getConnextion()){
+			pstmt= cnx.prepareStatement(sqlSelectEnchereeByIdUser);
+			pstmt.setInt(1, iduser);
+			ResultSet rs = pstmt.executeQuery();
+		
+			
+			if(rs.next()) {
+				enchere = new Enchere(rs.getInt("no_utilisateur"),rs.getDate("date_enchere"),
+						rs.getInt("no_article"), rs.getInt("montant_enchere"));
+			} 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DALException ("SelectBtIdUser failed - id = " + iduser, e);
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return enchere;
 	}
 
 

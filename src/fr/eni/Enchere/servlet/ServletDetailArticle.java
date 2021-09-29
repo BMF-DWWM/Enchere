@@ -110,7 +110,7 @@ public class ServletDetailArticle extends HttpServlet {
 					e.printStackTrace();
 				}
 				if (enchere.getMontantEnchere() > rechercheEnchere.getMontantEnchere()) {
-					if (rechercheEnchere2 != null && rechercheEnchere2.getMontantEnchere() == rechercheEnchere.getMontantEnchere()) {
+					if (rechercheEnchere2 != null) {
 						try {
 							enchereDAO.update(enchere);
 							
@@ -121,18 +121,25 @@ public class ServletDetailArticle extends HttpServlet {
 						}
 					}else {
 						try {
-							System.out.println("4");
-							enchereDAO.delete(articleNoArticle, rechercheEnchere.getNoUtilisateur());
-							if (rechercheEnchere2 == null) {
-								enchereDAO.insert(enchere);
-							}else {
-								enchereDAO.update(enchere);
-							}
-							
+							enchereDAO.insert(enchere);
 						} catch (DALException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						
+//						try {
+//							System.out.println("4");
+//							enchereDAO.delete(articleNoArticle, rechercheEnchere.getNoUtilisateur());
+//							if (rechercheEnchere2 == null) {
+//								enchereDAO.insert(enchere);
+//							}else {
+//								enchereDAO.update(enchere);
+//							}
+//							
+//						} catch (DALException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
 					}
 				
 				}

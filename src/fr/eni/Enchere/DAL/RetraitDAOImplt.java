@@ -182,4 +182,10 @@ public void updateNoAcquereur(int noAcquereur, int noArticle) throws DALExceptio
 	// TODO Auto-generated method stub
 	
 }
+
+@Override
+public Enchere selectbyIdUser(int iduser) throws DALException {
+	// TODO Auto-generated method stub
+	return null;
+}
 }
