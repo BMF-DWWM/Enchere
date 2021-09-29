@@ -1,6 +1,7 @@
 package fr.eni.Enchere.servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -32,6 +33,7 @@ public class ServletListeEncheres extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		request.setAttribute("getdate", new Date( System.currentTimeMillis())); 
 	
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionEncheres/ListeEncheres.jsp");
 		rd.forward(request, response);

@@ -61,7 +61,7 @@ public class ServletDetailArticle extends HttpServlet {
 		}
 		Date dateFinEncheres = (Date) article.getDateFinEncheres();
 		if (dateMilliSec.compareTo(dateFinEncheres) > 0) {
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/GestionEncheres/EnchereRemportee.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/EnchereRemportee");
 			rd.forward(request, response);
 		}else {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/GestionEncheres/DetailsVente.jsp");

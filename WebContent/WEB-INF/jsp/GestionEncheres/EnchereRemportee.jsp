@@ -9,5 +9,12 @@
 </head>
 <body>
 <%@include file="/WEB-INF/jsp/HeadersFooters/Entete.jsp" %>
-</body>
+</body>	
+		<label>${article.pseudoUtilisateur } a remporté l'enchere</label>
+		<label>Meilleur offre : ${article.nomArticle }</label>
+		<label> Mise à prix : ${article.prixInitial }</label>
+		<label>Fin de l'enchère : ${article.dateFinEncheres }</label>
+		<label>Retrait : ${retrait.rue } ${retrait.codePostal } ${retrait.ville}</label>
+		<label> Vendeur : ${article.pseudoUtilisateur }</label>
+		<label>Ma proposition : </label>
 </html>

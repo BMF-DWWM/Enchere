@@ -50,7 +50,8 @@
   		<div class='containerArticle'></div>
   			<div class='containerImage'></div>
   			<div class='containerTexte'>
-  			<a href="<%=request.getContextPath()%>/ServletDetailArticle?noArticle=${article.noArticle}">${article.nomArticle }</a>
+  			<c:if test="${getdate > article.dateFinEncheres}"> <a href="<%=request.getContextPath()%>/EnchereRemportee?noArticle=${article.noArticle}">${article.nomArticle }</a> </c:if>
+  			<c:if test="${getdate < article.dateFinEncheres}"><a href="<%=request.getContextPath()%>/ServletDetailArticle?noArticle=${article.noArticle}">${article.nomArticle }</a></c:if>
   			<label> Prix : ${article.prixInitial }</label>
   			<label>Description : ${article.description }</label>
   			<label>Fin de l'enchère : ${article.dateFinEncheres }</label>

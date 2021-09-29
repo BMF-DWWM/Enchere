@@ -6,7 +6,7 @@ import fr.eni.Enchere.BO.Utilisateur;
 
 public interface DAOUtilisateur{
 	
-	public DAOUtilisateur selectbyId(int id) throws  DALException;
+	public Utilisateur selectbyId(int id) throws  DALException;
 		
 	public List<Utilisateur> selectAll() throws DALException; 
 	
