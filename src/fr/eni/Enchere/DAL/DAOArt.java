@@ -31,6 +31,11 @@ public interface DAOArt<T> {
 		
 		public Enchere selectbyIdUser(int iduser) throws DALException ;
 		
+		public void UpdateCreditInsertEnchere(int soldeCredit, int montantEnchere, int noUtilisateur) throws DALException;
+		
+		public void UpdateCreditUpdateEnchere(int soldeCredit, int nouvelleEnchere, int ancienneEnchere, int noUtilisateur) throws DALException;
+		
+		public void UpdateCreditRollBackEnchere(int soldeCredit, int derniereEnchere, int noUtilisateur) throws DALException;
 		
 		
 

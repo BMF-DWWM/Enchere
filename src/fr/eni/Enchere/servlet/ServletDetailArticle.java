@@ -121,6 +121,7 @@ public class ServletDetailArticle extends HttpServlet {
 						}
 					}else {
 						try {
+							System.out.println("4");
 							enchereDAO.insert(enchere);
 						} catch (DALException e) {
 							// TODO Auto-generated catch block

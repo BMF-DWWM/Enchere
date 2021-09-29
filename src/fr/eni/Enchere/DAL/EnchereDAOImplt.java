@@ -27,7 +27,9 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 			"where no_article = ? \r\n" + 
 			"group by no_article,date_enchere, no_utilisateur \r\n" +
 			"order by montant_enchere desc";
-	
+	private static final String sqlUpdateCreditInsertEnchere =  "update UTILISATEURS set credit = ( sodle credit - enchere) where no_utilisateur = ?";
+	private static final String sqlUpdateCreditUpdateEnchere =  "update UTILISATEURS set credit = soldecredit -(nouvelleEnchere- ancienne enchere ) where no_utilisateur = ? ";
+	private static final String sqlUpdateCreditRollBackEnchere =  "update UTILISATEURS set credit = soldecredit  - enchere loa plus recente  where no_utilisateur =? " ;
 	public EnchereDAOImplt() {
 		
 	}
@@ -283,6 +285,23 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 			}
 		}
 		return enchere;
+	}
+	@Override
+	public void UpdateCreditInsertEnchere(int soldeCredit, int montantEnchere, int noUtilisateur) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void UpdateCreditUpdateEnchere(int soldeCredit, int nouvelleEnchere, int ancienneEnchere, int noUtilisateur)
+			throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void UpdateCreditRollBackEnchere(int soldeCredit, int derniereEnchere, int noUtilisateur)
+			throws DALException {
+		// TODO Auto-generated method stub
+		
 	}
 
 

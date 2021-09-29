@@ -188,4 +188,23 @@ public Enchere selectbyIdUser(int iduser) throws DALException {
 	// TODO Auto-generated method stub
 	return null;
 }
+
+@Override
+public void UpdateCreditInsertEnchere(int soldeCredit, int montantEnchere, int noUtilisateur) throws DALException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void UpdateCreditUpdateEnchere(int soldeCredit, int nouvelleEnchere, int ancienneEnchere, int noUtilisateur)
+		throws DALException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void UpdateCreditRollBackEnchere(int soldeCredit, int derniereEnchere, int noUtilisateur) throws DALException {
+	// TODO Auto-generated method stub
+	
+}
 }
