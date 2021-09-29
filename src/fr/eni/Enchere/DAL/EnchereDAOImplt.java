@@ -288,13 +288,48 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 	}
 	@Override
 	public void UpdateCreditInsertEnchere(int soldeCredit, int montantEnchere, int noUtilisateur) throws DALException {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement pstmt = null;
+		try (Connection cnx = ConnectionProvider.getConnextion() ){
+			pstmt = cnx.prepareStatement(sqlUpdate);
+			pstmt.setInt(1, soldeCredit);
+			pstmt.setInt(2, montantEnchere);
+			pstmt.setInt(3, noUtilisateur);
+			
+		pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new DALException("UpdateCreditInsertEnchere enchere failed"+soldeCredit +montantEnchere+ noUtilisateur, e);
+		}finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					throw new DALException("close failed - ", e);
+				}
+			}
+		}
 	}
 	@Override
-	public void UpdateCreditUpdateEnchere(int soldeCredit, int nouvelleEnchere, int ancienneEnchere, int noUtilisateur)
-			throws DALException {
-		// TODO Auto-generated method stub
+	public void UpdateCreditUpdateEnchere(int soldeCredit, int nouvelleEnchere, int ancienneEnchere, int noUtilisateur) throws DALException {
+	PreparedStatement pstmt = null;
+	try (Connection cnx = ConnectionProvider.getConnextion() ){
+		pstmt = cnx.prepareStatement(sqlUpdate);
+		pstmt.setInt(1, soldeCredit);
+		pstmt.setInt(2, nouvelleEnchere);
+		pstmt.setInt(3, ancienneEnchere);
+		pstmt.setInt(4, noUtilisateur);
+		
+	pstmt.executeUpdate();
+	} catch (Exception e) {
+		throw new DALException("UpdateCreditInsertEnchere enchere failed"+soldeCredit +nouvelleEnchere+ ancienneEnchere +noUtilisateur, e);
+	}finally {
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				throw new DALException("close failed - ", e);
+			}
+		}
+	}
 		
 	}
 	@Override
