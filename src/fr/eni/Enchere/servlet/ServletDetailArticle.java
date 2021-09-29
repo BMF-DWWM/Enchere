@@ -41,6 +41,7 @@ public class ServletDetailArticle extends HttpServlet {
 		Date dateMilliSec = new Date( System.currentTimeMillis());
 		try {	if ( request.getParameter("noArticle")==(null)) {
 				article = (ArticlesVendu) session.getAttribute("articlesession");
+				
 				request.setAttribute("article", articleDAO.selectbyId(article.getNoArticle()));
 				request.setAttribute("retrait", retraitDAO.selectbyId(article.getNoArticle()));
 					
@@ -121,7 +122,7 @@ public class ServletDetailArticle extends HttpServlet {
 					}else {
 						try {
 							System.out.println("4");
-							enchereDAO.delete(articleNoArticle, rechercheEnchere.getNoUtilisateur());
+//							enchereDAO.delete(articleNoArticle, rechercheEnchere.getNoUtilisateur());
 							if (rechercheEnchere2 == null) {
 								enchereDAO.insert(enchere);
 							}else {
