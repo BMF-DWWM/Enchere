@@ -16,6 +16,7 @@ import fr.eni.Enchere.BO.Utilisateur;
 import fr.eni.Enchere.DAL.DALException;
 import fr.eni.Enchere.DAL.DAOArt;
 import fr.eni.Enchere.DAL.DAOFactory;
+import fr.eni.Enchere.DAL.DAOUtilisateur;
 
 /**
  * Servlet implementation class EnchereRemportee
@@ -28,12 +29,14 @@ public class EnchereRemportee extends HttpServlet {
 		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
 		DAOArt<Enchere> enchereDAO = DAOFactory.getEnchereDAO();
 		DAOArt<Retrait> retraitDAO = DAOFactory.getretraitDAO();
+		DAOUtilisateur utilisateurDAO = DAOFactory.getUtilisateurDAO();
 		
 		try {
 			ArticlesVendu article = articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
 			Enchere enchereMax = enchereDAO.sqlSelectMax(Integer.parseInt(request.getParameter("noArticle")));
 			Retrait retrait = retraitDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
-			Utilisateur utilisateurGagnantEnchere ;
+			Utilisateur utilisateurGagnantEnchere = utilisateurDAO.selectbyId(enchereMax.getNoUtilisateur());
+			request.setAttribute("utilisateurGagnantEnchere", utilisateurGagnantEnchere);
 			request.setAttribute("article", article);
 			request.setAttribute("enchere", enchereMax);
 			int montantEnchereMax = enchereMax.getMontantEnchere();

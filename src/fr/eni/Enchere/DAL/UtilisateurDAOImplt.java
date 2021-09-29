@@ -208,7 +208,7 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 			if(rs.next()) {
 				utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
 						rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),
-						rs.getString("telephone"), rs.getString(" rue"),rs.getString("code_Postal"),
+						rs.getString("telephone"), rs.getString("rue"),rs.getString("code_Postal"),
 						rs.getString("ville"), rs.getString("mot_De_Passe"),rs.getInt("credit") ,
 						rs.getBoolean("administrateur"));
 				

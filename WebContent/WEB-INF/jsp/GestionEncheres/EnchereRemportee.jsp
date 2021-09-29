@@ -10,7 +10,7 @@
 <body>
 <%@include file="/WEB-INF/jsp/HeadersFooters/Entete.jsp" %>
 </body>	
-		<label>${article.pseudoUtilisateur } a remporté l'enchere</label>
+		<label>${utilisateurGagnantEnchere.pseudo } a remporté l'enchere</label>
 		<label>Meilleur offre : ${article.nomArticle }</label>
 		<label> Mise à prix : ${article.prixInitial }</label>
 		<label>Fin de l'enchère : ${article.dateFinEncheres }</label>
