@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.Enchere.BO.ArticlesVendu;
+import fr.eni.Enchere.BO.Utilisateur;
 import fr.eni.Enchere.DAL.DALException;
 import fr.eni.Enchere.DAL.DAOArt;
 import fr.eni.Enchere.DAL.DAOFactory;
@@ -40,8 +42,11 @@ public class ServletListeEncheres extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
+		HttpSession session = request.getSession();
 		String categorie;
-		String option ;
+		String option ="";
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+		int noUtilisateur = utilisateur.getNoUtilisateur();
 			String mot = request.getParameter("s");
 			if (request.getParameter("categories").equals("")) {
 				categorie = "";
@@ -49,11 +54,23 @@ public class ServletListeEncheres extends HttpServlet {
 			else {
 				categorie = " and no_categorie =" +request.getParameter("categories");
 			}
-			switch (request.getParameter("achatVente")) {
-			case "1": option = "and GETDATE()  between date_debut_encheres and date_fin_encheres";break;
-			default: option ="";
-				break;
+			if (request.getParameter("achatVente")=="2"){
+				
 			}
+			else {
+				switch (request.getParameter("achatVente")) {
+				case "1": option = "and GETDATE()  between date_debut_encheres and date_fin_encheres";break;
+				case "3": option = "and av.no_acquereur = "+noUtilisateur+" ";break;
+				
+				case "4": option = "and av.no_utilisateur = "+noUtilisateur+"  and GETDATE() between date_debut_encheres and date_fin_encheres";break;
+				case "5": option = "and av.no_utilisateur = "+noUtilisateur+" and GETDATE() < date_debut_encheres ";break;
+				case "6": option = "and av.no_utilisateur = "+noUtilisateur+" and GETDATE() > date_fin_encheres ";break;
+				
+				default: option ="";
+					break;
+				}
+			}
+			
 			try {
 				request.setAttribute("listeArticle", articleDAO.selectAllByMotCle(mot, categorie, option));
 			

@@ -22,10 +22,11 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 	private static final String sqlInsert = "insert into Encheres (no_utilisateur, date_enchere,"
 			+ "no_article,montant_enchere)"
 			+ " values (?,?,?,?)";
-	private static final String sqlDelete = "delete from Encheres where no_utilisateur = ?" ;
-	private static final String sqlSelectMax ="select  MAX(montant_enchere) as montant_enchere,no_article,date_enchere from ENCHERES \r\n" + 
+	private static final String sqlDelete = "delete from Encheres where no_article = ? and no_utilisateur = ?  " ;
+	private static final String sqlSelectMax ="select  MAX(montant_enchere) as montant_enchere,no_article,date_enchere,no_utilisateur from ENCHERES \r\n" + 
 			"where no_article = ? \r\n" + 
-			"group by no_article,date_enchere";
+			"group by no_article,date_enchere, no_utilisateur \r\n" +
+			"order by montant_enchere desc";
 	
 	public EnchereDAOImplt() {
 		
@@ -98,6 +99,7 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 		try (Connection cnx = ConnectionProvider.getConnextion()){
 			
 			PreparedStatement pstmt = cnx.prepareStatement(sqlSelectAllRun);
+			pstmt.setMaxRows(1); 
 			ResultSet rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -207,7 +209,7 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 		
 			
 			if(rs.next()) {
-				enchere = new Enchere(rs.getDate("date_enchere"),
+				enchere = new Enchere(rs.getInt("no_utilisateur"),rs.getDate("date_enchere"),
 						rs.getInt("no_article"), rs.getInt("montant_enchere"));
 			} 
 			
@@ -224,6 +226,32 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 			}
 		}
 		return enchere;
+	}
+	@Override
+	public void delete(int noArticle, int noutilisateur) throws DALException {
+
+		PreparedStatement pstmt = null;
+		try (Connection cnx = ConnectionProvider.getConnextion() ){
+			pstmt = cnx.prepareStatement(sqlDelete);
+			pstmt.setInt(1, noArticle);
+			pstmt.setInt(2, noutilisateur);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new DALException("Delete enchere failed"+ noArticle, e);
+		}finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	@Override
+	public void updateNoAcquereur(int noAcquereur, int noArticle) throws DALException {
+		// TODO Auto-generated method stub
+		
 	}
 
 

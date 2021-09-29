@@ -170,4 +170,16 @@ public Enchere sqlSelectMax(int idArticle) throws DALException {
 	// TODO Auto-generated method stub
 	return null;
 }
+
+@Override
+public void delete(int noArticle, int noutilisateur) throws DALException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void updateNoAcquereur(int noAcquereur, int noArticle) throws DALException {
+	// TODO Auto-generated method stub
+	
+}
 }

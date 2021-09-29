@@ -6,13 +6,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.Enchere.BO.ArticlesVendu;
 import fr.eni.Enchere.BO.Enchere;
-import fr.eni.Enchere.BO.Utilisateur;
 
 
 public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
@@ -35,7 +33,7 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 			+ "date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie)"
 			+ " values (?,?,?,?,?,?,?,?)";
 	private static final String sqlDelete = "delete from Articles_Vendus where no_article = ?" ;
-	
+	private static final String sqlUpdateNoAcquereur = "update ARTICLES_VENDUS set no_acquereur = ? where no_article = ?";
 	
 	public  ArticleDAOImplt() {
 	}
@@ -53,7 +51,7 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 			if(rs.next()) {
 				article = new ArticlesVendu(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres"),
 						rs.getDate("date_fin_encheres"), rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"),
-						rs.getInt("no_categorie"), rs.getString("pseudo"));
+						rs.getInt("no_categorie"), rs.getString("pseudo"), rs.getInt("no_acquereur"));
 				
 			} 
 			
@@ -85,7 +83,7 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 				
 				article = new ArticlesVendu(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres"),
 						rs.getDate("date_fin_encheres"), rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"),
-						rs.getInt("no_categorie"), rs.getString("pseudo"));		
+						rs.getInt("no_categorie"), rs.getString("pseudo"), rs.getInt("no_acquereur"));		
 				listArticle.add(article);
 		}
 						
@@ -106,7 +104,7 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 				
 				article = new ArticlesVendu(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres"),
 						rs.getDate("date_fin_encheres"), rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"),
-						rs.getInt("no_categorie"), rs.getString("pseudo"));		
+						rs.getInt("no_categorie"), rs.getString("pseudo"), rs.getInt("no_acquereur"));		
 				listArticle.add(article);
 		}
 						
@@ -203,6 +201,28 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 		}
 		
 	}
+	
+	@Override
+	public void updateNoAcquereur(int noAcquereur, int noArticle) throws DALException {
+		PreparedStatement pstmt = null;
+		try (Connection cnx = ConnectionProvider.getConnextion() ){
+			pstmt = cnx.prepareStatement(sqlUpdateNoAcquereur);
+			pstmt.setInt(1, noAcquereur);
+			pstmt.setInt(2, noArticle);
+			
+		pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new DALException("Update noAcquereur article failed"+ noAcquereur + " " +noArticle + e);
+		}finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					throw new DALException("close failed - ", e);
+				}
+			}
+		}
+	}
 
 	@Override
 	public Enchere selectbyIdUserAndIdArticle(int idUtilisateur, int IdArticle) throws DALException {
@@ -215,6 +235,14 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void delete(int noArticle, int noutilisateur) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 
 }

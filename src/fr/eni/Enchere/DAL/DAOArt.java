@@ -25,6 +25,10 @@ public interface DAOArt<T> {
 		
 		public Enchere sqlSelectMax (int idArticle) throws DALException;
 		
+		public void delete(int noArticle, int noutilisateur) throws DALException ;
+		
+		public void updateNoAcquereur (int noAcquereur, int noArticle) throws DALException;
+		
 		
 		
 

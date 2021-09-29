@@ -14,12 +14,13 @@ public class ArticlesVendu {
     private int noUtilisateur;
     private int noCategorie;
     private String pseudoUtilisateur;
+    private int noAcquereur;
     
     
 
 	public ArticlesVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
 			Date dateFinEncheres, int prixInitial, int prixVente, int noUtilisateur, int noCategorie,
-			String pseudoUtilisateur) {
+			String pseudoUtilisateur, int noAcquereur) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -30,6 +31,8 @@ public class ArticlesVendu {
 		this.noUtilisateur = noUtilisateur;
 		this.noCategorie = noCategorie;
 		this.pseudoUtilisateur = pseudoUtilisateur;
+		this.noAcquereur = noAcquereur;
+		
 	}
 
 	public ArticlesVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
