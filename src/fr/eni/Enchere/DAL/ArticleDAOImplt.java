@@ -243,12 +243,6 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 	}
 
 	@Override
-	public Enchere selectbyIdUser(int iduser) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void UpdateCreditInsertEnchere(int soldeCredit, int montantEnchere, int noUtilisateur) throws DALException {
 		// TODO Auto-generated method stub
 		
@@ -266,6 +260,12 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 			throws DALException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Enchere> selectbyIdUser(int iduser) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

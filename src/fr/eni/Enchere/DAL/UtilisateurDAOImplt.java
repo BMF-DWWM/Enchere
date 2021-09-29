@@ -5,9 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import fr.eni.Enchere.BO.ArticlesVendu;
+import fr.eni.Enchere.BO.Enchere;
 import fr.eni.Enchere.BO.Utilisateur;
 
 
@@ -24,6 +28,7 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 	private String sqlCreationCompte = "insert into Utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe) values(?,?,?,?,?,?,?,?,?)";
 	private String sqlUpdate = "update UTILISATEURS SET pseudo = ?,nom = ?,prenom = ?,email= ?,telephone = ?,rue = ?,code_postal = ?,ville = ?,mot_de_passe = ? where no_utilisateur = ?";
 	private String sqlSelectUser = "select * from UTILISATEURS where no_utilisateur = ?";
+	private static final String sqlDelete = "delete from Utilisateus where no_utilisateur = ?" ;
 
 //public void SelectAll() {
 //		
@@ -190,11 +195,8 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 				}
 			}
 		}
-
-		
 	}
 
-	
 	@Override
 	public Utilisateur selectbyId(int id) throws DALException {
 		Utilisateur utilisateur = null;
@@ -229,6 +231,40 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 		return utilisateur;
 	}
 
+	@Override
+	public Enchere delete(int id) throws DALException {
+
+		PreparedStatement pstmt;
+		try {
+			Connection cnx = ConnectionProvider.getConnextion();
+			List<Enchere> enchere = new ArrayList<Enchere>();
+			enchere = DAOFactory.getEnchereDAO().selectbyIdUser(id);
+			Collections.sort(List<enchere> enchere);
+			if (enchere != null) {
+				System.out.println(enchere);
+				Enchere maxEnchere = DAOFactory.getEnchereDAO().sqlSelectMax();
+				Enchere idArticle = enchere.get(1);
+				if (maxEnchere != null) {
+					System.out.println("vous le meilleur encheriseur sur une enchere");
+				}
+				return maxEnchere;
+			}
+			
+			
+				else if (enchere == null) {
+					pstmt = cnx.prepareStatement(sqlDelete);
+					pstmt.setInt(1, id);
+					pstmt.executeUpdate();
+					System.out.println("Profil Supprimer");
+				}
+			}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+	}
+		return null;	
+}
+
 
 	@Override
 	public List<Utilisateur> selectAll() throws DALException {
@@ -245,11 +281,7 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 	}
 
 
-	@Override
-	public void delete(int id) throws DALException {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 }
 

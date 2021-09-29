@@ -29,7 +29,7 @@
 				<div>	
 					<d:if test="${utilisateur.noUtilisateur != null}"> 
 						<a href="<%=request.getContextPath()%>/ServletMisEnVenteArticle"><input class="containerBoutonEntete" type="button" Value="Vendre un article"></a>
-						<a href="<%=request.getContextPath()%>/LectureProfil"><input class="containerBoutonEntete" type="button" Value="Mon Profil"></a>
+						<a href="<%=request.getContextPath()%>/modifieProfil"><input class="containerBoutonEntete" type="button" Value="Mon Profil"></a>
 						<a href="<%=request.getContextPath()%>/Connection"><input class="containerBoutonEntete" type="button" Value="Déconnexion"></a>
 					</d:if>
 				</div>

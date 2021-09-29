@@ -2,6 +2,7 @@ package fr.eni.Enchere.DAL;
 
 import java.util.List;
 
+import fr.eni.Enchere.BO.Enchere;
 import fr.eni.Enchere.BO.Utilisateur;
 
 public interface DAOUtilisateur{
@@ -14,7 +15,7 @@ public interface DAOUtilisateur{
 	
 	public void insert (Utilisateur t) throws DALException;
 	
-	public void delete (int id) throws DALException; 
+	public Enchere delete (int idUser) throws DALException; 
 	
 	public Utilisateur VerifConnection(String pseudo,String password);
 	
