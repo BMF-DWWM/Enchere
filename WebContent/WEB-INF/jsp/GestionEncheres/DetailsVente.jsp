@@ -11,15 +11,18 @@
 <body>
 <%@include file="/WEB-INF/jsp/HeadersFooters/Entete.jsp" %>	
 
-<h1>Détail vente</h1>
+
 <div class="containerVente">
-	<div class="containerImage"></div>
-	<div class="containerInfo">
-		<label>${article.nomArticle }</label>
-		<label>Description : ${article.description }</label>
+	<form action="<%=request.getContextPath()%>/ServletDetailArticle" method="post">
+	<h2>Détail vente</h2>
+	<div class="containerFormulaire">
+	<div class="container1">
+	
+		<label class="nomArticle">${article.nomArticle }</label>
+		<label >Description : ${article.description }</label>
 		<c:choose>
 			<c:when test="${article.noCategorie ==1}">
-				<label>Catégorie : Informatique</label>
+				<label class="">Catégorie : Informatique</label>
 			</c:when>
 			<c:when test="${article.noCategorie ==2}">
 				<label>Catégorie : Ameublement</label>
@@ -32,21 +35,22 @@
 			</c:when>
 		</c:choose>
 	
-		<label>Meilleur offre : ${article.nomArticle }</label>
+		<label>Meilleure offre : ${article.nomArticle }</label>
 		<label> Mise à prix : ${article.prixInitial }</label>
 		<label>Fin de l'enchère : ${article.dateFinEncheres }</label>
 		<label>Retrait : ${retrait.rue } ${retrait.codePostal } ${retrait.ville}</label>
-		<label> Vendeur : ${article.pseudoUtilisateur }</label>
+		<label>Vendeur : ${article.pseudoUtilisateur }</label>
 		<label>Ma proposition : </label>
-		<form action="<%=request.getContextPath()%>/ServletDetailArticle" method="post">
-			<input type="number" name="montantEnchere" value="${rechercheEnchere.montantEnchere }">
-			<input type="submit" value="Enchérir">
-		</form>
 		
-	</div>
-
-</div>
+			<input  type="number" name="montantEnchere" value="${rechercheEnchere.montantEnchere }">
+			<input class="containerBouton" type="submit" value="Enchérir">
+			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBouton" type="button" name="retour" Value="Retour"></a>
+		
+		</div>
 	
+		</div>
+	</form>
+</div>	
 
 </body>
 </html>

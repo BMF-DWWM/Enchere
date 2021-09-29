@@ -13,20 +13,68 @@
 	
 	<div class="lectureProfil">
 	<form action="<%=request.getContextPath()%>" method="get">
-	<h2 class="titrepProfil">Mon profil</h2>
-		<div class="containerFormulaire">
+	<h2>Mon profil</h2>
 			<div class="container1">
-			<label>Pseudo :</label>
-			<label>Nom :</label> 
-			<label>Prénom :</label>
-			<label>Email :</label> 
-			<label>Téléphone :</label> 
-			<label>Rue :</label> 
-			<label>Code postal :</label> 
-			<label>Ville :</label> 
-			<label>Mot de passe :</label> >
-			<label>Confirmation :</label> 
+				<div class="containerFormulaire">
+					<div class="label-input-container">
+						<label class="my-label">Pseudo : </label> 
+						<input type="text" name="pseudo"  value="${utilisateur.pseudo}" >
+						
+					</div>
+					<div class="label-input-container">
+						<label class="my-label">Email :</label> 
+						<input type="text" name="email"  value="${utilisateur.email}">
+					</div>
+				</div>
+				<div class="containerFormulaire">	
+					<div class="label-input-container">
+						<label class="my-label">Prénom :</label> 
+						<input type="text" name="prenom"  value="${utilisateur.prenom}">
+					</div>
+					<div class="label-input-container">
+						<label class="my-label">Nom :</label> 
+						<input type="text" name="nom"  value="${utilisateur.nom}">
+					</div>
+				</div>
+				<div class="containerFormulaire">	
+					<div class="label-input-container">
+						<label class="my-label">Téléphone :</label> 
+						<input type="text" name="telephone"  value="${utilisateur.telephone}">
+					</div>
+					<div class="label-input-container">
+						<label class="my-label">Rue :</label> 
+						<input type="text" name="rue"  value="${utilisateur.rue}">
+					</div>
+				</div>
+				<div class="containerFormulaire">	
+					<div class="label-input-container">
+						<label class="my-label">Code postal :</label> 
+						<input type="text" name="codePostal"  value="${utilisateur.codePostal}">
+					</div>
+					<div class="label-input-container">
+						<label class="my-label">Ville :</label> 
+						<input type="text" name="ville"  value="${utilisateur.ville}">
+					</div>
+				</div>
+				<!-- <div class="containerFormulaire">	
+					<div class="label-input-container">
+						<label class="my-label">Mot de passe :</label> 
+						<input type="text" name="password"  value="${utilisateur.motDePasse}">
+					</div>	
+					<div class="label-input-container">
+						<label class="my-label">Confirmation :</label> 
+						<input type="text" name="passwordConfirm"  value="${utilisateur.motDePasse}">
+					</div>
+				</div> -->
 			</div>
-		</div>
+			
+			<div >
+			<a href="<%=request.getContextPath()%>/modifieProfil"><input class="containerBoutonWide" type="button" name="modifierProfil" Value="Modifier mon profil"></a>
+			</div>
+			<div >
+			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBouton" type="button" name="Retour" Value="Retour"></a>
+			</div>
+			
+		
 	</form>
 </div>

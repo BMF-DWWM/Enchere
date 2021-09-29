@@ -14,22 +14,23 @@
 
 	<header>
 		<div class="EnTete">
-			<div>
-			<h1>ENI-Encheres</h1>
+			<div >
+			<a class="logo" href="<%=request.getContextPath()%>/ServletListeEncheres" >ENI-Encheres</a>
+			<!--  <h1>ENI-Encheres</h1>-->
 			<p>Achetez, vendez, découvrez !</p>
 			</div>		
 			<div>
 				<div>
 					<d:if test="${utilisateur.noUtilisateur == null}">
-							<a href="<%=request.getContextPath()%>/Connection"><input class="containerBoutonWide"  type="button" name="Connection" Value="Se connecter"></a>
-							<a href="<%=request.getContextPath()%>/CreerCompte"><input class="containerBoutonWide"  type="button" name="Connection" Value="S'inscrire"></a>
+							<a href="<%=request.getContextPath()%>/Connection"><input class="containerBoutonEntete"  type="button" name="Connection" Value="Se connecter"></a>
+							<a href="<%=request.getContextPath()%>/CreerCompte"><input class="containerBoutonEntete"  type="button" name="Connection" Value="S'inscrire"></a>
 					</d:if>
 				</div>
 				<div>	
 					<d:if test="${utilisateur.noUtilisateur != null}"> 
-						<a href="<%=request.getContextPath()%>/ServletMisEnVenteArticle"><input class="containerBoutonWide" type="button" Value="Vendre un article"></a>
-						<a href="<%=request.getContextPath()%>/modifieProfil"><input class="containerBoutonWide" type="button" Value="Modifier Profil"></a>
-						<a href="<%=request.getContextPath()%>/Connection"><input class="containerBouton" type="button" Value="Déconnexion"></a>
+						<a href="<%=request.getContextPath()%>/ServletMisEnVenteArticle"><input class="containerBoutonEntete" type="button" Value="Vendre un article"></a>
+						<a href="<%=request.getContextPath()%>/LectureProfil"><input class="containerBoutonEntete" type="button" Value="Mon Profil"></a>
+						<a href="<%=request.getContextPath()%>/Connection"><input class="containerBoutonEntete" type="button" Value="Déconnexion"></a>
 					</d:if>
 				</div>
 			</div>

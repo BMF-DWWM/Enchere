@@ -79,6 +79,31 @@ h1 {
 	text-shadow:0 4px 0 #000000;
 	color: #fec501;
 }
+.logo {
+	display:flex;
+	margin:3px;
+	justify-content: center;
+	font-family: Brush Script MT, Brush Script Std, cursive;
+	font-size:xx-large;
+	background: #820000;
+	text-shadow:0 4px 0 #000000;
+	color: #fec501;
+	outline: none;
+	text-decoration: none;
+}
+
+.nomArticle{
+	display:flex;
+	margin:3px;
+	justify-content: center;
+	font-family: Franklin Gothic Medium ;
+	outline: none;
+	text-decoration: none;
+	text-shadow:0 3px 0 #fec605;
+	color: #000000;
+	font-size: 150%; 
+	font-weight: bolder;
+}
 
 h2 {
 	display:flex;
@@ -224,6 +249,44 @@ form {
 	left: 100%;
 }
 
+.containerBoutonEntete {
+	font-family:Tahoma, Geneva, sans-serif;
+	background: linear-gradient(to right, gold, darkorange);
+	color: white;
+	--width: 105px;
+	--height: calc(var(--width) / 6);
+	width: var(--width);
+	height: var(--height);
+	text-align: center;
+	line-height: 10px;
+	font-size: calc(var(--height) / 2);
+	letter-spacing: 0.2em;
+	transform: perspective(500px) rotateY(-15deg);
+	text-shadow: 6px 3px 2px rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
+	position: relative;
+	overflow: hidden;
+	padding-bottom: 5px;
+	margin: 5px;
+}
+
+.containerBoutonEntete:hover {
+	transform: perspective(500px) rotateY(15deg);
+	text-shadow: -6px 3px 2px rgba(0, 0, 0, 0.2);
+}
+
+.containerBoutonEntete::before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: -100%;
+	transition: 0.5s;
+}
+
+.containerBoutonEntete:hover::before {
+	left: 100%;
+}
 
 p {
 	display:flex;
@@ -244,6 +307,16 @@ label {
 	color: #000000;
 	font-size: 150%; 
 	font-weight: bold;
+	
+}
+
+.affichageArticle {
+	display: flex;
+	justify-content: center;
+	font-family: Tahoma, Geneva, sans-serif;
+	width:100%;
+	text-align: center;
+	
 	
 }
   
