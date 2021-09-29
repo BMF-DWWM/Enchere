@@ -122,7 +122,7 @@ public class ServletDetailArticle extends HttpServlet {
 					}else {
 						try {
 							System.out.println("4");
-//							enchereDAO.delete(articleNoArticle, rechercheEnchere.getNoUtilisateur());
+							enchereDAO.delete(articleNoArticle, rechercheEnchere.getNoUtilisateur());
 							if (rechercheEnchere2 == null) {
 								enchereDAO.insert(enchere);
 							}else {
