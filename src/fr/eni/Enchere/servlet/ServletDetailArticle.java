@@ -40,6 +40,7 @@ public class ServletDetailArticle extends HttpServlet {
 		ArticlesVendu article = null;
 		Enchere rechercheEnchere = null;
 		Date dateMilliSec = new Date( System.currentTimeMillis());
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		try {	if ( request.getParameter("noArticle")==(null)) {
 				article = (ArticlesVendu) session.getAttribute("articlesession");
 				
@@ -51,8 +52,8 @@ public class ServletDetailArticle extends HttpServlet {
 				request.setAttribute("retrait", retraitDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
 				article = articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
 			}
-						
-						
+						request.setAttribute("getdate", dateMilliSec);
+						request.setAttribute("utilisateur", utilisateur);
 						session.setAttribute("articlesession", article);
 						rechercheEnchere = enchereDAO.sqlSelectMax(article.getNoArticle());
 						request.setAttribute("rechercheEnchere", rechercheEnchere);
