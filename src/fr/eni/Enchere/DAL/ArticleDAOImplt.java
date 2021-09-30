@@ -34,6 +34,7 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 			+ " values (?,?,?,?,?,?,?,?)";
 	private static final String sqlDelete = "delete from Articles_Vendus where no_article = ?" ;
 	private static final String sqlUpdateNoAcquereur = "update ARTICLES_VENDUS set no_acquereur = ? where no_article = ?";
+	private static final String sqlDeleteRetrait = "delete from RETRAITS where no_article = ?";
 	
 	public  ArticleDAOImplt() {
 	}
@@ -184,6 +185,21 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 	@Override
 	public void delete(int noArticle) throws DALException {
 		PreparedStatement pstmt = null;
+		try (Connection cnx = ConnectionProvider.getConnextion() ){
+			pstmt = cnx.prepareStatement(sqlDeleteRetrait);
+			pstmt.setInt(1, noArticle);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new DALException("Delete retrait failed"+ noArticle, e);
+		}finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		try (Connection cnx = ConnectionProvider.getConnextion() ){
 			pstmt = cnx.prepareStatement(sqlDelete);
 			pstmt.setInt(1, noArticle);
