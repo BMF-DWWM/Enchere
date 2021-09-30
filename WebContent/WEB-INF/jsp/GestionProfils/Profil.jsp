@@ -18,42 +18,42 @@
 				<div class="containerFormulaire">
 					<div class="label-input-container">
 						<label class="my-label">Pseudo : </label> 
-						<input type="text" name="pseudo"  value="${utilisateur.pseudo}" >
+						<input type="text" name="pseudo"  value="${vendeur.pseudo}" >
 						
 					</div>
 					<div class="label-input-container">
 						<label class="my-label">Email :</label> 
-						<input type="text" name="email"  value="${utilisateur.email}">
+						<input type="text" name="email"  value="${vendeur.email}">
 					</div>
 				</div>
 				<div class="containerFormulaire">	
 					<div class="label-input-container">
 						<label class="my-label">Prénom :</label> 
-						<input type="text" name="prenom"  value="${utilisateur.prenom}">
+						<input type="text" name="prenom"  value="${vendeur.prenom}">
 					</div>
 					<div class="label-input-container">
 						<label class="my-label">Nom :</label> 
-						<input type="text" name="nom"  value="${utilisateur.nom}">
+						<input type="text" name="nom"  value="${vendeur.nom}">
 					</div>
 				</div>
 				<div class="containerFormulaire">	
 					<div class="label-input-container">
 						<label class="my-label">Téléphone :</label> 
-						<input type="text" name="telephone"  value="${utilisateur.telephone}">
+						<input type="text" name="telephone"  value="${vendeur.telephone}">
 					</div>
 					<div class="label-input-container">
 						<label class="my-label">Rue :</label> 
-						<input type="text" name="rue"  value="${utilisateur.rue}">
+						<input type="text" name="rue"  value="${vendeur.rue}">
 					</div>
 				</div>
 				<div class="containerFormulaire">	
 					<div class="label-input-container">
 						<label class="my-label">Code postal :</label> 
-						<input type="text" name="codePostal"  value="${utilisateur.codePostal}">
+						<input type="text" name="codePostal"  value="${vendeur.codePostal}">
 					</div>
 					<div class="label-input-container">
 						<label class="my-label">Ville :</label> 
-						<input type="text" name="ville"  value="${utilisateur.ville}">
+						<input type="text" name="ville"  value="${vendeur.ville}">
 					</div>
 				</div>
 				<!-- <div class="containerFormulaire">	

@@ -54,7 +54,7 @@
   			<label> Prix : ${article.prixInitial }</label>
   			<label>Description : ${article.description }</label>
   			<label>Fin de l'enchère : ${article.dateFinEncheres }</label>
-  			<label>Vendeur : <a href="<%=request.getContextPath()%>/ServletListeEncheres">${article.pseudoUtilisateur }</a></label>
+  			<label>Vendeur : <a href="<%=request.getContextPath()%>/AffichageProfil?pseudoVendeur=${article.pseudoUtilisateur}">${article.pseudoUtilisateur }</a></label>
   			</div>
   		</div>
  	</c:forEach>

@@ -25,4 +25,6 @@ public interface DAOUtilisateur{
 
 	Utilisateur updateMdp(String Pseudo,String Password) throws DALException;
 
+	Utilisateur selectbyPseudo(String pseudo) throws DALException;
+
 }

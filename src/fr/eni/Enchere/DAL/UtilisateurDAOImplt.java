@@ -28,6 +28,7 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 	private String sqlCreationCompte = "insert into Utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe) values(?,?,?,?,?,?,?,?,?)";
 	private String sqlUpdate = "update UTILISATEURS SET pseudo = ?,nom = ?,prenom = ?,email= ?,telephone = ?,rue = ?,code_postal = ?,ville = ?,mot_de_passe = ? where no_utilisateur = ?";
 	private String sqlSelectUser = "select * from UTILISATEURS where no_utilisateur = ?";
+	private String sqlSelectbyPseudo = "select * from UTILISATEURS where pseudo = ?";
 	private static final String sqlDelete = "delete from Utilisateus where no_utilisateur = ?" ;
 
 //public void SelectAll() {
@@ -229,6 +230,39 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 			}
 		}
 		return utilisateur;
+	}
+	
+	@Override
+	public Utilisateur selectbyPseudo(String pseudo) throws DALException {
+		PreparedStatement pstmt = null;
+		try (Connection cnx = ConnectionProvider.getConnextion()){
+			pstmt= cnx.prepareStatement(sqlSelectbyPseudo);
+			pstmt.setString(1, pseudo);
+			ResultSet rs = pstmt.executeQuery();
+		
+			
+			if(rs.next()) {
+				Utilisateur utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
+						rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),
+						rs.getString("telephone"), rs.getString("rue"),rs.getString("code_Postal"),
+						rs.getString("ville"), rs.getString("mot_De_Passe"),rs.getInt("credit") ,
+						rs.getBoolean("administrateur"));
+				return utilisateur;
+			} 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DALException ("SelectByPseudo failed - pseudo = " + pseudo, e);
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
