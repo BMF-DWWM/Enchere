@@ -22,6 +22,7 @@ import fr.eni.Enchere.BO.Utilisateur;
 import fr.eni.Enchere.DAL.DALException;
 import fr.eni.Enchere.DAL.DAOArt;
 import fr.eni.Enchere.DAL.DAOFactory;
+import fr.eni.Enchere.DAL.DAOUtilisateur;
 
 /**
  * Servlet implementation class ServletDetailArticle
@@ -75,6 +76,7 @@ public class ServletDetailArticle extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		DAOArt<Enchere> enchereDAO = DAOFactory.getEnchereDAO();
+		DAOUtilisateur userDAO = DAOFactory.getUtilisateurDAO();
 		Enchere rechercheEnchere = null;
 		Enchere rechercheEnchere2 = null;
 		ArticlesVendu article = (ArticlesVendu) session.getAttribute("articlesession");
@@ -87,6 +89,7 @@ public class ServletDetailArticle extends HttpServlet {
 		Date dateMilliSec = new Date( System.currentTimeMillis());
 		Enchere enchere = new Enchere(noUtilisateur, dateMilliSec, articleNoArticle, montant);
 		try {
+			//Recherche l'enchere la plus haute de l'article
 			rechercheEnchere = enchereDAO.sqlSelectMax(articleNoArticle);
 		} catch (DALException e1) {
 			// TODO Auto-generated catch block
@@ -94,16 +97,18 @@ public class ServletDetailArticle extends HttpServlet {
 		}
 		if (Integer.class.isInstance(montant) && montant > articlePrixInitial) {
 			if (rechercheEnchere == null) {
+				//Si l'article n'a aucune enchere existante et que l'enchere proposé est polus grande que le prix initial alors
 				try {
 					System.out.println("1");
-					enchereDAO.insert(enchere);
 					enchereDAO.UpdateCreditInsertEnchere(utilisateur.getCredit(), montant, noUtilisateur);
+					enchereDAO.insert(enchere);
 				} catch (DALException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}else {
 				try {
+					// Si une enchere existe, verifitcation si c'est l'enchere connecté qui la faite
 					System.out.println("2");
 					rechercheEnchere2 = enchereDAO.selectbyIdUserAndIdArticle(noUtilisateur, articleNoArticle);
 				} catch (DALException e) {
@@ -111,18 +116,38 @@ public class ServletDetailArticle extends HttpServlet {
 					e.printStackTrace();
 				}
 				if (enchere.getMontantEnchere() > rechercheEnchere.getMontantEnchere()) {
-					if (rechercheEnchere2 != null) {
-						try {
-							enchereDAO.update(enchere);
-							
-							System.out.println("3");
-						} catch (DALException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+					if (rechercheEnchere2 != null ) {
+						if ( rechercheEnchere.getMontantEnchere() == rechercheEnchere2.getMontantEnchere()) {
+							try {
+								Utilisateur user = userDAO.selectbyId(noUtilisateur);
+								enchereDAO.UpdateCreditUpdateEnchere(user.getCredit(), montant, 
+										rechercheEnchere.getMontantEnchere(), noUtilisateur);
+								enchereDAO.update(enchere);
+								System.out.println("3");
+							} catch (DALException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						} else {
+							try {
+								Utilisateur userEnchereMax = userDAO.selectbyId(rechercheEnchere.getNoUtilisateur());
+								enchereDAO.UpdateCreditRollBackEnchere(userEnchereMax.getCredit(),rechercheEnchere.getMontantEnchere(),
+										rechercheEnchere.getNoUtilisateur());
+								enchereDAO.UpdateCreditInsertEnchere(utilisateur.getCredit(), montant, noUtilisateur);
+								enchereDAO.update(enchere);
+							} catch (DALException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
+						
 					}else {
 						try {
 							System.out.println("4");
+							enchereDAO.UpdateCreditInsertEnchere(utilisateur.getCredit(), montant, noUtilisateur);
+							Utilisateur userEnchereMax = userDAO.selectbyId(rechercheEnchere.getNoUtilisateur());
+							enchereDAO.UpdateCreditRollBackEnchere(userEnchereMax.getCredit(),rechercheEnchere.getMontantEnchere(),
+								rechercheEnchere.getNoUtilisateur());
 							enchereDAO.insert(enchere);
 						} catch (DALException e) {
 							// TODO Auto-generated catch block
@@ -151,6 +176,7 @@ public class ServletDetailArticle extends HttpServlet {
 		response.sendRedirect("/Enchere/ServletDetailArticle");
 //		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/GestionEncheres/DetailsVente.jsp");
 //		rd.forward(request, response);
+// nono shpaire
 		
 		
 		

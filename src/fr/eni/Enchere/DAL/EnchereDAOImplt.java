@@ -28,8 +28,8 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 			"group by no_article,date_enchere, no_utilisateur \r\n" +
 			"order by montant_enchere desc";
 	private static final String sqlUpdateCreditInsertEnchere =  "update UTILISATEURS set credit = ( ? - ? ) where no_utilisateur = ?";
-	private static final String sqlUpdateCreditUpdateEnchere =  "update UTILISATEURS set credit = soldecredit -(nouvelleEnchere- ancienne enchere ) where no_utilisateur = ? ";
-	private static final String sqlUpdateCreditRollBackEnchere =  "update UTILISATEURS set credit = soldecredit  - enchere loa plus recente  where no_utilisateur =? " ;
+	private static final String sqlUpdateCreditUpdateEnchere =  "update UTILISATEURS set credit = ? -( ? - ? ) where no_utilisateur = ? ";
+	private static final String sqlUpdateCreditRollBackEnchere =  "update UTILISATEURS set credit = ? + ? where no_utilisateur =? " ;
 	public EnchereDAOImplt() {
 		
 	}
@@ -94,35 +94,7 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 		return enchere;
 	}
 	
-	@Override
-	public Enchere selectbyIdUser(int iduser) throws DALException {
-		Enchere enchere= null;
-		PreparedStatement pstmt = null;
-		try (Connection cnx = ConnectionProvider.getConnextion()){
-			pstmt= cnx.prepareStatement(sqlSelectEnchereeByIdUser);
-			pstmt.setInt(1, iduser);
-			ResultSet rs = pstmt.executeQuery();
-		
-			
-			if(rs.next()) {
-				enchere = new Enchere(rs.getInt("no_utilisateur"),rs.getDate("date_enchere"),
-						rs.getInt("no_article"), rs.getInt("montant_enchere"));
-			} 
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DALException ("SelectBtIdUser failed - id = " + iduser, e);
-		} finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return enchere;
-	}
+	
 
 	@Override
 	public List<Enchere> selectAll() throws DALException {
@@ -285,7 +257,35 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 		// TODO Auto-generated method stub
 		
 	}
-
+	@Override
+	public Enchere selectbyIdUser(int iduser) throws DALException {
+		Enchere enchere= null;
+		PreparedStatement pstmt = null;
+		try (Connection cnx = ConnectionProvider.getConnextion()){
+			pstmt= cnx.prepareStatement(sqlSelectEnchereeByIdUser);
+			pstmt.setInt(1, iduser);
+			ResultSet rs = pstmt.executeQuery();
+		
+			
+			if(rs.next()) {
+				enchere = new Enchere(rs.getInt("no_utilisateur"),rs.getDate("date_enchere"),
+						rs.getInt("no_article"), rs.getInt("montant_enchere"));
+			} 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DALException ("SelectBtIdUser failed - id = " + iduser, e);
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return enchere;
+	}
 	@Override
 	public void UpdateCreditInsertEnchere(int soldeCredit, int montantEnchere, int noUtilisateur) throws DALException {
 		PreparedStatement pstmt = null;
@@ -339,7 +339,7 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 			pstmt = cnx.prepareStatement(sqlUpdateCreditRollBackEnchere);
 			pstmt.setInt(1, soldeCredit);
 			pstmt.setInt(2, derniereEnchere);
-			pstmt.setInt(4, noUtilisateur);
+			pstmt.setInt(3, noUtilisateur);
 			
 		pstmt.executeUpdate();
 		} catch (Exception e) {
