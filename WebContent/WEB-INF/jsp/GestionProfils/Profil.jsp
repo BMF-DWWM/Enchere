@@ -56,16 +56,7 @@
 						<input type="text" name="ville"  value="${vendeur.ville}">
 					</div>
 				</div>
-				<!-- <div class="containerFormulaire">	
-					<div class="label-input-container">
-						<label class="my-label">Mot de passe :</label> 
-						<input type="text" name="password"  value="${utilisateur.motDePasse}">
-					</div>	
-					<div class="label-input-container">
-						<label class="my-label">Confirmation :</label> 
-						<input type="text" name="passwordConfirm"  value="${utilisateur.motDePasse}">
-					</div>
-				</div> -->
+				
 			</div>
 			
 			<div >
