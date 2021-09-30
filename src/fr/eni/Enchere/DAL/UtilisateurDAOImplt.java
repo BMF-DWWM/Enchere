@@ -17,6 +17,7 @@ import fr.eni.Enchere.BO.Utilisateur;
 
 
 public class UtilisateurDAOImplt implements DAOUtilisateur {
+	
 	public  UtilisateurDAOImplt() {
 	}
 	
@@ -29,7 +30,7 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 	private String sqlUpdate = "update UTILISATEURS SET pseudo = ?,nom = ?,prenom = ?,email= ?,telephone = ?,rue = ?,code_postal = ?,ville = ?,mot_de_passe = ? where no_utilisateur = ?";
 	private String sqlSelectUser = "select * from UTILISATEURS where no_utilisateur = ?";
 	private String sqlSelectbyPseudo = "select * from UTILISATEURS where pseudo = ?";
-	private static final String sqlDelete = "delete from Utilisateus where no_utilisateur = ?" ;
+	private String sqlDelete = " update UTILISATEURS set statut = 'Supprimer' where no_utilisateur = ?" ;
 
 //public void SelectAll() {
 //		
@@ -64,8 +65,11 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-					return new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
-					
+				Utilisateur utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"),rs.getString("statut"));
+				String statut = utilisateur.getStatut();	
+					if(statut.equals("null")) {
+						return utilisateur;
+					}
 				}
 			else {
 				System.out.println("pas ok");
@@ -267,38 +271,61 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 		return null;
 	}
 
+	
 	@Override
-	public Enchere delete(int id) throws DALException {
+	public Enchere VerifDelete(int id) throws DALException {
 
 		PreparedStatement pstmt;
+		
 		try {
 			Connection cnx = ConnectionProvider.getConnextion();
-			Enchere enchere = DAOFactory.getEnchereDAO().selectbyIdUser(id);
-			if (enchere != null) {
+			
+			pstmt =cnx.prepareStatement("select no_article,(montant_enchere)as max_enchere from encheres where no_utilisateur = ?");	
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Enchere enchere = new Enchere(rs.getInt("no_article"), rs.getInt("max_enchere"));
 				System.out.println(enchere);
-				Enchere maxEnchere = DAOFactory.getEnchereDAO().sqlSelectMax();
-				Enchere idArticle = enchere.get(1);
-				if (maxEnchere != null) {
-					System.out.println("vous le meilleur encheriseur sur une enchere");
-				}
-				return maxEnchere;
-			}
-			
-			
-				else if (enchere == null) {
-					pstmt = cnx.prepareStatement(sqlDelete);
+				if(enchere != null ) {
+					pstmt =cnx.prepareStatement("select max (montant_enchere)as max_enchere,no_article from encheres where no_article = (select no_article from ENCHERES where no_utilisateur =?) group by no_article");
 					pstmt.setInt(1, id);
-					pstmt.executeUpdate();
-					System.out.println("Profil Supprimer");
+					rs = pstmt.executeQuery();
+					while (rs.next()) {
+						Enchere enchereMax = new Enchere(rs.getInt("no_article"), rs.getInt("max_enchere"));
+						System.out.println(enchereMax);
+						
+					return enchereMax;
+						}
 				}
 			}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-	}
-		return null;	
+		}
+	return null;
 }
+	
 
+	public void deleteUser(int idUser) throws DALException {
+
+		PreparedStatement pstmt = null;
+		try (Connection cnx = ConnectionProvider.getConnextion() ){
+			pstmt = cnx.prepareStatement(sqlDelete);
+			pstmt.setInt(1, idUser);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new DALException("Delete enchere failed"+ idUser, e);
+		}finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 
 	@Override
 	public List<Utilisateur> selectAll() throws DALException {

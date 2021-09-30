@@ -18,6 +18,16 @@ body {
 	background-image: url("img/bg_encheres.png");
 }
 
+.erreur{
+	background: #c51244 ;
+	padding: 10px ;
+	border-radius: 5px ;
+	position: relative; 
+	display: inline-block;
+	box-shadow: 1px 1px 1px #aaaaaa;
+	margin-top: 10px;
+}
+
 .container1 {
 	display: flex;
 	flex-direction:column;

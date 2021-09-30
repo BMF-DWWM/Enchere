@@ -30,6 +30,7 @@ public class Connection extends HttpServlet {
 		HttpSession session = request.getSession();
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/GestionProfils/Connection.jsp");
 		
+		
 		Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -52,6 +53,7 @@ public class Connection extends HttpServlet {
 		HttpSession session = request.getSession();
 		UtilisateurManager utilManager = new UtilisateurManager();
 		
+		
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
 		String sesouvenirdemoi = request.getParameter("sesouvenirdemoi");
@@ -68,19 +70,18 @@ public class Connection extends HttpServlet {
 		} 
 
 		System.out.println("Pseudo : "+ pseudo);
-		System.out.println("Password : "+ password);	
-		
+		System.out.println("Password : "+ password);
+
 		Utilisateur utilisateur = utilManager.verifConnection(pseudo, password);
 		
-		session.setAttribute("utilisateur", utilisateur);
-		
 		if(utilisateur != null) {
+			session.setAttribute("utilisateur", utilisateur);
 			response.sendRedirect("/Enchere/ServletListeEncheres");
 			//rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionEncheres/ListeEncheres.jsp");
 			//rd.forward(request, response);
 		}
 		else {
-			rd = request.getRequestDispatcher("WEB-INF/jsp/Erreur.jsp");
+			rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionProfils/Connection.jsp");
 			rd.forward(request, response);
 		}
 	
@@ -88,5 +89,12 @@ public class Connection extends HttpServlet {
 
 }
 		
+////côté backend
+//request.setAttribute("error", "Mon erreur")
+//
+////côté vue (jsp)
+//<% if(request.getAttribute("error") != null) {%>
+// <div class="error">Une erreur a été rencontrée: <%=request.getAttribute("error")%></div>
+//<%}%>
 
 

@@ -23,6 +23,11 @@ public class Enchere {
 		this.noArticle = noArticle;
 		this.montantEnchere = montantEnchere;
 	}
+	
+	public Enchere(int noArticle, int montantEnchere) {
+		this.noArticle = noArticle;
+		this.montantEnchere = montantEnchere;
+	}
 
 
 	public int getNoUtilisateur() {

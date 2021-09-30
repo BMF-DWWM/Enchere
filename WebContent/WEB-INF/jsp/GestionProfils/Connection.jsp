@@ -15,20 +15,23 @@
 	<div class="container1">
 		<div class="containerConnexion">
 		
-		
+		<div class ="erreur">
+			<c:if test="${empty utilisateur}">
+				<c:out value="Pseudo ou Mot de passe incorrect" />
+			</c:if>
+		</div>
+			
 			<label>Pseudo</label>
-			<input type="text" name="pseudo" value="${pseudo}">
+			<input type="text" name="pseudo" value="${pseudo}" autofocus required>
 			
 			<label>Mot de passe</label>
-			<input type="text" name="password">
+			<input type="password" name="password" required>
 			<div>
 			<label>Se souvenir de moi</label>
 			<input class="" type="checkbox" value="Se souvenir de moi" name="sesouvenirdemoi" >
 			</div>
 			<div class="boutonsConnexion" >
 			<input class="containerBouton" type="submit" value="Connexion">
-
-			
 			
 				<div>
 					<a href="<%=request.getContextPath()%>/CreerCompte"><input class="containerBoutonWide" type="button" name="creerCompte" Value="Créer un compte"></a>

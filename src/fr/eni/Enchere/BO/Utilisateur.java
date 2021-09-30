@@ -14,6 +14,26 @@ public class Utilisateur  {
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
+	private String statut;
+	
+	
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur,String statut) {
+		this.noUtilisateur = noUtilisateur;
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.motDePasse = motDePasse;
+		this.credit = credit;
+		this.administrateur = administrateur;
+		this.statut = statut;
+		
+	}
 	
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
@@ -167,12 +187,21 @@ public class Utilisateur  {
 		this.administrateur = administrateur;
 	}
 
+
+	public String getStatut() {
+		return statut;
+	}
+
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+	
 	@Override
 	public String toString() {
 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
-				+ ", administrateur=" + administrateur + "]";
+				+ ", administrateur=" + administrateur + ", Statut=" + statut +  "]";
 	}
 
 	

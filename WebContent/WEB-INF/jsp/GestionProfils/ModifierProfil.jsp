@@ -59,11 +59,11 @@
 				<div class="containerFormulaire">	
 					<div class="label-input-container">
 						<label class="my-label">Mot de passe :</label> 
-						<input type="text" name="password"  value="${utilisateur.motDePasse}">
+						<input type="password" name="password"  value="${utilisateur.motDePasse}">
 					</div>	
 					<div class="label-input-container">
 						<label class="my-label">Confirmation :</label> 
-						<input type="text" name="passwordConfirm"  value="${utilisateur.motDePasse}">
+						<input type="password" name="passwordConfirm"  value="">
 					</div>
 				</div>
 			</div>

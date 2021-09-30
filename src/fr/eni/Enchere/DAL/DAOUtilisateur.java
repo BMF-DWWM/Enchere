@@ -15,7 +15,7 @@ public interface DAOUtilisateur{
 	
 	public void insert (Utilisateur t) throws DALException;
 	
-	public Enchere delete (int idUser) throws DALException; 
+	public Enchere VerifDelete (int idUser) throws DALException; 
 	
 	public Utilisateur VerifConnection(String pseudo,String password);
 	
@@ -26,5 +26,7 @@ public interface DAOUtilisateur{
 	boolean updateMdp(String Pseudo,String Password) throws DALException;
 
 	Utilisateur selectbyPseudo(String pseudo) throws DALException;
+	
+	public void deleteUser(int idUser)throws DALException;
 
 }

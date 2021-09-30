@@ -13,6 +13,12 @@ public class UtilisateurManager {
 		dao = DAOFactory.getUtilisateurDAO();
 	}
 	
+	public void deleteUser(int idUser) throws DALException {
+		dao.deleteUser(idUser);
+
+	}
+	
+	
 	public void update(Utilisateur utilisateur) throws DALException {
 		dao.update(utilisateur);
 
@@ -31,8 +37,8 @@ public class UtilisateurManager {
 	}
 	
 	public Utilisateur verifConnection(String Pseudo,String Password) {
-		Utilisateur utilisateur = dao.VerifConnection(Pseudo, Password);
-		 return utilisateur;
+		 return dao.VerifConnection(Pseudo, Password);
+		
 		 
 	}
 	
