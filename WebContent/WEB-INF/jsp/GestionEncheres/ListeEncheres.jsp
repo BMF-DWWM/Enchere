@@ -63,6 +63,7 @@
 	<!-- Afficher derniers articles ajoutés -->
 	
 	<!-- Afficher dernières ventes réalisées -->
+	<!-- Afficher dernières ventes réalisées -->
 	
 	
 	 
