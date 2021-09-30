@@ -263,10 +263,11 @@ public class ArticleDAOImplt implements DAOArt<ArticlesVendu> {
 	}
 
 	@Override
-	public List<Enchere> selectbyIdUser(int iduser) throws DALException {
+	public Enchere selectbyIdUser(int iduser) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 
