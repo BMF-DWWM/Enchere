@@ -10,7 +10,7 @@
 }
 
 body {
-	height: 100%;
+	max-width:100%;
 	display:flex;
 	flex-direction : column ; 
 	flex-wrap : wrap;
@@ -21,16 +21,16 @@ body {
 .container1 {
 	display: flex;
 	flex-direction:column;
-	justify-content:center;
+	justify-content: center;
 	align-items:center;
+	margin: 20px;
 	background: rgba(204, 204, 153, 0.8) ;
 	border-radius: 10px;
 	border-style: groove;
 	border-color: #dbaa02;
 	border-width:3px;
 	padding: 5px;
-	
-	
+
 }
 
 .retrait {
@@ -62,12 +62,19 @@ body {
 	display: flex;
 	padding: 10px;
 	width:80%;
-	
+	border-radius: 2px;
+
 }
 .my-label {
 	width: 100%;
 	display: inline-block;
 	text-align: right;
+	border-radius: 2px;
+}
+
+.ligne {
+	display: inline-block;
+	font-family: Tahoma, Geneva, sans-serif;
 }
 
 h1 {
@@ -101,7 +108,7 @@ h1 {
 	text-decoration: none;
 	text-shadow:0 3px 0 #fec605;
 	color: #000000;
-	font-size: 150%; 
+	font-size: 200%; 
 	font-weight: bolder;
 }
 
@@ -305,14 +312,14 @@ label {
 	font-family:Monotype Corsiva, cursive;
 	text-shadow:0 3px 0 #fec605;
 	color: #000000;
-	font-size: 150%; 
+	font-size: 125%; 
 	font-weight: bold;
 	
 }
 
 .affichageArticle {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	font-family: Tahoma, Geneva, sans-serif;
 	width:100%;
 	text-align: center;

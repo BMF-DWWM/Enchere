@@ -48,22 +48,18 @@
 		
 	
 	<div class="affichageArticle">
-	<c:forEach items="${listeArticle}" var="article">
+		<c:forEach items="${listeArticle}" var="article">
   		<div class='container1'>
-  			<div class='containerConnexion'>
-  			<c:if test="${getdate > article.dateFinEncheres}"> <a href="<%=request.getContextPath()%>/EnchereRemportee?noArticle=${article.noArticle}">${article.nomArticle }</a> </c:if>
-  			<c:if test="${getdate < article.dateFinEncheres}"><a href="<%=request.getContextPath()%>/ServletDetailArticle?noArticle=${article.noArticle}">${article.nomArticle }</a></c:if>
-  			<label> Prix : ${article.prixInitial }</label>
-  			<label>Description : ${article.description }</label>
-  			<label>Fin de l'enchère : ${article.dateFinEncheres }</label>
-  			<label>Vendeur : <a href="<%=request.getContextPath()%>/AffichageProfil?pseudoVendeur=${article.pseudoUtilisateur}">${article.pseudoUtilisateur }</a></label>
+  			<div class=''>
+  			<c:if test="${getdate > article.dateFinEncheres}"><div><a class="nomArticle" href="<%=request.getContextPath()%>/EnchereRemportee?noArticle=${article.noArticle}">${article.nomArticle }</a></div> </c:if>
+  			<c:if test="${getdate < article.dateFinEncheres}"><div><a class="nomArticle" href="<%=request.getContextPath()%>/ServletDetailArticle?noArticle=${article.noArticle}">${article.nomArticle }</a></div></c:if>
+  			<label class="ligne">Prix : ${article.prixInitial }</label>
+  			<label class="ligne">Description : ${article.description }</label>
+  			<label class="ligne">Fin de l'enchère : ${article.dateFinEncheres }</label>
+  			<label class="ligne">Vendeur : <a href="<%=request.getContextPath()%>/AffichageProfil?pseudoVendeur=${article.pseudoUtilisateur}">${article.pseudoUtilisateur }</a></label>
   			</div>
   		</div>
  	</c:forEach>
-	<!-- Afficher derniers articles ajoutés -->
-	
-	<!-- Afficher dernières ventes réalisées -->
-	<!-- Afficher dernières ventes réalisées -->
 	
 	
 	 
