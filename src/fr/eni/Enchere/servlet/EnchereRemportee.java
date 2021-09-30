@@ -32,18 +32,27 @@ public class EnchereRemportee extends HttpServlet {
 		DAOUtilisateur utilisateurDAO = DAOFactory.getUtilisateurDAO();
 		
 		try {
-			if (enchereDAO.sqlSelectMax(Integer.parseInt(request.getParameter("noArticle"))) != null) {
+		
 				ArticlesVendu article = articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
 				Enchere enchereMax = enchereDAO.sqlSelectMax(Integer.parseInt(request.getParameter("noArticle")));
 				Retrait retrait = retraitDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
-				Utilisateur utilisateurGagnantEnchere = utilisateurDAO.selectbyId(enchereMax.getNoUtilisateur());
-				request.setAttribute("utilisateurGagnantEnchere", utilisateurGagnantEnchere);
+				Utilisateur utilisateurGagnantEnchere = null;
+				if (enchereDAO.sqlSelectMax(Integer.parseInt(request.getParameter("noArticle"))) != null) {
+					 utilisateurGagnantEnchere = utilisateurDAO.selectbyId(enchereMax.getNoUtilisateur());
+					request.setAttribute("utilisateurGagnantEnchere", utilisateurGagnantEnchere);
+				}
+				
 				request.setAttribute("article", article);
 				request.setAttribute("enchere", enchereMax);
-				int montantEnchereMax = enchereMax.getMontantEnchere();
+				int montantEnchereMax = 0;
+				if (enchereMax != null) {
+					montantEnchereMax = enchereMax.getMontantEnchere();	
+				}
+				
 				if (montantEnchereMax!= 0 && montantEnchereMax > article.getPrixInitial()) {
 					articleDAO.updateNoAcquereur(enchereMax.getNoUtilisateur(), article.getNoArticle());
-			}
+			
+			request.setAttribute("userWin", utilisateurGagnantEnchere );
 			
 				
 			}

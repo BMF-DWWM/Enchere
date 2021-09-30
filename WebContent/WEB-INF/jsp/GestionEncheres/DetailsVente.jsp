@@ -42,8 +42,8 @@
 		<label>Vendeur : ${article.pseudoUtilisateur }</label>
 		<label>Ma proposition : </label>
 		
-			<input  type="number" name="montantEnchere" value="${rechercheEnchere.montantEnchere }">
-			<input class="containerBouton" type="submit" value="Enchérir">
+		<input  type="number" name="montantEnchere" value="${rechercheEnchere.montantEnchere }">
+		<input class="containerBouton" type="submit" value="Enchérir">
 			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBouton" type="button" name="retour" Value="Retour"></a>
 			<c:if test="${article.noUtilisateur == utilisateur.noUtilisateur && getdate < article.dateFinEncheres }"><a href="<%=request.getContextPath()%>/AnnuleVente?noArticle=${article.noArticle}">Annuler la vente</a></c:if>
 			

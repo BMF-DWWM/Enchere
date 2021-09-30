@@ -16,6 +16,7 @@
 <h2>Enchère Remportée !</h2>
 	<div class="containerFormulaire"></div>
 	<div class="container1">
+		
 		<label>${article.nomArticle }</label>
 		<label>Description : ${article.description }</label>
 		<c:choose>
@@ -38,6 +39,7 @@
 		<label>Fin de l'enchère : ${article.dateFinEncheres }</label>
 		<label>Retrait : ${retrait.rue } ${retrait.codePostal } ${retrait.ville}</label>
 		<label> Vendeur : ${article.pseudoUtilisateur }</label>
+		<label>Acquereur : ${userWin.pseudo } </label>
 		
 		
 	</div>
