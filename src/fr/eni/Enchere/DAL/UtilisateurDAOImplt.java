@@ -24,7 +24,7 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 	private String sqlmdpOublier = "update Utilisateurs set mot_de_passe=? where pseudo=? ";
 	private String sqlSelectAll = "Select idUser,identifiant,password from Utilisateur";
 	private String sqlVerif = "Select * from Utilisateurs where (pseudo=? or email=?) and mot_de_passe=?";
-	private String sqlVerifCreationCompte = "Select pseudo,email from Utilisateurs where pseudo=? and email=?";
+	private String sqlVerifCreationCompte = "Select * from Utilisateurs where pseudo=? or email=?";
 	private String sqlCreationCompte = "insert into Utilisateurs(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe) values(?,?,?,?,?,?,?,?,?)";
 	private String sqlUpdate = "update UTILISATEURS SET pseudo = ?,nom = ?,prenom = ?,email= ?,telephone = ?,rue = ?,code_postal = ?,ville = ?,mot_de_passe = ? where no_utilisateur = ?";
 	private String sqlSelectUser = "select * from UTILISATEURS where no_utilisateur = ?";
@@ -79,7 +79,9 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 
 	}	
 
-	public Utilisateur VerifPseudo(String Pseudo, String Email) {
+	public boolean VerifPseudo(String Pseudo, String Email) {
+		
+		boolean utiliser = false;
 		
 		try {
 			 Connection connection = ConnectionProvider.getConnextion();
@@ -91,7 +93,7 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 			
 			if (rs.next()) {
 				System.out.println("Pseudo/email deja utiliser");
-				return new Utilisateur(rs.getString("Pseudo"));
+				return utiliser = true;
 			}
 			else {
 				System.out.println("Pseudo & email disponible");
@@ -100,26 +102,26 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 				System.out.println("Erreur de verification");
 				e.printStackTrace();
 			}
-			return null;
+			return utiliser;
 		} 
 
 
-	public Utilisateur CreationCompte (String Pseudo,String Nom,String Prenom,String Email,String Telephone,String Rue,String CodePostal,String Ville,String Password) {
+	public Utilisateur CreationCompte (Utilisateur utilisateur) {
 		
 	try {
 		Connection connection = ConnectionProvider.getConnextion();
 		PreparedStatement pstmt = connection.prepareStatement(sqlCreationCompte,Statement.RETURN_GENERATED_KEYS);
-		Utilisateur utilisateur = new Utilisateur(); 
+
 		
-		pstmt.setString(1, Pseudo);
-		pstmt.setString(2, Nom);
-		pstmt.setString(3, Prenom);
-		pstmt.setString(4, Email);
-		pstmt.setString(5, Telephone);
-		pstmt.setString(6, Rue);
-		pstmt.setString(7, CodePostal);
-		pstmt.setString(8, Ville);
-		pstmt.setString(9, Password);
+		pstmt.setString(1, utilisateur.getPseudo());
+		pstmt.setString(2, utilisateur.getNom());
+		pstmt.setString(3, utilisateur.getPrenom());
+		pstmt.setString(4, utilisateur.getEmail());
+		pstmt.setString(5, utilisateur.getTelephone());
+		pstmt.setString(6, utilisateur.getRue());
+		pstmt.setString(7, utilisateur.getCodePostal());
+		pstmt.setString(8, utilisateur.getVille());
+		pstmt.setString(9, utilisateur.getMotDePasse());
 		
 		int nbRows = pstmt.executeUpdate();
 		if(nbRows == 1) {

@@ -19,9 +19,9 @@ public interface DAOUtilisateur{
 	
 	public Utilisateur VerifConnection(String pseudo,String password);
 	
-	public Utilisateur VerifPseudo(String Pseudo,String Email);
+	public boolean VerifPseudo(String Pseudo,String Email);
 	
-	public Utilisateur CreationCompte (String Pseudo,String Nom,String Prenom,String Email,String Telephone,String Rue,String CodePostal,String Ville,String Password);
+	public Utilisateur CreationCompte (Utilisateur utilisateur);
 
 	Utilisateur updateMdp(String Pseudo,String Password) throws DALException;
 
