@@ -28,16 +28,18 @@
 							<option value="3">Vêtement</option>
 							<option value="4">Sport/Loisirs</option>
 						</select>
+						<c:if test="${not empty usersession  }">
 						<select name="achatVente" id="achat vente">
 							<option value="">-----Achats-----</option>
 							<option value="1">enchères ouverte</option>
-							<option value="2">mes enchères en cours</option>
 							<option value="3">mes enchères remportées</option>
 							<option value="">-----Mes ventes-----</option>
 							<option value="4">Mes ventes en cours</option>
 							<option value="5">ventes non débutées</option>
 							<option value="6">ventes terminées</option>
 						</select>
+						</c:if>
+						
 					</div>
 					<button class="containerBouton" id="btnRecherche" type="submit" >Rechercher</button>
 				</div>

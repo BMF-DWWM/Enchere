@@ -26,7 +26,9 @@ public class ServletListeEncheres extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		try {
 			request.setAttribute("listeArticle",articleDAO.selectAll());
 		} catch (DALException e) {
@@ -34,6 +36,7 @@ public class ServletListeEncheres extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("getdate", new Date( System.currentTimeMillis())); 
+		request.setAttribute("usersession", utilisateur);
 	
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionEncheres/ListeEncheres.jsp");
 		rd.forward(request, response);
@@ -48,7 +51,8 @@ public class ServletListeEncheres extends HttpServlet {
 		String categorie;
 		String option ="";
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
-		int noUtilisateur = utilisateur.getNoUtilisateur();
+		
+		
 			String mot = request.getParameter("s");
 			if (request.getParameter("categories").equals("")) {
 				categorie = "";
@@ -60,18 +64,23 @@ public class ServletListeEncheres extends HttpServlet {
 				
 			}
 			else {
-				switch (request.getParameter("achatVente")) {
-				case "1": option = "and GETDATE()  between date_debut_encheres and date_fin_encheres";break;
-				case "3": option = "and av.no_acquereur = "+noUtilisateur+" ";break;
-				
-				case "4": option = "and av.no_utilisateur = "+noUtilisateur+"  and GETDATE() between date_debut_encheres and date_fin_encheres";break;
-				case "5": option = "and av.no_utilisateur = "+noUtilisateur+" and GETDATE() < date_debut_encheres ";break;
-				case "6": option = "and av.no_utilisateur = "+noUtilisateur+" and GETDATE() > date_fin_encheres ";break;
-				
-				default: option ="";
-					break;
+				if (request.getParameter("achatVente") != null) {
+					int noUtilisateur = utilisateur.getNoUtilisateur();
+					switch (request.getParameter("achatVente")) {
+					case "1": option = "and GETDATE()  between date_debut_encheres and date_fin_encheres";break;
+					case "3": option = "and av.no_acquereur = "+noUtilisateur+" ";break;
+					
+					case "4": option = "and av.no_utilisateur = "+noUtilisateur+"  and GETDATE() between date_debut_encheres and date_fin_encheres";break;
+					case "5": option = "and av.no_utilisateur = "+noUtilisateur+" and GETDATE() < date_debut_encheres ";break;
+					case "6": option = "and av.no_utilisateur = "+noUtilisateur+" and GETDATE() > date_fin_encheres ";break;
+					
+					default: option ="";
+						break;
+					}
 				}
 			}
+		
+			
 			
 			try {
 				request.setAttribute("listeArticle", articleDAO.selectAllByMotCle(mot, categorie, option));
@@ -80,6 +89,8 @@ public class ServletListeEncheres extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			request.setAttribute("getdate", new Date( System.currentTimeMillis())); 
+			request.setAttribute("usersession", utilisateur);
 			
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionEncheres/ListeEncheres.jsp");

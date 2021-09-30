@@ -58,10 +58,12 @@
 				</div>
 				
 			</div>
+			<c:if test="${vendeur.noUtilisateur == userSession.noUtilisateur }">
+				<div >
+				<a href="<%=request.getContextPath()%>/modifieProfil"><input class="containerBoutonWide" type="button" name="modifierProfil" Value="Modifier mon profil"></a>
+				</div>
+			</c:if>
 			
-			<div >
-			<a href="<%=request.getContextPath()%>/modifieProfil"><input class="containerBoutonWide" type="button" name="modifierProfil" Value="Modifier mon profil"></a>
-			</div>
 			<div >
 			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBouton" type="button" name="Retour" Value="Retour"></a>
 			</div>
