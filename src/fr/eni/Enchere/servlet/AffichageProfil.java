@@ -28,8 +28,10 @@ public class AffichageProfil extends HttpServlet {
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = null;
+		HttpSession session = request.getSession();
 		String pseudo = request.getParameter("pseudoVendeur");
-		
+		Utilisateur userSession = (Utilisateur) session.getAttribute("utilisateur");
+		request.setAttribute("userSession", userSession);
 		
 		System.out.println(pseudo);
 		
