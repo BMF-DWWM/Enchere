@@ -11,7 +11,7 @@
 <body>
 <%@include file="/WEB-INF/jsp/HeadersFooters/Entete.jsp" %>	
 
-
+<!-- PUUUSSSHHH -->
 <div class="containerVente">
 	<form action="<%=request.getContextPath()%>/ServletDetailArticle" method="post">
 	<h2>Détail vente</h2>
