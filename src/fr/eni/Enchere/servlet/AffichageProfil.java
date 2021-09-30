@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.Enchere.BLL.UtilisateurManager;
 import fr.eni.Enchere.BO.ArticlesVendu;
 import fr.eni.Enchere.BO.Enchere;
 import fr.eni.Enchere.BO.Utilisateur;
@@ -29,15 +30,17 @@ public class AffichageProfil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = null;
 		HttpSession session = request.getSession();
+		UtilisateurManager utilManager = new UtilisateurManager();
+		
 		String pseudo = request.getParameter("pseudoVendeur");
 		Utilisateur userSession = (Utilisateur) session.getAttribute("utilisateur");
 		request.setAttribute("userSession", userSession);
 		
-		System.out.println(pseudo);
-		
 		try {
-			Utilisateur vendeur = DAOFactory.getUtilisateurDAO().selectbyPseudo(pseudo);
+			
+			Utilisateur vendeur = utilManager.selectbyPseudo(pseudo);
 			request.setAttribute("vendeur", vendeur);
+			
 		if(vendeur != null) {
 			rd = request.getRequestDispatcher("WEB-INF/jsp/GestionProfils/Profil.jsp");
 			rd.forward(request, response);

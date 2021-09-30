@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.Enchere.BLL.BLLExceptions;
+import fr.eni.Enchere.BLL.UtilisateurManager;
 import fr.eni.Enchere.BO.Utilisateur;
 import fr.eni.Enchere.DAL.DALException;
 import fr.eni.Enchere.DAL.DAOFactory;
@@ -28,24 +30,26 @@ public class MdpOublier extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RequestDispatcher rd;
+		UtilisateurManager utilManager = new UtilisateurManager();
 		
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
 		String passwordConfirm = request.getParameter("passwordConfirm");
 		
-		System.out.println("Pseudo : "+ pseudo);
-		System.out.println("Password : "+ password);	
-		System.out.println("Password : "+ passwordConfirm);	
-		
-		
-		
-		if(password.equals(passwordConfirm)) {
+		try {
+			
+			boolean verifmdpconfirm;
 			try {
-				Utilisateur utilDAO = DAOFactory.getUtilisateurDAO().updateMdp(pseudo, password);
+				verifmdpconfirm = utilManager.verifmdpconfirm(password, passwordConfirm);
+			} catch (BLLExceptions e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			boolean mdpChanger = utilManager.updateMdp(pseudo, password);
 				
-		if(utilDAO != null) {
-			rd = request.getRequestDispatcher("WEB-INF/jsp/GestionProfils/Connection.jsp");
-			rd.forward(request, response);
+		if(verifmdpconfirm = true &&  mdpChanger == true ) {
+			response.sendRedirect("Connection");
+			
 		}
 		else {
 			rd = request.getRequestDispatcher("WEB-INF/jsp/Erreur.jsp");
@@ -56,8 +60,9 @@ public class MdpOublier extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-		
-	}
 
+	}
+	
 }
+
+

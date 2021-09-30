@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.Enchere.BLL.UtilisateurManager;
 import fr.eni.Enchere.BO.Utilisateur;
 import fr.eni.Enchere.DAL.DALException;
 import fr.eni.Enchere.DAL.DAOFactory;
@@ -33,8 +34,9 @@ public class modifieProfil extends HttpServlet {
 
 		RequestDispatcher rd;
 		HttpSession session = request.getSession();
-		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+		UtilisateurManager utilManager = new UtilisateurManager();
 		
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		
 		int noUtilisateur = utilisateur.getNoUtilisateur();
 		String pseudo = request.getParameter("pseudo");
@@ -49,16 +51,16 @@ public class modifieProfil extends HttpServlet {
 		int credit = utilisateur.getCredit();
 		boolean administrateur = utilisateur.isAdministrateur();
 		
-		
 		Utilisateur modifUtil = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, password, credit, administrateur);
 		
 		session.setAttribute("utilisateur", modifUtil);
+
 		try {
-			DAOFactory.getUtilisateurDAO().update(modifUtil);
+			utilManager.update(modifUtil);
 		} catch (DALException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionProfils/ModifierProfil.jsp");
 		rd.forward(request, response);
 	}

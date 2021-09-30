@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.Enchere.BLL.UtilisateurManager;
 import fr.eni.Enchere.BO.Utilisateur;
 import fr.eni.Enchere.DAL.DAOFactory;
 
@@ -49,6 +50,7 @@ public class Connection extends HttpServlet {
 		
 		RequestDispatcher rd;
 		HttpSession session = request.getSession();
+		UtilisateurManager utilManager = new UtilisateurManager();
 		
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
@@ -68,11 +70,11 @@ public class Connection extends HttpServlet {
 		System.out.println("Pseudo : "+ pseudo);
 		System.out.println("Password : "+ password);	
 		
-		Utilisateur utilDAO = DAOFactory.getUtilisateurDAO().VerifConnection(pseudo, password);
+		Utilisateur utilisateur = utilManager.verifConnection(pseudo, password);
 		
-		session.setAttribute("utilisateur", utilDAO);
+		session.setAttribute("utilisateur", utilisateur);
 		
-		if(utilDAO != null) {
+		if(utilisateur != null) {
 			response.sendRedirect("/Enchere/ServletListeEncheres");
 			//rd = request.getRequestDispatcher("/WEB-INF/jsp/GestionEncheres/ListeEncheres.jsp");
 			//rd.forward(request, response);

@@ -23,7 +23,7 @@ public interface DAOUtilisateur{
 	
 	public Utilisateur CreationCompte (Utilisateur utilisateur);
 
-	Utilisateur updateMdp(String Pseudo,String Password) throws DALException;
+	boolean updateMdp(String Pseudo,String Password) throws DALException;
 
 	Utilisateur selectbyPseudo(String pseudo) throws DALException;
 

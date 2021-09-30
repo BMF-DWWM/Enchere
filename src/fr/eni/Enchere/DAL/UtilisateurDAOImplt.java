@@ -140,23 +140,23 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 
 
 	@Override
-	public Utilisateur updateMdp(String Pseudo,String Password) throws DALException {
-		
+	public boolean updateMdp(String Pseudo,String Password) throws DALException {
+		boolean mdpChanger = false;
 		try {
 			Connection connection = ConnectionProvider.getConnextion();
 			PreparedStatement pstmt;
-			pstmt = connection.prepareStatement(sqlmdpOublierVerif);
 			
+			pstmt = connection.prepareStatement(sqlmdpOublierVerif);
 			pstmt.setString(1, Pseudo);
 			ResultSet rs = pstmt.executeQuery();
+			
 			if(rs.next()) {
-
 				pstmt = connection.prepareStatement(sqlmdpOublier);
 				pstmt.setString(1,Password);
 				pstmt.setString(2, Pseudo);
 				pstmt.executeUpdate();
 				System.out.println("mot de passe changer avec succes");
-				return new Utilisateur(Pseudo);
+				return mdpChanger = true;
 			}
 			else {
 				System.out.println("aucun compte créer avec ce pseudo");
@@ -165,7 +165,7 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return mdpChanger;
 	}
 	
 	
