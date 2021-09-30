@@ -29,7 +29,7 @@ public interface DAOArt<T> {
 		
 		public void updateNoAcquereur (int noAcquereur, int noArticle) throws DALException;
 		
-		public List<Enchere> selectbyIdUser(int iduser) throws DALException ;
+		public Enchere selectbyIdUser(int iduser) throws DALException ;
 		
 		public void UpdateCreditInsertEnchere(int soldeCredit, int montantEnchere, int noUtilisateur) throws DALException;
 		

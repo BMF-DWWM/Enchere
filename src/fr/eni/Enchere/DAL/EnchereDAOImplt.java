@@ -95,9 +95,8 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 	}
 	
 	@Override
-	public List<Enchere> selectbyIdUser(int iduser) throws DALException {
+	public Enchere selectbyIdUser(int iduser) throws DALException {
 		Enchere enchere= null;
-		List<Enchere> listEnchere = new ArrayList<Enchere>();
 		PreparedStatement pstmt = null;
 		try (Connection cnx = ConnectionProvider.getConnextion()){
 			pstmt= cnx.prepareStatement(sqlSelectEnchereeByIdUser);
@@ -122,7 +121,7 @@ public class EnchereDAOImplt implements DAOArt<Enchere>{
 				}
 			}
 		}
-		return listEnchere;
+		return enchere;
 	}
 
 	@Override

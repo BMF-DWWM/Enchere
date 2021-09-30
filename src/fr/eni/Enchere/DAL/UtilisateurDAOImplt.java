@@ -237,9 +237,7 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 		PreparedStatement pstmt;
 		try {
 			Connection cnx = ConnectionProvider.getConnextion();
-			List<Enchere> enchere = new ArrayList<Enchere>();
-			enchere = DAOFactory.getEnchereDAO().selectbyIdUser(id);
-			Collections.sort(List<enchere> enchere);
+			Enchere enchere = DAOFactory.getEnchereDAO().selectbyIdUser(id);
 			if (enchere != null) {
 				System.out.println(enchere);
 				Enchere maxEnchere = DAOFactory.getEnchereDAO().sqlSelectMax();
