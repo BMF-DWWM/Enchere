@@ -278,7 +278,7 @@ public class UtilisateurDAOImplt implements DAOUtilisateur {
 		
 	}
 
-
+//no no Square Bolux
 
 	
 }
