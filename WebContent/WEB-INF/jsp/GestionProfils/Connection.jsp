@@ -16,10 +16,10 @@
 		<div class="containerConnexion">
 		
 		<div class ="erreur">
-			<c:if test="${empty utilisateur}">
-				<c:out value="Pseudo ou Mot de passe incorrect" />
-			</c:if>
-		</div>
+            <c:if test="${empty pseudo}">
+                <c:out value="Pseudo ou Mot de passe incorrect" />
+            </c:if>
+        </div>
 			
 			<label>Pseudo</label>
 			<input type="text" name="pseudo" value="${pseudo}" autofocus required>
@@ -31,7 +31,7 @@
 			<input class="" type="checkbox" value="Se souvenir de moi" name="sesouvenirdemoi" >
 			</div>
 			<div class="boutonsConnexion" >
-			<input class="containerBouton" type="submit" value="Connexion">
+			<input class="containerBouton" type="submit" value="Connexion" name="connexion">
 			
 				<div>
 					<a href="<%=request.getContextPath()%>/CreerCompte"><input class="containerBoutonWide" type="button" name="creerCompte" Value="Créer un compte"></a>
@@ -46,3 +46,5 @@
 
 </body>
 </html>
+
+<!-- no no square  -->
