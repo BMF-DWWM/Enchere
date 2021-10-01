@@ -176,7 +176,16 @@ form {
 }
 
 
-  
+.logUtil {
+	display: flex;
+	justify-content: flex-end;
+	font-family: Brush Script MT, Brush Script Std, cursive;
+	text-shadow:0 3px 0 #000000;
+	color: #fec605;
+	font-size:200%;
+	margin: 10px;
+	
+} 
 
 .containerBouton {
 	font-family:Tahoma, Geneva, sans-serif;

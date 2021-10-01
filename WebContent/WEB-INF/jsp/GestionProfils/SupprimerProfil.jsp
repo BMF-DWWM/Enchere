@@ -4,18 +4,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style><%@include file="/Style.css"%></style>
 <title>Supprimer Profil</title>
 </head>
 <body>
-<h1>test</h1>
-<form action="SupprimerProfil" method="post">
+<%@include file="/WEB-INF/jsp/HeadersFooters/Entete.jsp" %>
 
-	<p>êtes vous sur de vouloir supprimer votre profil ?</p>
+<form action="SupprimerProfil" method="post">
+	<h2>Supprimer le profil</h2>
+	<div class="container1">
 	
-	<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input type="button" name="annuler" Value="Annuler"></a>
+	<p>Etes vous sûr de vouloir supprimer votre profil ?</p>
 	
-	<input type="submit" Value="Supprimer">
+	<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBouton" type="button" name="annuler" Value="Annuler"></a>
 	
+	<input class="containerBouton" type="submit" Value="Supprimer">
+		</div>
 </form>
 
 </body>
