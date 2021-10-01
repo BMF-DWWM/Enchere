@@ -16,7 +16,6 @@
 		<div class="EnTete">
 			<div >
 			<a class="logo" href="<%=request.getContextPath()%>/ServletListeEncheres" >ENI-Encheres</a>
-			<!--  <h1>ENI-Encheres</h1>-->
 			<p>Achetez, vendez, découvrez !</p>
 			</div>		
 			<div>
@@ -31,6 +30,7 @@
 						<a href="<%=request.getContextPath()%>/ServletMisEnVenteArticle"><input class="containerBoutonEntete" type="button" Value="Vendre un article"></a>
 						<a href="<%=request.getContextPath()%>/modifieProfil"><input class="containerBoutonEntete" type="button" Value="Mon Profil"></a>
 						<a href="<%=request.getContextPath()%>/Connection"><input class="containerBoutonEntete" type="button" Value="Déconnexion"></a>
+						<div class="logUtil"><d:out value='${utilisateur.pseudo}'/></div>
 					</d:if>
 				</div>
 			</div>
