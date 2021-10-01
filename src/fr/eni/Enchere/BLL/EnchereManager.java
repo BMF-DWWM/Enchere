@@ -34,15 +34,15 @@ public class EnchereManager {
 	}
 	
 	public void update(Enchere enchere) throws DALException {
-		
+		daoEnchere.update(enchere);
 	}
 	
 	public void insert(Enchere enchere) throws DALException {
-		
+		daoEnchere.insert(enchere);
 	}
 	
 	public void delete(int noArticle) throws DALException {
-		
+		daoEnchere.delete(noArticle);
 	}
 	
 	public List<Enchere> selectAllByMotCle(String mot, String categorie, String option) throws DALException {
@@ -54,7 +54,7 @@ public class EnchereManager {
 	}
 	
 	public void delete(int noArticle, int noutilisateur) throws DALException {
-		
+		daoEnchere.delete(noArticle, noutilisateur);
 	}
 	
 	public Enchere selectbyIdUser(int iduser) throws DALException {
@@ -62,12 +62,12 @@ public class EnchereManager {
 	}
 	
 	public void UpdateCreditInsertEnchere(int soldeCredit, int montantEnchere, int noUtilisateur) throws DALException {
-		
+		daoEnchere.UpdateCreditInsertEnchere(soldeCredit, montantEnchere, noUtilisateur);
 	}
 	public void UpdateCreditUpdateEnchere(int soldeCredit, int nouvelleEnchere, int ancienneEnchere, int noUtilisateur) throws DALException {
-		
+		daoEnchere.UpdateCreditUpdateEnchere(soldeCredit, nouvelleEnchere, ancienneEnchere, noUtilisateur);
 	}
 	public void UpdateCreditRollBackEnchere(int soldeCredit, int derniereEnchere, int noUtilisateur) throws DALException {
-		
+		daoEnchere.UpdateCreditRollBackEnchere(soldeCredit, derniereEnchere, noUtilisateur);
 	}
 }

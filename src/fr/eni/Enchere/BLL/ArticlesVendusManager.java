@@ -33,17 +33,20 @@ public class ArticlesVendusManager {
 	}
 	
 	public void update(ArticlesVendu article ) throws DALException {
+		daoArticle.update(article);
 		
 	}
 	
 	public void insert(ArticlesVendu article) throws DALException{
+		daoArticle.insert(article);
 		
 	}
 	public void delete(int noArticle) throws DALException {
-		
+		daoArticle.delete(noArticle);
 	}
 	
 	public void updateNoAcquereur(int noAcquereur, int noArticle) throws DALException {
+		daoArticle.updateNoAcquereur(noAcquereur, noArticle);
 		
 	}
 	
