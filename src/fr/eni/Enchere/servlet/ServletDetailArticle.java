@@ -170,7 +170,7 @@ public class ServletDetailArticle extends HttpServlet {
 		response.sendRedirect("/Enchere/ServletDetailArticle");
 
 		
-		
+//		
 		
 	
 		
