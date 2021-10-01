@@ -16,7 +16,6 @@
 		<div class="EnTete">
 			<div >
 			<a class="logo" href="<%=request.getContextPath()%>/ServletListeEncheres" >ENI-Encheres</a>
-			<!--  <h1>ENI-Encheres</h1>-->
 			<p>Achetez, vendez, découvrez !</p>
 			</div>		
 			<div>
