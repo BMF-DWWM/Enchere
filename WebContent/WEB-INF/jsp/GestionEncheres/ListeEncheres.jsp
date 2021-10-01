@@ -51,7 +51,7 @@
 		<c:forEach items="${listeArticle}" var="article">
   		<div class='container1'>
   			<div class=''>
-  			<c:if test="${getdate > article.dateFinEncheres}"><div><a class="nomArticle" href="<%=request.getContextPath()%>/EnchereRemportee?noArticle=${article.noArticle}">${article.nomArticle }</a></div> </c:if>
+  			<c:if test="${getdate > article.dateFinEncheres or getdate < article.dateDebutEncheres}"><div><a class="nomArticle" href="<%=request.getContextPath()%>/EnchereRemportee?noArticle=${article.noArticle}">${article.nomArticle }</a></div> </c:if>
   			<c:if test="${getdate < article.dateFinEncheres}"><div><a class="nomArticle" href="<%=request.getContextPath()%>/ServletDetailArticle?noArticle=${article.noArticle}">${article.nomArticle }</a></div></c:if>
   			<label class="ligne">Prix : ${article.prixInitial }</label>
   			<label class="ligne">Description : ${article.description }</label>

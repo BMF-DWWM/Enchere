@@ -87,6 +87,7 @@ public class ServletDetailArticle extends HttpServlet {
 		ArticlesVendu article = (ArticlesVendu) session.getAttribute("articlesession");
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		int noUtilisateur = utilisateur.getNoUtilisateur();
+		
 		int articleNoUtilisateur = article.getNoUtilisateur();
 		int articleNoArticle = article.getNoArticle();
 		int articlePrixInitial = article.getPrixInitial();

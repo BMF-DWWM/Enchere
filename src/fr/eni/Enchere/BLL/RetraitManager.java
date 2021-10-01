@@ -29,14 +29,14 @@ public class RetraitManager {
 	
 	
 	public void update(Retrait retrait) throws DALException{
-	
+		daoRetrait.update(retrait);
 	}
 	
 	public void insert(Retrait retrait) throws DALException {
-		
+		daoRetrait.insert(retrait);
 	}
 	
 	public void delete(int noArticle) throws DALException {
-		
+		daoRetrait.delete(noArticle);
 	}
 }

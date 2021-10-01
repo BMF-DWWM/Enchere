@@ -41,11 +41,15 @@
 		<label>Retrait : ${retrait.rue } ${retrait.codePostal } ${retrait.ville}</label>
 		<label>Vendeur : ${article.pseudoUtilisateur }</label>
 		<label>Ma proposition : </label>
-		
-		<input  type="number" name="montantEnchere" value="${rechercheEnchere.montantEnchere }">
+		<c:if test="${not empty utilisateur }">
+			<c:if test="${empty rechercheEnchere.montantEnchere }"><input  type="number" name="montantEnchere" value="${article.prixInitial+1 }"></c:if>
+		<c:if test="${ not empty rechercheEnchere.montantEnchere }"><input  type="number" name="montantEnchere" value="${rechercheEnchere.montantEnchere }"></c:if>
 		<input class="containerBouton" type="submit" value="Enchérir">
+		</c:if>
+		
+		
 			<a href="<%=request.getContextPath()%>/ServletListeEncheres"><input class="containerBouton" type="button" name="retour" Value="Retour"></a>
-			<c:if test="${article.noUtilisateur == utilisateur.noUtilisateur && getdate < article.dateFinEncheres }"><div class="containerBoutonWide"><a href="<%=request.getContextPath()%>/AnnuleVente?noArticle=${article.noArticle}">Annuler la vente</a></div></c:if>
+			<c:if test="${article.noUtilisateur == utilisateur.noUtilisateur && getdate < article.dateDebutEncheres }"><div class="containerBoutonWide"><a href="<%=request.getContextPath()%>/AnnuleVente?noArticle=${article.noArticle}">Annuler la vente</a></div></c:if>
 			
 			
 		</div>

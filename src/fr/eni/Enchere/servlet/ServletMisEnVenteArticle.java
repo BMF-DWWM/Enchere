@@ -40,6 +40,7 @@ public class ServletMisEnVenteArticle extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		ArticlesVendusManager articleMngr = new ArticlesVendusManager();
+		RetraitManager retraitMngr = new RetraitManager();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		 String nomArticle = request.getParameter("article");
 		 String description = request.getParameter("description");
@@ -54,13 +55,14 @@ public class ServletMisEnVenteArticle extends HttpServlet {
 	    		 prixInitial, prixVente, noUtilisateur, noCategorie);
 	     
 	     try {
+	    	 System.out.println("1");
 	    	 articleMngr.insert(articlesVendu);
+	    	 System.out.println("2");
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	     
-	     DAOArt<Retrait> retraitDAO = DAOFactory.getretraitDAO();
 	     int noArticle = articlesVendu.getNoArticle();
 	     String rue = utilisateur.getRue();
 	     String codePostal = utilisateur.getCodePostal();
@@ -69,7 +71,9 @@ public class ServletMisEnVenteArticle extends HttpServlet {
 	     
 	     
 	     try {
-			retraitDAO.insert(retrait);
+	    	 System.out.println("3");
+	    	 retraitMngr.insert(retrait);
+	    	 System.out.println("4");
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -20,7 +20,6 @@
 				<label>Article :</label> <input type="text" id="article" name="article">
 				<label>Description :</label> <input type="text" id="description" name="description"  >
 				<label>Catégorie :</label> <select name="categories" id="select-categorie">
-											<option value="toutes">Toutes</option>
 											<option value="1">Informatique</option>
 											<option value="2">Ameublement</option>
 											<option value="3">Vêtement</option>
