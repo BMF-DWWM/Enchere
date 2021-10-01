@@ -41,7 +41,7 @@
 		<label> Vendeur : ${article.pseudoUtilisateur }</label>
 		<label>Acquereur : ${userWin.pseudo } </label>
 		
-		
+		<c:if test="${article.noUtilisateur == utilisateur.noUtilisateur && getdate < article.dateDebutEncheres }"><div class="containerBoutonWide"><a href="<%=request.getContextPath()%>/AnnuleVente?noArticle=${article.noArticle}">Annuler la vente</a></div></c:if>
 	</div>
 </div>
 	

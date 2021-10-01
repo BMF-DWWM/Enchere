@@ -1,6 +1,7 @@
 package fr.eni.Enchere.servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.Enchere.BLL.ArticlesVendusManager;
 import fr.eni.Enchere.BLL.EnchereManager;
@@ -34,6 +36,11 @@ public class EnchereRemportee extends HttpServlet {
 		EnchereManager enchereMngr = new EnchereManager();
 		RetraitManager retraitMngr = new RetraitManager();
 		UtilisateurManager utilisateurMngr = new UtilisateurManager();
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+		Date dateMilliSec = new Date( System.currentTimeMillis());
+		request.setAttribute("utilisateur", utilisateur);
+		request.setAttribute("getdate", dateMilliSec);
 		
 		try {
 		
@@ -41,6 +48,7 @@ public class EnchereRemportee extends HttpServlet {
 				Enchere enchereMax = enchereMngr.sqlSelectMax(Integer.parseInt(request.getParameter("noArticle")));
 				Retrait retrait = retraitMngr.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
 				Utilisateur utilisateurGagnantEnchere = null;
+				
 				if (enchereMngr.sqlSelectMax(Integer.parseInt(request.getParameter("noArticle"))) != null) {
 					 utilisateurGagnantEnchere = utilisateurMngr.selectbyId(enchereMax.getNoUtilisateur());
 					request.setAttribute("utilisateurGagnantEnchere", utilisateurGagnantEnchere);

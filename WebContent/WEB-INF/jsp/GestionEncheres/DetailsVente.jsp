@@ -43,7 +43,7 @@
 		<label>Ma proposition : </label>
 		<c:if test="${not empty utilisateur }">
 			<c:if test="${empty rechercheEnchere.montantEnchere }"><input  type="number" name="montantEnchere" value="${article.prixInitial+1 }"></c:if>
-		<c:if test="${ not empty rechercheEnchere.montantEnchere }"><input  type="number" name="montantEnchere" value="${rechercheEnchere.montantEnchere }"></c:if>
+		<c:if test="${ not empty rechercheEnchere.montantEnchere }"><input  type="number" name="montantEnchere" value="${rechercheEnchere.montantEnchere+1 }"></c:if>
 		<input class="containerBouton" type="submit" value="Enchérir">
 		</c:if>
 		

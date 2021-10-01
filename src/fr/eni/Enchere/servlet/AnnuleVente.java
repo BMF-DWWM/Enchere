@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Response;
 
 import fr.eni.Enchere.BLL.ArticlesVendusManager;
 import fr.eni.Enchere.BLL.UtilisateurManager;
@@ -33,8 +34,9 @@ public class AnnuleVente extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		response.sendRedirect("/Enchere/ServletListeEncheres");
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
