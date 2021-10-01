@@ -121,7 +121,9 @@ public class ServletDetailArticle extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				//verifie si le montant de l'enchere est supérieur à la plus haute enchere sur l'article
 				if (enchere.getMontantEnchere() > rechercheEnchere.getMontantEnchere()) {
+					// si il a deja fait une enchere et que il est celui qui a fait l'enchere la plus ahute sur l'article
 					if (rechercheEnchere2 != null ) {
 						if ( rechercheEnchere.getMontantEnchere() == rechercheEnchere2.getMontantEnchere()) {
 							try {
@@ -135,6 +137,7 @@ public class ServletDetailArticle extends HttpServlet {
 								e.printStackTrace();
 							}
 						} else {
+							//si il a deja encherie et qu'il n'est pas celui qui a la plus haute enchere
 							try {
 								Utilisateur userEnchereMax = utilisateurMngr.selectbyId(rechercheEnchere.getNoUtilisateur());
 								enchereMngr.UpdateCreditRollBackEnchere(userEnchereMax.getCredit(),rechercheEnchere.getMontantEnchere(),
@@ -146,7 +149,7 @@ public class ServletDetailArticle extends HttpServlet {
 								e.printStackTrace();
 							}
 						}
-						
+						//si une enchere existe deja mais que l'utilisateur connecté n'a jamais enchérie
 					}else {
 						try {
 							System.out.println("4");
@@ -160,7 +163,6 @@ public class ServletDetailArticle extends HttpServlet {
 							e.printStackTrace();
 						}
 						
-//					
 					}
 				
 				}
@@ -170,7 +172,6 @@ public class ServletDetailArticle extends HttpServlet {
 		response.sendRedirect("/Enchere/ServletDetailArticle");
 
 		
-//		
 		
 	
 		
