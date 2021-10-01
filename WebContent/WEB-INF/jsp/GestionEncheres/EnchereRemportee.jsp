@@ -36,6 +36,7 @@
 	
 		<label>Meilleur offre : ${article.nomArticle }</label>
 		<label> Mise à prix : ${article.prixInitial }</label>
+		<c:if test="${getdate < article.dateDebutEncheres}"> Début de l'enchère : ${article.dateDebutEncheres }</c:if>
 		<label>Fin de l'enchère : ${article.dateFinEncheres }</label>
 		<label>Retrait : ${retrait.rue } ${retrait.codePostal } ${retrait.ville}</label>
 		<label> Vendeur : ${article.pseudoUtilisateur }</label>
