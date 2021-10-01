@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.Enchere.BLL.ArticlesVendusManager;
+import fr.eni.Enchere.BLL.EnchereManager;
+import fr.eni.Enchere.BLL.RetraitManager;
+import fr.eni.Enchere.BLL.UtilisateurManager;
 import fr.eni.Enchere.BO.ArticlesVendu;
 import fr.eni.Enchere.BO.Retrait;
 import fr.eni.Enchere.BO.Utilisateur;
@@ -35,7 +39,7 @@ public class ServletMisEnVenteArticle extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
+		ArticlesVendusManager articleMngr = new ArticlesVendusManager();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		 String nomArticle = request.getParameter("article");
 		 String description = request.getParameter("description");
@@ -50,7 +54,7 @@ public class ServletMisEnVenteArticle extends HttpServlet {
 	    		 prixInitial, prixVente, noUtilisateur, noCategorie);
 	     
 	     try {
-			articleDAO.insert(articlesVendu);
+	    	 articleMngr.insert(articlesVendu);
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

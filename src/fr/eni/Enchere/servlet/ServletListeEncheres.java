@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.Enchere.BLL.ArticlesVendusManager;
 import fr.eni.Enchere.BO.ArticlesVendu;
 import fr.eni.Enchere.BO.Utilisateur;
 import fr.eni.Enchere.DAL.DALException;
@@ -27,10 +28,10 @@ public class ServletListeEncheres extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
+		ArticlesVendusManager articleMngr = new ArticlesVendusManager();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		try {
-			request.setAttribute("listeArticle",articleDAO.selectAll());
+			request.setAttribute("listeArticle",articleMngr.selectAll());
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,7 +47,7 @@ public class ServletListeEncheres extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
+		ArticlesVendusManager articleMngr = new ArticlesVendusManager();
 		HttpSession session = request.getSession();
 		String categorie;
 		String option ="";
@@ -83,7 +84,7 @@ public class ServletListeEncheres extends HttpServlet {
 			
 			
 			try {
-				request.setAttribute("listeArticle", articleDAO.selectAllByMotCle(mot, categorie, option));
+				request.setAttribute("listeArticle", articleMngr.selectAllByMotCle(mot, categorie, option));
 			
 			} catch (DALException e) {
 				// TODO Auto-generated catch block

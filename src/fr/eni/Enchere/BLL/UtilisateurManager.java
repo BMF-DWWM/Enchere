@@ -42,6 +42,10 @@ public class UtilisateurManager {
 		 
 	}
 	
+	public Utilisateur selectbyId(int id) throws DALException{
+		return dao.selectbyId(id);
+	}
+	
 	public boolean verifPseudoMail(String newPseudo,String newEmail) {
 		return dao.VerifPseudo(newPseudo, newEmail);
 		

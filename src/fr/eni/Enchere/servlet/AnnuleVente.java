@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.Enchere.BLL.ArticlesVendusManager;
+import fr.eni.Enchere.BLL.UtilisateurManager;
 import fr.eni.Enchere.BO.ArticlesVendu;
 import fr.eni.Enchere.DAL.DALException;
 import fr.eni.Enchere.DAL.DAOArt;
@@ -23,10 +25,10 @@ public class AnnuleVente extends HttpServlet {
        
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
+		ArticlesVendusManager articleMngr = new ArticlesVendusManager();
 		try {
-			articleDAO.delete(noArticle);
+			articleMngr.delete(noArticle);
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

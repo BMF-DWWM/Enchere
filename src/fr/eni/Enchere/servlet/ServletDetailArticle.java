@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.Enchere.BLL.ArticlesVendusManager;
+import fr.eni.Enchere.BLL.EnchereManager;
+import fr.eni.Enchere.BLL.RetraitManager;
+import fr.eni.Enchere.BLL.UtilisateurManager;
 import fr.eni.Enchere.BO.ArticlesVendu;
 import fr.eni.Enchere.BO.Enchere;
 import fr.eni.Enchere.BO.Retrait;
@@ -33,9 +37,9 @@ public class ServletDetailArticle extends HttpServlet {
        
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAOArt<ArticlesVendu> articleDAO = DAOFactory.getArticleDAO();
-		DAOArt<Retrait> retraitDAO = DAOFactory.getretraitDAO();
-		DAOArt<Enchere> enchereDAO = DAOFactory.getEnchereDAO();
+		ArticlesVendusManager articleMngr = new ArticlesVendusManager();
+		EnchereManager enchereMngr = new EnchereManager();
+		RetraitManager retraitMngr = new RetraitManager();
 		HttpSession session = request.getSession();
 		ArticlesVendu article = null;
 		Enchere rechercheEnchere = null;
@@ -44,18 +48,18 @@ public class ServletDetailArticle extends HttpServlet {
 		try {	if ( request.getParameter("noArticle")==(null)) {
 				article = (ArticlesVendu) session.getAttribute("articlesession");
 				
-				request.setAttribute("article", articleDAO.selectbyId(article.getNoArticle()));
-				request.setAttribute("retrait", retraitDAO.selectbyId(article.getNoArticle()));
+				request.setAttribute("article", articleMngr.selectbyId(article.getNoArticle()));
+				request.setAttribute("retrait", retraitMngr.selectbyId(article.getNoArticle()));
 					
 			}else { 
-				request.setAttribute("article", articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
-				request.setAttribute("retrait", retraitDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
-				article = articleDAO.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
+				request.setAttribute("article", articleMngr.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
+				request.setAttribute("retrait", retraitMngr.selectbyId(Integer.parseInt(request.getParameter("noArticle"))));
+				article = articleMngr.selectbyId(Integer.parseInt(request.getParameter("noArticle")));
 			}
 						request.setAttribute("getdate", dateMilliSec);
 						request.setAttribute("utilisateur", utilisateur);
 						session.setAttribute("articlesession", article);
-						rechercheEnchere = enchereDAO.sqlSelectMax(article.getNoArticle());
+						rechercheEnchere = enchereMngr.sqlSelectMax(article.getNoArticle());
 						request.setAttribute("rechercheEnchere", rechercheEnchere);
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
@@ -76,8 +80,8 @@ public class ServletDetailArticle extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		DAOArt<Enchere> enchereDAO = DAOFactory.getEnchereDAO();
-		DAOUtilisateur userDAO = DAOFactory.getUtilisateurDAO();
+		UtilisateurManager utilisateurMngr = new UtilisateurManager();
+		EnchereManager enchereMngr = new EnchereManager();
 		Enchere rechercheEnchere = null;
 		Enchere rechercheEnchere2 = null;
 		ArticlesVendu article = (ArticlesVendu) session.getAttribute("articlesession");
@@ -91,7 +95,7 @@ public class ServletDetailArticle extends HttpServlet {
 		Enchere enchere = new Enchere(noUtilisateur, dateMilliSec, articleNoArticle, montant);
 		try {
 			//Recherche l'enchere la plus haute de l'article
-			rechercheEnchere = enchereDAO.sqlSelectMax(articleNoArticle);
+			rechercheEnchere = enchereMngr.sqlSelectMax(articleNoArticle);
 		} catch (DALException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -101,8 +105,8 @@ public class ServletDetailArticle extends HttpServlet {
 				//Si l'article n'a aucune enchere existante et que l'enchere proposé est polus grande que le prix initial alors
 				try {
 					System.out.println("1");
-					enchereDAO.UpdateCreditInsertEnchere(utilisateur.getCredit(), montant, noUtilisateur);
-					enchereDAO.insert(enchere);
+					enchereMngr.UpdateCreditInsertEnchere(utilisateur.getCredit(), montant, noUtilisateur);
+					enchereMngr.insert(enchere);
 				} catch (DALException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -111,7 +115,7 @@ public class ServletDetailArticle extends HttpServlet {
 				try {
 					// Si une enchere existe, verifitcation si c'est l'enchere connecté qui la faite
 					System.out.println("2");
-					rechercheEnchere2 = enchereDAO.selectbyIdUserAndIdArticle(noUtilisateur, articleNoArticle);
+					rechercheEnchere2 = enchereMngr.selectbyIdUserAndIdArticle(noUtilisateur, articleNoArticle);
 				} catch (DALException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -120,10 +124,10 @@ public class ServletDetailArticle extends HttpServlet {
 					if (rechercheEnchere2 != null ) {
 						if ( rechercheEnchere.getMontantEnchere() == rechercheEnchere2.getMontantEnchere()) {
 							try {
-								Utilisateur user = userDAO.selectbyId(noUtilisateur);
-								enchereDAO.UpdateCreditUpdateEnchere(user.getCredit(), montant, 
+								Utilisateur user = utilisateurMngr.selectbyId(noUtilisateur);
+								enchereMngr.UpdateCreditUpdateEnchere(user.getCredit(), montant, 
 										rechercheEnchere.getMontantEnchere(), noUtilisateur);
-								enchereDAO.update(enchere);
+								enchereMngr.update(enchere);
 								System.out.println("3");
 							} catch (DALException e) {
 								// TODO Auto-generated catch block
@@ -131,11 +135,11 @@ public class ServletDetailArticle extends HttpServlet {
 							}
 						} else {
 							try {
-								Utilisateur userEnchereMax = userDAO.selectbyId(rechercheEnchere.getNoUtilisateur());
-								enchereDAO.UpdateCreditRollBackEnchere(userEnchereMax.getCredit(),rechercheEnchere.getMontantEnchere(),
+								Utilisateur userEnchereMax = utilisateurMngr.selectbyId(rechercheEnchere.getNoUtilisateur());
+								enchereMngr.UpdateCreditRollBackEnchere(userEnchereMax.getCredit(),rechercheEnchere.getMontantEnchere(),
 										rechercheEnchere.getNoUtilisateur());
-								enchereDAO.UpdateCreditInsertEnchere(utilisateur.getCredit(), montant, noUtilisateur);
-								enchereDAO.update(enchere);
+								enchereMngr.UpdateCreditInsertEnchere(utilisateur.getCredit(), montant, noUtilisateur);
+								enchereMngr.update(enchere);
 							} catch (DALException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -145,29 +149,17 @@ public class ServletDetailArticle extends HttpServlet {
 					}else {
 						try {
 							System.out.println("4");
-							enchereDAO.UpdateCreditInsertEnchere(utilisateur.getCredit(), montant, noUtilisateur);
-							Utilisateur userEnchereMax = userDAO.selectbyId(rechercheEnchere.getNoUtilisateur());
-							enchereDAO.UpdateCreditRollBackEnchere(userEnchereMax.getCredit(),rechercheEnchere.getMontantEnchere(),
+							enchereMngr.UpdateCreditInsertEnchere(utilisateur.getCredit(), montant, noUtilisateur);
+							Utilisateur userEnchereMax = utilisateurMngr.selectbyId(rechercheEnchere.getNoUtilisateur());
+							enchereMngr.UpdateCreditRollBackEnchere(userEnchereMax.getCredit(),rechercheEnchere.getMontantEnchere(),
 								rechercheEnchere.getNoUtilisateur());
-							enchereDAO.insert(enchere);
+							enchereMngr.insert(enchere);
 						} catch (DALException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						
-//						try {
-//							System.out.println("4");
-//							enchereDAO.delete(articleNoArticle, rechercheEnchere.getNoUtilisateur());
-//							if (rechercheEnchere2 == null) {
-//								enchereDAO.insert(enchere);
-//							}else {
-//								enchereDAO.update(enchere);
-//							}
-//							
-//						} catch (DALException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
+//					
 					}
 				
 				}
@@ -175,9 +167,7 @@ public class ServletDetailArticle extends HttpServlet {
 		}
 	}
 		response.sendRedirect("/Enchere/ServletDetailArticle");
-//		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/GestionEncheres/DetailsVente.jsp");
-//		rd.forward(request, response);
-// nono shpaire
+
 		
 		
 		
